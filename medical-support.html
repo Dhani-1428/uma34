@@ -1,0 +1,2088 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Support - The United Maritime Association</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        /* Custom styles */
+        .org-level {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .org-card {
+            background: white;
+            padding: 24px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #f1f5f9;
+            text-align: center;
+            width: 100%;
+            max-width: 280px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .org-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            transform: scaleX(0);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .org-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .org-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .org-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .org-card:hover .org-icon {
+            transform: scale(1.1);
+        }
+
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 100%);
+        }
+
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .section-divider {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #2563eb, #3b82f6);
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+
+        .timeline-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 16px;
+            top: 30px;
+            height: calc(100% - 30px);
+            width: 2px;
+            background: #2563eb;
+        }
+
+        .timeline-dot {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #2563eb;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .feature-icon {
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* Navigation styles */
+        .nav-link {
+            color: #1e293b;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #3b82f6;
+        }
+
+        .nav-link.active {
+            color: #3b82f6;
+            font-weight: 600;
+        }
+
+        .nav-link.active:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background-color: #3b82f6;
+            border-radius: 50%;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 12px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 8px 20px;
+            color: #475569;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            color: #3b82f6;
+            background: #f8fafc;
+        }
+
+        /* Mobile menu styles */
+        .mobile-menu {
+            overflow-y: auto;
+        }
+
+        .mobile-nav-item {
+            display: block;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 4px;
+            color: #334155;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-item:hover {
+            background: #f1f5f9;
+            color: #3b82f6;
+        }
+
+        .mobile-nav-item.active {
+            background: #3b82f6;
+            color: white;
+        }
+
+        /* Section spacing */
+        section {
+            padding: 80px 0;
+        }
+
+        /* Enhanced Mission/Vision Card Styles with Animations */
+        .mission-vision-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            padding: 40px;
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mission-vision-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 0;
+        }
+
+        .mission-vision-card:hover::before {
+            opacity: 1;
+        }
+
+        .mission-vision-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .mission-vision-card h2 {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .mission-vision-card:hover h2 {
+            color: #3b82f6;
+        }
+
+        .mission-vision-card h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .mission-vision-card:hover h2:after {
+            width: 80px;
+        }
+
+        /* Enhanced Objective Item Styles with Animations */
+        .objective-item {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1px solid #f1f5f9;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .objective-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .objective-item:hover::after {
+            transform: scaleX(1);
+        }
+
+        .objective-item:hover {
+            transform: translateY(-10px) rotate(1deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .objective-item h3 {
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .objective-item:hover h3 {
+            color: #3b82f6;
+        }
+
+        .objective-item h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: #3b82f6;
+            transition: width 0.3s ease;
+        }
+
+        .objective-item:hover h3:after {
+            width: 50px;
+        }
+
+        /* Enhanced Service Card Styles with Animations */
+        .service-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            text-align: center;
+            border: 1px solid #f1f5f9;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 0;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) rotate(-1deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #3b82f6, #6366f1);
+            color: white;
+            font-size: 24px;
+            transition: all 0.5s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card:hover .service-icon {
+            transform: rotate(15deg) scale(1.1);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .service-card h3 {
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+
+        .service-card:hover h3 {
+            color: #3b82f6;
+        }
+
+        .service-card h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 2px;
+            background: #3b82f6;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover h3:after {
+            width: 50px;
+            background: #06b6d4;
+        }
+
+        /* Floating animation for hero section */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Pulse animation for CTA */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .pulse {
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        /* Rotating animation for icons */
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .rotate-on-hover:hover {
+            animation: rotate 1s linear;
+        }
+
+        /* Bounce animation */
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .bounce-on-hover:hover {
+            animation: bounce 0.5s ease infinite;
+        }
+
+        /* Scroll reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Gradient text animation */
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #06b6d4, #3b82f6);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: gradientText 3s linear infinite;
+        }
+
+        @keyframes gradientText {
+            0% {
+                background-position: 0% center;
+            }
+
+            100% {
+                background-position: 200% center;
+            }
+        }
+
+        /* New Wave Animation */
+        @keyframes wave {
+            0% {
+                transform: translateX(0) translateZ(0) scaleY(1)
+            }
+
+            50% {
+                transform: translateX(-25%) translateZ(0) scaleY(0.8)
+            }
+
+            100% {
+                transform: translateX(-50%) translateZ(0) scaleY(1)
+            }
+        }
+
+        .wave-animation {
+            animation: wave 8s ease-in-out infinite alternate;
+        }
+
+        /* Parallax Effect */
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* Glow Animation */
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+            }
+
+            100% {
+                box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+            }
+        }
+
+        .glow {
+            animation: glow 3s infinite;
+        }
+
+        /* Morph Animation */
+        @keyframes morph {
+            0% {
+                border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+            }
+
+            50% {
+                border-radius: 30% 60% 70% 40%/50% 60% 30% 60%;
+            }
+
+            100% {
+                border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+            }
+        }
+
+        .morph {
+            animation: morph 8s ease-in-out infinite;
+        }
+
+        /* Transition speeds */
+        .transition-slow {
+            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .transition-medium {
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .transition-fast {
+            transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* Custom underline animation */
+        .underline-animation {
+            position: relative;
+        }
+
+        .underline-animation:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #3b82f6;
+            transition: width 0.4s ease;
+        }
+
+        .underline-animation:hover:after {
+            width: 100%;
+        }
+
+        /* Text shadow animation */
+        @keyframes textShadow {
+            0% {
+                text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+            }
+
+            50% {
+                text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+            }
+
+            100% {
+                text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+            }
+        }
+
+        .text-shadow-animate {
+            animation: textShadow 3s infinite;
+        }
+
+        /* Background pan animation */
+        @keyframes pan {
+            0% {
+                background-position: 0% 0%;
+            }
+
+            100% {
+                background-position: 100% 100%;
+            }
+        }
+
+        .pan-bg {
+            animation: pan 15s linear infinite;
+        }
+
+        /* 3D Flip Animation */
+        .flip-container {
+            perspective: 1000px;
+        }
+
+        .flipper {
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        .flip-container:hover .flipper {
+            transform: rotateY(180deg);
+        }
+
+        .front,
+        .back {
+            backface-visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .back {
+            transform: rotateY(180deg);
+        }
+
+        /* Hover Grow Effect */
+        .hover-grow {
+            transition: transform 0.3s ease;
+        }
+
+        .hover-grow:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+    <!-- Top Bar -->
+    <div class="bg-gradient-to-r from-slate-900 to-blue-900 text-white py-2 text-xs md:text-sm">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center space-y-1 md:space-y-0">
+            <div class="flex flex-wrap justify-center md:justify-start items-center space-x-2 md:space-x-6">
+                <div class="flex items-center space-x-2 hover:text-blue-300 transition-fast animate-slide-left">
+                    <i class="fas fa-envelope text-blue-300 text-sm animate-bounce"></i>
+                    <span><a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@unitedmaritimeassociation.com&su=Enquiry%20from%20Website&body=Dear%20United%20Maritime%20Association%20Team,%0A%0A"
+                            target="_blank"
+                            class="hover:text-blue-600 cursor-pointer">info@unitedmaritimeassociation.com</span></a>
+                </div>
+                <div
+                    class="flex items-center space-x-2 hover:text-blue-300 transition-fast animate-slide-left delay-100">
+                    <i class="fas fa-phone text-blue-300 text-sm animate-bounce"></i>
+                    <span>+916124482546</span>
+                </div>
+                <div
+                    class="flex items-center space-x-2 hover:text-blue-300 transition-fast animate-slide-left delay-200">
+                    <i class="fas fa-map-marker-alt text-blue-300 text-sm animate-bounce"></i>
+                    <span>Kolkata, West Bengal, India</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right">
+                    <i class="fab fa-facebook-f text-xs"></i>
+                </a>
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right delay-100">
+                    <i class="fab fa-twitter text-xs"></i>
+                </a>
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right delay-200">
+                    <i class="fab fa-linkedin-in text-xs"></i>
+                </a>
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right delay-300">
+                    <i class="fab fa-instagram text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center">
+                            <div
+                                class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center mr-3 shadow-md">
+                                <a href="http://127.0.0.1:5500/index.html"
+                                    class="w-full h-full flex items-center justify-center">
+                                    <img src="UMA LOGO.jpeg" alt="UMA Logo"
+                                        class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full" />
+                                </a>
+                            </div>
+                            <div>
+                                <h1 class="text-xl font-bold text-slate-800"
+                                    style="font-family: 'Playfair Display', serif;">UMA</h1>
+                                <p class="text-xs text-blue-600 font-medium -mt-1">The United Maritime Association</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden lg:block">
+                    <div class="ml-10 flex items-center space-x-1">
+                        <a href="index.html" class="nav-link px-4 py-2 text-sm font-semibold">Home</a>
+
+                        <!-- About Dropdown -->
+                        <div class="dropdown">
+                            <a href="about.html" class="nav-link px-4 py-2 text-sm font-semibold dropdown-trigger">
+                                About Us <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="about.html" class="dropdown-item">Our Story</a>
+                                <a href="mission-vision.html" class="dropdown-item active">Mission & Vision</a>
+                                <a href="objectives.html" class="dropdown-item">Objectives</a>
+                                <a href="organization-structure.html" class="dropdown-item">Organization
+                                    Structure</a>
+                            </div>
+                        </div>
+
+                        <!-- Services Dropdown -->
+                        <div class="dropdown">
+                            <a href="services.html" class="nav-link px-4 py-2 text-sm font-semibold dropdown-trigger">
+                                Services <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="services.html" class="dropdown-item">All Services</a>
+                                <a href="training-education.html" class="dropdown-item">Training & Education</a>
+                                <a href="medical-support.html" class="dropdown-item">Medical Support</a>
+                                <a href="job-placement.html" class="dropdown-item">Job Placement</a>
+                                <a href="family-welfare.html" class="dropdown-item">Family Welfare</a>
+                                <a href="publications.html" class="dropdown-item">Publications</a>
+                            </div>
+                        </div>
+
+                        <a href="partners.html" class="nav-link px-4 py-2 text-sm font-semibold">Partners</a>
+                        <a href="subsectors.html" class="nav-link px-4 py-2 text-sm font-semibold">Sub Sectors</a>
+
+                        <!-- Events Dropdown -->
+                        <div class="dropdown">
+                            <a href="events.html" class="nav-link px-4 py-2 text-sm font-semibold dropdown-trigger">
+                                Events <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="events.html" class="dropdown-item">Upcoming Events</a>
+                                <a href="conferences.html" class="dropdown-item">Conferences</a>
+                                <a href="webinars.html" class="dropdown-item">Webinars</a>
+                                <a href="workshops.html" class="dropdown-item">Workshops</a>
+                                <a href="past-events.html" class="dropdown-item">Past Events</a>
+                            </div>
+                        </div>
+
+                        <a href="gallery.html" class="nav-link px-4 py-2 text-sm font-semibold">Gallery</a>
+                        <a href="membership.html" class="nav-link px-4 py-2 text-sm font-semibold">Membership</a>
+                        <a href="contact.html"
+                            class="nav-link bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-2 rounded-full hover:from-blue-700 hover:to-blue-800 transition-all duration-300 transform hover:scale-105 shadow-md">Contact
+                            Us</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="lg:hidden">
+                    <button id="mobile-menu-btn" class="text-slate-700 hover:text-blue-600 focus:outline-none p-2">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+       <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="lg:hidden fixed inset-0 bg-white z-50 transform translate-x-full transition-transform duration-300 ease-in-out">
+            <div class="flex flex-col h-full">
+                <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+                    <div class="flex items-center">
+                        <div
+                                class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center mr-3 shadow-md">
+                                <a href="http://127.0.0.1:5500/index.html"
+                                    class="w-full h-full flex items-center justify-center">
+                                    <img src="UMA LOGO.jpeg" alt="UMA Logo"
+                                        class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full" />
+                                </a>
+                            </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-800">UMA</h3>
+                            <p class="text-xs text-blue-600">United Maritime Association</p>
+                        </div>
+                    </div>
+                    <button id="mobile-menu-close" class="text-slate-500 hover:text-slate-700 p-2">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div class="flex-1 overflow-y-auto p-6 space-y-4">
+                    <a href="index.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Home</a>
+                    <a href="about.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">About
+                        Us</a>
+                    <a href="services.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Services</a>
+                    <a href="partners.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Partners</a>
+                    <a href="subsectors.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Sub
+                        Sectors</a>
+                    <a href="events.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Events</a>
+                    <a href="gallery.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Gallery</a>
+                    <a href="membership.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Membership</a>
+                    <a href="contact.html"
+                        class="block py-3 px-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg font-medium text-center mt-8">Contact
+                        Us</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-r from-blue-900 to-slate-900 text-white overflow-hidden">
+        <div class="hero-overlay"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="text-center md:text-left animate-fade-in">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight"
+                        style="font-family: 'Playfair Display', serif;">
+                        Medical Support <br><span class="gradient-text">For Seafarers</span>
+                    </h1>
+                    <p class="text-lg md:text-xl mb-8 max-w-lg mx-auto md:mx-0">
+                        Comprehensive healthcare solutions tailored for maritime professionals and their families.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                        <a href="#services"
+                            class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                            Our Services
+                        </a>
+                        <a href="#contact"
+                            class="bg-transparent hover:bg-white hover:text-blue-900 text-white px-8 py-3 rounded-lg font-semibold border-2 border-white transition-all duration-300 transform hover:scale-105">
+                            Contact Us
+                        </a>
+                    </div>
+                </div>
+                <div class="relative hidden md:block">
+                    <div class="float-doctor">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2785/2785482.png" alt="Doctor"
+                            class="w-full max-w-md mx-auto">
+                    </div>
+                    <div class="absolute -bottom-10 -left-10 w-24 h-24 bg-blue-600 rounded-full opacity-20 pulse"></div>
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-blue-400 rounded-full opacity-20 pulse"
+                        style="animation-delay: 0.5s;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent z-10"></div>
+    </section>
+
+    <!-- Medical Services Section -->
+    <section id="services" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4"
+                    style="font-family: 'Playfair Display', serif;">
+                    Our <span class="text-gradient bg-gradient-to-r from-blue-600 to-blue-400">Medical Services</span>
+                </h2>
+                <div class="section-divider"></div>
+                <p class="text-lg text-slate-600 max-w-3xl mx-auto">
+                    We provide specialized medical support services designed to meet the unique needs of maritime
+                    professionals.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card medical-card">
+                    <div class="service-icon heartbeat">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Seafarer Health Checkups</h3>
+                    <p class="text-slate-600">
+                        Comprehensive pre-employment and periodic medical examinations to ensure fitness for duty at
+                        sea.
+                    </p>
+                    <div class="mt-4">
+                        <a href="#" class="text-blue-600 font-medium inline-flex items-center">
+                            Learn More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card medical-card">
+                    <div class="service-icon stethoscope">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Telemedicine Services</h3>
+                    <p class="text-slate-600">
+                        Remote medical consultations with specialists for seafarer. </p>
+                    <div class="mt-4">
+                        <a href="#" class="text-blue-600 font-medium inline-flex items-center">
+                            Learn More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card medical-card">
+                    <div class="service-icon medicine-shake">
+                        <i class="fas fa-pills"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Medical Supply Coordination</h3>
+                    <p class="text-slate-600">
+                        Arrangement and delivery of essential medicines and medical equipment.
+                    </p>
+                    <div class="mt-4">
+                        <a href="#" class="text-blue-600 font-medium inline-flex items-center">
+                            Learn More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-card medical-card">
+                    <div class="service-icon syringe-injection">
+                        <i class="fas fa-syringe"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Vaccination Programs</h3>
+                    <p class="text-slate-600">
+                        Complete vaccination services including hepatitis, and other travel-required
+                        immunizations.
+                    </p>
+                    <div class="mt-4">
+                        <a href="#" class="text-blue-600 font-medium inline-flex items-center">
+                            Learn More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+
+                <!-- Service 6 -->
+                <div class="service-card medical-card">
+                    <div class="service-icon blood-drop">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Mental Health Support</h3>
+                    <p class="text-slate-600">
+                        Counseling and psychological support services for seafarers dealing with isolation and stress.
+                    </p>
+                    <div class="mt-4">
+                        <a href="#" class="text-blue-600 font-medium inline-flex items-center">
+                            Learn More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Medical Features Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="relative">
+                    <div class="bg-blue-50 rounded-2xl p-6 shadow-lg relative overflow-hidden">
+                        <div class="scan-line"></div>
+                        <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                            alt="Medical Team" class="rounded-xl w-full h-auto medical-scale">
+                        <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-blue-600 rounded-full opacity-10 pulse">
+                        </div>
+                    </div>
+                    <div class="absolute -top-6 -left-6 w-24 h-24 bg-blue-400 rounded-full opacity-10 pulse"
+                        style="animation-delay: 0.5s;"></div>
+                </div>
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-6"
+                        style="font-family: 'Playfair Display', serif;">
+                        Why Choose Our <span class="text-gradient bg-gradient-to-r from-blue-600 to-blue-400">Medical
+                            Services?</span>
+                    </h2>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div
+                                    class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 cross-pulse">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold text-slate-800">Maritime Medical Specialists</h3>
+                                <p class="text-slate-600 mt-1">
+                                    Our team includes doctors with specialized knowledge in maritime medicine and
+                                    seafarer health issues.
+                                </p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 mt-1">
+                            <div
+                                class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 cross-pulse">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-slate-800">24/7 Availability</h3>
+                            <p class="text-slate-600 mt-1">
+                                Round-the-clock emergency response team dedicated to maritime medical emergencies.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 mt-1">
+                            <div
+                                class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 cross-pulse">
+                                <i class="fas fa-ship"></i>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-slate-800">Vessel-Specific Solutions</h3>
+                            <p class="text-slate-600 mt-1">
+                                Customized medical kits and protocols based on your vessel type, route, and crew size.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Emergency Contact Section -->
+    <section class="py-16 bg-gradient-to-r from-blue-900 to-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-2">
+                    <div class="p-8 md:p-12 lg:p-16 bg-gradient-to-br from-red-600 to-red-800 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-full opacity-10">
+                            <div class="absolute top-1/4 left-1/4 w-32 h-32 bg-white rounded-full pulse-circle"></div>
+                            <div class="absolute top-1/2 left-1/2 w-40 h-40 bg-white rounded-full pulse-circle"
+                                style="animation-delay: 0.5s;"></div>
+                            <div class="absolute top-3/4 left-3/4 w-28 h-28 bg-white rounded-full pulse-circle"
+                                style="animation-delay: 1s;"></div>
+                        </div>
+                        <div class="relative z-10">
+                            <h2 class="text-3xl md:text-4xl font-bold mb-4"
+                                style="font-family: 'Playfair Display', serif;">
+                                Medical Emergency?
+                            </h2>
+                            <p class="text-xl mb-8 text-red-100">
+                                Immediate assistance for maritime medical emergencies 24 hours a day, 7 days a week.
+                            </p>
+                            <div class="flex items-center mb-6">
+                                <div
+                                    class="w-14 h-14 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 heartbeat">
+                                    <i class="fas fa-phone-alt text-2xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-red-100">Emergency Hotline</p>
+                                    <p class="text-2xl font-bold">+91 8981885427</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div
+                                    class="w-14 h-14 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-envelope text-2xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-red-100">Emergency Email</p>
+                                    <p class="text-xl font-bold">wwmmckol@gmail.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8 md:p-12 lg:p-16 bg-white text-slate-800">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6" style="font-family: 'Playfair Display', serif;">
+                            Schedule a Consultation
+                        </h2>
+                        <form class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Full
+                                    Name</label>
+                                <input type="text" id="name"
+                                    class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Email
+                                    Address</label>
+                                <input type="email" id="email"
+                                    class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-sm font-medium text-slate-700 mb-1">Phone
+                                    Number</label>
+                                <input type="tel" id="phone"
+                                    class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            </div>
+                            <div>
+                                <label for="service" class="block text-sm font-medium text-slate-700 mb-1">Service
+                                    Needed</label>
+                                <select id="service"
+                                    class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                    <option>Select a service</option>
+                                    <option>Pre-employment Medical</option>
+                                    <option>Telemedicine Consultation</option>
+                                    <option>Vaccination</option>
+                                    <option>Mental Health Support</option>
+                                    <option>Other Medical Service</option>
+                                </select>
+                            </div>
+                            <div>
+                                <button type="submit"
+                                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105">
+                                    Request Appointment
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4"
+                    style="font-family: 'Playfair Display', serif;">
+                    What Our <span class="text-gradient bg-gradient-to-r from-blue-600 to-blue-400">Clients Say</span>
+                </h2>
+                <div class="section-divider"></div>
+                <p class="text-lg text-slate-600 max-w-3xl mx-auto">
+                    Hear from maritime professionals who have benefited from our medical support services.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 relative overflow-hidden">
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-blue-100 rounded-full opacity-20"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center mb-4">
+                            <div
+                                class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4 heartbeat">
+                                JD
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800">John Davis</h4>
+                                <p class="text-sm text-slate-500">Chief Engineer, Merchant Navy</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 mb-4">
+                            "The telemedicine service saved my life when I developed severe abdominal pain in the middle
+                            of the Atlantic. The doctor guided our onboard medic through the emergency treatment until
+                            we could reach port."
+                        </p>
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 relative overflow-hidden">
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-blue-100 rounded-full opacity-20"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center mb-4">
+                            <div
+                                class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4 heartbeat">
+                                MS
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800">Maria Sanchez</h4>
+                                <p class="text-sm text-slate-500">Captain, Cruise Line</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 mb-4">
+                            "Their vaccination program made it so easy for my entire crew to get all required
+                            immunizations before our world cruise. The mobile clinic came right to our ship and
+                            completed everything in one day."
+                        </p>
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 relative overflow-hidden">
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-blue-100 rounded-full opacity-20"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center mb-4">
+                            <div
+                                class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4 heartbeat">
+                                RK
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800">Robert Kim</h4>
+                                <p class="text-sm text-slate-500">Fleet Manager, Shipping Company</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 mb-4">
+                            "As a fleet manager, I appreciate their comprehensive medical support for all our vessels.
+                            The customized medical kits for each ship type have significantly improved our onboard
+                            medical capabilities."
+                        </p>
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4"
+                    style="font-family: 'Playfair Display', serif;">
+                    Frequently Asked <span
+                        class="text-gradient bg-gradient-to-r from-blue-600 to-blue-400">Questions</span>
+                </h2>
+                <div class="section-divider"></div>
+                <p class="text-lg text-slate-600 max-w-3xl mx-auto">
+                    Find answers to common questions about our maritime medical support services.
+                </p>
+            </div>
+
+            <div class="max-w-3xl mx-auto">
+                <div class="space-y-4 faq-container">
+                    <!-- FAQ Item 1 -->
+                    <div
+                        class="border border-gray-200 rounded-xl overflow-hidden transition-all duration-300 faq-item group relative">
+                        <button
+                            class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                            <h3
+                                class="text-lg font-semibold text-slate-800 group-hover:text-blue-600 transition-colors">
+                                What medical certifications do your doctors have?</h3>
+                            <i
+                                class="fas fa-chevron-down text-blue-600 transition-transform duration-300 transform group-hover:rotate-180"></i>
+                        </button>
+                        <div
+                            class="faq-content px-6 pb-6 max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-[500px]">
+                            <p class="text-slate-600">
+                                <BR> All our physicians are fully licensed and many hold additional certifications in
+                                maritime medicine, occupational health, and emergency medicine. Our team includes
+                                specialists in diving medicine, tropical diseases, and mental health - all with
+                                experience treating seafarers.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 2 -->
+                    <div
+                        class="border border-gray-200 rounded-xl overflow-hidden transition-all duration-300 faq-item group relative">
+                        <button
+                            class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                            <h3
+                                class="text-lg font-semibold text-slate-800 group-hover:text-blue-600 transition-colors">
+                                How quickly can you arrange medical evacuations?</h3>
+                            <i
+                                class="fas fa-chevron-down text-blue-600 transition-transform duration-300 transform group-hover:rotate-180"></i>
+                        </button>
+                        <div
+                            class="faq-content px-6 pb-6 max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-[500px]">
+                            <p class="text-slate-600">
+                                <BR> Response times vary based on location and circumstances, but our emergency team can
+                                typically initiate evacuation procedures within 1-2 hours of receiving a request. We
+                                maintain relationships with air ambulance services worldwide to ensure the fastest
+                                possible response.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 3 -->
+                    <div
+                        class="border border-gray-200 rounded-xl overflow-hidden transition-all duration-300 faq-item group relative">
+                        <button
+                            class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                            <h3
+                                class="text-lg font-semibold text-slate-800 group-hover:text-blue-600 transition-colors">
+                                Do you provide mental health support for seafarers?</h3>
+                            <i
+                                class="fas fa-chevron-down text-blue-600 transition-transform duration-300 transform group-hover:rotate-180"></i>
+                        </button>
+                        <div
+                            class="faq-content px-6 pb-6 max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-[500px]">
+                            <p class="text-slate-600">
+                                <BR>Yes, we offer confidential counseling services via satellite phone or internet
+                                connection. Our mental health professionals specialize in issues common to maritime
+                                workers including isolation, stress, and family separation. We also provide crisis
+                                intervention when needed.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 4 -->
+                    <div
+                        class="border border-gray-200 rounded-xl overflow-hidden transition-all duration-300 faq-item group relative">
+                        <button
+                            class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                            <h3
+                                class="text-lg font-semibold text-slate-800 group-hover:text-blue-600 transition-colors">
+                                What vaccinations are required for seafarers?</h3>
+                            <i
+                                class="fas fa-chevron-down text-blue-600 transition-transform duration-300 transform group-hover:rotate-180"></i>
+                        </button>
+                        <div
+                            class="faq-content px-6 pb-6 max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-[500px]">
+                            <p class="text-slate-600">
+                                <BR> Requirements vary by destination but typically include yellow fever, hepatitis A &
+                                B, typhoid, and routine immunizations like tetanus. Our medical team stays current on
+                                all international health regulations and can advise on specific needs for your voyage
+                                itinerary.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 5 -->
+                    <div
+                        class="border border-gray-200 rounded-xl overflow-hidden transition-all duration-300 faq-item group relative">
+                        <button
+                            class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                            <h3
+                                class="text-lg font-semibold text-slate-800 group-hover:text-blue-600 transition-colors">
+                                Can you help with medical supplies for our vessel?</h3>
+                            <i
+                                class="fas fa-chevron-down text-blue-600 transition-transform duration-300 transform group-hover:rotate-180"></i>
+                        </button>
+                        <div
+                            class="faq-content px-6 pb-6 max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-[500px]">
+                            <p class="text-slate-600">
+                                <BR> Absolutely. We can prepare customized medical kits based on your vessel type, crew
+                                size, and itinerary. Our logistics team can arrange delivery to your next port of call,
+                                often within 24-48 hours. We also provide training for crew members on proper use of
+                                medical equipment.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .faq-container:hover .faq-item:not(:hover) {
+            filter: blur(3px);
+            opacity: 0.8;
+        }
+
+        .faq-item {
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            transform: scale(1.02);
+            z-index: 10;
+            background: white;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-content {
+            transition: max-height 0.5s ease;
+        }
+    </style>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6" style="font-family: 'Playfair Display', serif;">
+                Ready to Enhance Your Crew's Medical Support?
+            </h2>
+            <p class="text-xl mb-8 max-w-3xl mx-auto text-blue-100">
+                Contact us today to discuss customized medical support solutions for your maritime operations.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#contact"
+                    class="bg-white text-blue-600 hover:bg-blue-50 px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                    Get in Touch
+                </a>
+                <a href="tel:+18007324357"
+                    class="bg-transparent hover:bg-white hover:text-blue-900 text-white px-8 py-3 rounded-lg font-semibold border-2 border-white transition-all duration-300 transform hover:scale-105">
+                    <i class="fas fa-phone-alt mr-2"></i> Call Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <!-- About Column -->
+                <div class="reveal">
+                    <div class="flex items-center mb-6">
+                        <div
+                            class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center mr-3 shadow-md">
+                            <a href="http://127.0.0.1:5500/index.html"
+                                class="w-full h-full flex items-center justify-center">
+                                <img src="UMA LOGO.jpeg" alt="UMA Logo"
+                                    class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full" />
+                            </a>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold" style="font-family: 'Playfair Display', serif;">UMA</h3>
+                            <p class="text-xs text-blue-400 font-medium -mt-1">The United Maritime Association</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 mb-6">Empowering maritime professionals through education, advocacy, and
+                        innovation since 2024.</p>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-facebook-f text-sm"></i>
+                        </a>
+                        <a href="#"
+                            class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-twitter text-sm"></i>
+                        </a>
+                        <a href="#"
+                            class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-linkedin-in text-sm"></i>
+                        </a>
+                        <a href="#"
+                            class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-instagram text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links Column -->
+                <div class="reveal" style="transition-delay: 0.1s">
+                    <h3
+                        class="text-lg font-bold mb-6 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:bg-blue-600">
+                        Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Home</a></li>
+                        <li><a href="about.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">About Us</a>
+                        </li>
+                        <li><a href="services.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Services</a>
+                        </li>
+                        <li><a href="partners.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Partners</a>
+                        </li>
+                        <li><a href="subsectors.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Subsectors</a>
+                        </li>
+                        <li><a href="events.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Events</a>
+                        </li>
+                        <li><a href="gallery.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Gallery</a>
+                        </li>
+                        <li><a href="contact.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Services Column -->
+                <div class="reveal" style="transition-delay: 0.2s">
+                    <h3
+                        class="text-lg font-bold mb-6 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:bg-blue-600">
+                        Our Services</h3>
+                    <ul class="space-y-3">
+                        <li><a href="training-education.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Training &
+                                Education</a></li>
+                        <li><a href="medical-support.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Medical
+                                Support</a></li>
+                        <li><a href="job-placement.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Job
+                                Placement</a></li>
+                        <li><a href="family-welfare.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Family
+                                Welfare</a></li>
+                        <li><a href="publications.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Publications</a>
+                        </li>
+                        <li><a href="membership.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Membership</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact Column -->
+                <div class="reveal" style="transition-delay: 0.3s">
+                    <h3
+                        class="text-lg font-bold mb-6 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:bg-blue-600">
+                        Contact Us</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-slate-400"> A3, 3RD FLOOR, LAKHAN SONA APARTMENT,NEAR RPS MORE,WEST BAILY
+                                ROAD,PATNA</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-slate-400">+916124482546</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-blue-400 mt-1 mr-3"></i>
+                            <span><a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@unitedmaritimeassociation.com&su=Enquiry%20from%20Website&body=Dear%20United%20Maritime%20Association%20Team,%0A%0A"
+                                    target="_blank" class="text-slate-400">info@unitedmaritimeassociation.com</span></a>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-clock text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-slate-400">Mon-Fri: 9:00 AM - 6:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-slate-500 text-sm mb-4 md:mb-0">© 2023 The United Maritime Association. All rights
+                    reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-slate-500 hover:text-blue-400 text-sm transition">Privacy Policy</a>
+                    <a href="#" class="text-slate-500 hover:text-blue-400 text-sm transition">Terms of Service</a>
+                    <a href="#" class="text-slate-500 hover:text-blue-400 text-sm transition">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top"
+        class="fixed bottom-8 right-8 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white shadow-lg transform transition-all duration-300 opacity-0 invisible hover:bg-blue-700 hover:scale-110">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-full');
+            mobileMenu.classList.add('translate-x-0');
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-0');
+            mobileMenu.classList.add('translate-x-full');
+        });
+
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible');
+                backToTopBtn.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopBtn.classList.remove('opacity-100', 'visible');
+                backToTopBtn.classList.add('opacity-0', 'invisible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Scroll Reveal Animation
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 150;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                } else {
+                    reveals[i].classList.remove('active');
+                }
+            }
+        }
+
+        window.addEventListener('scroll', reveal);
+        window.addEventListener('load', reveal);
+
+        // Dropdown Menu for Mobile
+        const mobileDropdowns = document.querySelectorAll('.mobile-dropdown-trigger');
+
+        mobileDropdowns.forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                const menu = trigger.nextElementSibling;
+                const icon = trigger.querySelector('i');
+
+                menu.classList.toggle('hidden');
+                menu.classList.toggle('block');
+
+                if (icon.classList.contains('fa-chevron-down')) {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                } else {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animation for mission/vision cards on hover
+        const missionVisionCards = document.querySelectorAll('.mission-vision-card');
+
+        missionVisionCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.querySelector('h2').classList.add('text-blue-600');
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.querySelector('h2').classList.remove('text-blue-600');
+            });
+        });
+
+        // Animation for service cards
+        const serviceCards = document.querySelectorAll('.service-card');
+
+        serviceCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.querySelector('h3').classList.add('text-blue-600');
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.querySelector('h3').classList.remove('text-blue-600');
+            });
+        });
+
+        // Animation for objective items
+        const objectiveItems = document.querySelectorAll('.objective-item');
+
+        objectiveItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.querySelector('h3').classList.add('text-blue-600');
+            });
+
+            item.addEventListener('mouseleave', () => {
+                item.querySelector('h3').classList.remove('text-blue-600');
+            });
+        });
+
+        // Initialize AOS (Animate On Scroll) if needed
+        // You would need to include AOS library for this to work
+        // AOS.init();
+    </script>
+</body>
+
+</html>
+<style>
+    /* Custom animations */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+            opacity: 0.2;
+        }
+
+        50% {
+            transform: scale(1.05);
+            opacity: 0.3;
+        }
+
+        100% {
+            transform: scale(1);
+            opacity: 0.2;
+        }
+    }
+
+    @keyframes pulseCircle {
+        0% {
+            transform: scale(0.8);
+            opacity: 0;
+        }
+
+        50% {
+            opacity: 0.2;
+        }
+
+        100% {
+            transform: scale(2.5);
+            opacity: 0;
+        }
+    }
+
+    @keyframes heartbeat {
+        0% {
+            transform: scale(1);
+        }
+
+        25% {
+            transform: scale(1.1);
+        }
+
+        50% {
+            transform: scale(1);
+        }
+
+        75% {
+            transform: scale(1.1);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    @keyframes float {
+        0% {
+            transform: translateY(0px);
+        }
+
+        50% {
+            transform: translateY(-15px);
+        }
+
+        100% {
+            transform: translateY(0px);
+        }
+    }
+
+    @keyframes shake {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        25% {
+            transform: rotate(5deg);
+        }
+
+        50% {
+            transform: rotate(0deg);
+        }
+
+        75% {
+            transform: rotate(-5deg);
+        }
+
+        100% {
+            transform: rotate(0deg);
+        }
+    }
+
+    @keyframes medicalScale {
+        0% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.02);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    @keyframes scan {
+        0% {
+            top: -100%;
+        }
+
+        100% {
+            top: 100%;
+        }
+    }
+
+    /* Animation classes */
+    .animate-fade-in {
+        animation: fadeIn 1s ease-out forwards;
+    }
+
+    .pulse {
+        animation: pulse 4s infinite ease-in-out;
+    }
+
+    .pulse-circle {
+        animation: pulseCircle 4s infinite ease-out;
+    }
+
+    .heartbeat {
+        animation: heartbeat 1.5s infinite ease-in-out;
+    }
+
+    .heartbeat:hover {
+        animation: heartbeat 0.8s infinite ease-in-out;
+    }
+
+    .float-doctor {
+        animation: float 6s infinite ease-in-out;
+    }
+
+    .stethoscope {
+        animation: shake 3s infinite ease-in-out;
+    }
+
+    .medicine-shake {
+        animation: shake 4s infinite ease-in-out;
+    }
+
+    .first-aid-shake {
+        animation: shake 3.5s infinite ease-in-out;
+    }
+
+    .blood-drop {
+        animation: pulse 2s infinite ease-in-out;
+    }
+
+    .syringe-injection {
+        animation: shake 2.5s infinite ease-in-out;
+    }
+
+    .cross-pulse {
+        animation: pulse 2s infinite ease-in-out;
+    }
+
+    .medical-scale {
+        animation: medicalScale 8s infinite ease-in-out;
+    }
+
+    .scan-line {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.3);
+        animation: scan 4s infinite linear;
+        z-index: 1;
+    }
+
+    /* Custom styles */
+    .gradient-text {
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        background-image: linear-gradient(to right, #3b82f6, #60a5fa);
+    }
+
+    .text-gradient {
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+    }
+
+    .section-divider {
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(to right, #3b82f6, #60a5fa);
+        margin: 0 auto 20px;
+        border-radius: 2px;
+    }
+
+    .service-card {
+        background: white;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    }
+
+    .medical-card:hover {
+        background: linear-gradient(to bottom right, #f0f9ff, #e0f2fe);
+    }
+
+    .service-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(to bottom right, #3b82f6, #60a5fa);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .transition-slow {
+        transition: all 0.5s ease;
+    }
+
+    .transition-fast {
+        transition: all 0.2s ease;
+    }
+
+    .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 1;
+    }
+
+    .mobile-menu {
+        transition: all 0.3s ease;
+    }
+
+    .mobile-nav-item {
+        display: block;
+        padding: 12px 0;
+        color: #4b5563;
+        font-weight: 500;
+        border-bottom: 1px solid #e5e7eb;
+        transition: all 0.2s ease;
+    }
+
+    .mobile-nav-item:hover,
+    .mobile-nav-item.active {
+        color: #3b82f6;
+    }
+</style>
+</body>
+
+</html>

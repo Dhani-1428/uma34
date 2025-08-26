@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membership - United Maritime Association</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        /* Navigation */
+        .nav-link {
+            position: relative;
+            color: #334155;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #1e40af;
+        }
+        
+        .nav-link.active {
+            color: #1e40af;
+            font-weight: 600;
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background-color: #1e40af;
+            border-radius: 50%;
+        }
+        
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 200px;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 12px 0;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-item {
+            display: block;
+            padding: 8px 24px;
+            color: #334155;
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown-item:hover {
+            background: #f1f5f9;
+            color: #1e40af;
+            padding-left: 28px;
+        }
+        
+        /* Mobile menu */
+        .mobile-menu {
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .mobile-nav-item {
+            display: block;
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: #334155;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-nav-item:hover {
+            background: #f1f5f9;
+            color: #1e40af;
+        }
+        
+        .mobile-nav-item.active {
+            background: #1e40af;
+            color: white;
+        }
+        
+        /* Benefit Cards */
+        .benefit-card {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #f1f5f9;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+        
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .benefit-card:hover .benefit-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        /* Process Steps */
+        .process-step {
+            text-align: center;
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+        
+        .step-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .process-step:hover .step-icon {
+            transform: scale(1.1);
+        }
+        
+        /* Form Styles */
+        .form-section {
+            margin-bottom: 32px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #334155;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+        
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .checkbox-item input {
+            margin-right: 8px;
+        }
+        
+        .btn-primary-compact {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary-compact:hover {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            transform: translateY(-2px);
+        }
+        
+        .btn-lg {
+            padding: 16px 32px;
+            font-size: 16px;
+        }
+        
+        /* Testimonials */
+        .testimonial-card {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #f1f5f9;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+        
+        .testimonial-rating {
+            color: #f59e0b;
+            margin-bottom: 16px;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 16px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            background: #e2e8f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: #64748b;
+        }
+        
+        /* Animation Classes */
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .animate-wave {
+            animation: wave 3s ease-in-out infinite;
+        }
+        
+        @keyframes wave {
+            0% { transform: rotate(0deg); }
+            5% { transform: rotate(5deg); }
+            10% { transform: rotate(-5deg); }
+            15% { transform: rotate(5deg); }
+            20% { transform: rotate(-5deg); }
+            25% { transform: rotate(0deg); }
+            100% { transform: rotate(0deg); }
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white">
+ <!-- Top Bar -->
+    <div class="bg-gradient-to-r from-slate-900 to-blue-900 text-white py-2 text-xs md:text-sm">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center space-y-1 md:space-y-0">
+            <div class="flex flex-wrap justify-center md:justify-start items-center space-x-2 md:space-x-6">
+                <div class="flex items-center space-x-2 hover:text-blue-300 transition-fast animate-slide-left">
+                    <i class="fas fa-envelope text-blue-300 text-sm animate-bounce"></i>
+                    <span><a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@unitedmaritimeassociation.com&su=Enquiry%20from%20Website&body=Dear%20United%20Maritime%20Association%20Team,%0A%0A"
+                            target="_blank"
+                            class="hover:text-blue-600 cursor-pointer">info@unitedmaritimeassociation.com</span></a>
+                </div>
+                <div
+                    class="flex items-center space-x-2 hover:text-blue-300 transition-fast animate-slide-left delay-100">
+                    <i class="fas fa-phone text-blue-300 text-sm animate-bounce"></i>
+                    <span>+916124482546</span>
+                </div>
+                <div
+                    class="flex items-center space-x-2 hover:text-blue-300 transition-fast animate-slide-left delay-200">
+                    <i class="fas fa-map-marker-alt text-blue-300 text-sm animate-bounce"></i>
+                    <span>Kolkata, West Bengal, India</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right">
+                    <i class="fab fa-facebook-f text-xs"></i>
+                </a>
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right delay-100">
+                    <i class="fab fa-twitter text-xs"></i>
+                </a>
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right delay-200">
+                    <i class="fab fa-linkedin-in text-xs"></i>
+                </a>
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right delay-300">
+                    <i class="fab fa-instagram text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center">
+                            <div
+                                class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center mr-3 shadow-md">
+                                <a href="http://127.0.0.1:5500/index.html"
+                                    class="w-full h-full flex items-center justify-center">
+                                    <img src="UMA LOGO.jpeg" alt="UMA Logo"
+                                        class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full" />
+                                </a>
+                            </div>
+                            <div>
+                                <h1 class="text-xl font-bold text-slate-800" style="font-family: 'Playfair Display', serif;">UMA</h1>
+                                <p class="text-xs text-blue-600 font-medium -mt-1">United Maritime Association</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden lg:block">
+                    <div class="ml-10 flex items-center space-x-1">
+                        <a href="index.html" class="px-4 py-2 text-sm font-medium text-slate-700 hover:text-blue-700 transition-slow">Home</a>
+                        
+                        <!-- About Dropdown -->
+                        <div class="dropdown relative">
+                            <a href="about.html" class="px-4 py-2 text-sm font-medium text-slate-700 hover:text-blue-700 flex items-center">
+                                About Us <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </a>
+                            <div class="dropdown-menu absolute left-0 mt-2 w-56 origin-top-left bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
+                                <div class="py-1">
+                                    <a href="about.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700">Our Story</a>
+                                    <a href="mission-vision.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700">Mission & Vision</a>
+                                    <a href="objectives.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700">Objectives</a>
+                                    <a href="organization-structure.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700">Organization Structure</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Services Dropdown -->
+                        <div class="dropdown relative">
+                            <a href="services.html" class="px-4 py-2 text-sm font-medium text-slate-700 hover:text-blue-700 transition-slow flex items-center">
+                                Services <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </a>
+                            <div class="dropdown-menu absolute left-0 mt-2 w-56 origin-top-left bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
+                                <div class="py-1">
+                                    <a href="services.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700">All Services</a>
+                                    <a href="training-education.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700">Training & Education</a>
+                                    <a href="medical-support.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700">Medical Support</a>
+                                    <a href="job-placement.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700">Job Placement</a>
+                                    <a href="family-welfare.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700">Family Welfare</a>
+                                    <a href="publications.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700">Publications</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <a href="partners.html" class="px-4 py-2 text-sm font-medium text-slate-700 hover:text-blue-700 transition-slow">Partners</a>
+                        <a href="subsectors.html" class="px-4 py-2 text-sm font-medium text-slate-700 hover:text-blue-700 transition-slow">Sub Sectors</a>
+                        
+                        <!-- Events Dropdown -->
+                        <div class="dropdown relative">
+                            <a href="events.html" class="px-4 py-2 text-sm font-medium text-slate-700 hover:text-blue-700 transition-slow flex items-center">
+                                Events <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </a>
+                            <div class="dropdown-menu absolute left-0 mt-2 w-56 origin-top-left bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
+                                <div class="py-1">
+                                    <a href="events.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700">Upcoming Events</a>
+                                    <a href="conferences.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700">Conferences</a>
+                                    <a href="webinars.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700">Webinars</a>
+                                    <a href="workshops.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700">Workshops</a>
+                                    <a href="past-events.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700">Past Events</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <a href="gallery.html" class="px-4 py-2 text-sm font-medium text-slate-700 hover:text-blue-700 transition-slow">Gallery</a>
+                        <a href="membership.html" class="px-4 py-2 text-sm font-medium text-blue-700 border-b-2 border-blue-700">Membership</a>
+                        <a href="contact.html" class="ml-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-2 rounded-full hover:from-blue-700 hover:to-blue-800 transition-slow transform hover:scale-[1.02] shadow-md">Contact Us</a>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="lg:hidden">
+                    <button id="mobile-menu-btn" class="text-slate-700 hover:text-blue-600 focus:outline-none p-2">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+       <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="lg:hidden fixed inset-0 bg-white z-50 transform translate-x-full transition-transform duration-300 ease-in-out">
+            <div class="flex flex-col h-full">
+                <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+                    <div class="flex items-center">
+                        <div
+                                class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center mr-3 shadow-md">
+                                <a href="http://127.0.0.1:5500/index.html"
+                                    class="w-full h-full flex items-center justify-center">
+                                    <img src="UMA LOGO.jpeg" alt="UMA Logo"
+                                        class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full" />
+                                </a>
+                            </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-800">UMA</h3>
+                            <p class="text-xs text-blue-600">United Maritime Association</p>
+                        </div>
+                    </div>
+                    <button id="mobile-menu-close" class="text-slate-500 hover:text-slate-700 p-2">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div class="flex-1 overflow-y-auto p-6 space-y-4">
+                    <a href="index.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Home</a>
+                    <a href="about.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">About
+                        Us</a>
+                    <a href="services.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Services</a>
+                    <a href="partners.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Partners</a>
+                    <a href="subsectors.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Sub
+                        Sectors</a>
+                    <a href="events.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Events</a>
+                    <a href="gallery.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Gallery</a>
+                    <a href="membership.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Membership</a>
+                    <a href="contact.html"
+                        class="block py-3 px-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg font-medium text-center mt-8">Contact
+                        Us</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 py-20 md:py-28 relative overflow-hidden">
+        <div class="absolute inset-0 bg-black/20"></div>
+        <div class="absolute top-0 left-0 w-full h-full">
+            <div class="absolute top-20 left-20 w-40 h-40 bg-blue-500 rounded-full filter blur-3xl opacity-20 animate-float"></div>
+            <div class="absolute bottom-20 right-20 w-60 h-60 bg-indigo-500 rounded-full filter blur-3xl opacity-20 animate-float" style="animation-delay: 2s;"></div>
+            <div class="absolute top-1/3 right-1/4 w-32 h-32 bg-slate-500 rounded-full filter blur-3xl opacity-20 animate-float" style="animation-delay: 4s;"></div>
+        </div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="animate__animated animate__fadeInUp">
+                <span class="inline-block px-3 py-1 bg-blue-600/20 backdrop-blur-sm border border-blue-400/30 rounded-full text-blue-300 text-sm font-semibold mb-6 animate__animated animate__fadeIn animate__delay-1s">
+                    Join Our Community
+                </span>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate__animated animate__fadeInUp" style="font-family: 'Playfair Display', serif;">
+                    Membership
+                </h1>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto animate__animated animate__fadeInUp animate__delay-1s">
+                    Become part of India's most prestigious maritime association and unlock opportunities for professional growth and industry leadership
+                </p>
+                <div class="mt-8 animate__animated animate__fadeInUp animate__delay-2s">
+                    <a href="#membershipForm" class="inline-flex items-center justify-center px-8 py-3 bg-white text-blue-700 font-bold rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                        <span>Apply Now</span>
+                        <i class="fas fa-arrow-right ml-3"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Membership Benefits -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 animate__animated animate__fadeIn">
+                <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">
+                    Member Benefits
+                </span>
+                <h2 class="text-3xl lg:text-4xl font-bold text-slate-800 mb-4" style="font-family: 'Playfair Display', serif;">
+                    Why Join UMA?
+                </h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-blue-600 to-cyan-600 mx-auto mb-6"></div>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Discover the exclusive benefits and opportunities that come with UMA membership
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="benefit-card animate__animated animate__fadeIn">
+                    <div class="benefit-icon bg-gradient-to-br from-blue-500 to-blue-600">
+                        <i class="fas fa-graduation-cap text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Professional Development</h3>
+                    <ul class="text-gray-600 text-sm space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Advanced training programs</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Industry certifications</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Skill enhancement workshops</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Online learning platform</li>
+                    </ul>
+                </div>
+
+                <div class="benefit-card animate__animated animate__fadeIn" style="animation-delay: 0.2s;">
+                    <div class="benefit-icon bg-gradient-to-br from-green-500 to-green-600">
+                        <i class="fas fa-briefcase text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Career Advancement</h3>
+                    <ul class="text-gray-600 text-sm space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Job placement assistance</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Career counseling</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Industry connections</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Resume building support</li>
+                    </ul>
+                </div>
+
+                <div class="benefit-card animate__animated animate__fadeIn" style="animation-delay: 0.4s;">
+                    <div class="benefit-icon bg-gradient-to-br from-purple-500 to-purple-600">
+                        <i class="fas fa-users text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Networking Opportunities</h3>
+                    <ul class="text-gray-600 text-sm space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Industry events & conferences</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Professional networking</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Mentorship programs</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Business partnerships</li>
+                    </ul>
+                </div>
+
+                <div class="benefit-card animate__animated animate__fadeIn">
+                    <div class="benefit-icon bg-gradient-to-br from-red-500 to-red-600">
+                        <i class="fas fa-heartbeat text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Healthcare & Wellness</h3>
+                    <ul class="text-gray-600 text-sm space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Medical support services</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Health insurance guidance</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Mental wellness programs</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Family healthcare support</li>
+                    </ul>
+                </div>
+
+                <div class="benefit-card animate__animated animate__fadeIn" style="animation-delay: 0.2s;">
+                    <div class="benefit-icon bg-gradient-to-br from-orange-500 to-orange-600">
+                        <i class="fas fa-book text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Knowledge Resources</h3>
+                    <ul class="text-gray-600 text-sm space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Monthly e-magazines</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Industry publications</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Research reports</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Maritime library access</li>
+                    </ul>
+                </div>
+
+                <div class="benefit-card animate__animated animate__fadeIn" style="animation-delay: 0.4s;">
+                    <div class="benefit-icon bg-gradient-to-br from-indigo-500 to-indigo-600">
+                        <i class="fas fa-shield-alt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Legal & Advisory</h3>
+                    <ul class="text-gray-600 text-sm space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Legal consultation</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Contract guidance</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Dispute resolution</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Regulatory compliance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Membership Application Form -->
+    <section class="py-16 bg-white" id="membershipForm">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 animate__animated animate__fadeIn">
+                <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">
+                    Apply Now
+                </span>
+                <h2 class="text-3xl lg:text-4xl font-bold text-slate-800 mb-4" style="font-family: 'Playfair Display', serif;">
+                    Membership Application Form
+                </h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-blue-600 to-cyan-600 mx-auto mb-6"></div>
+                <p class="text-lg text-gray-600">
+                    Start your journey with UMA by filling out this comprehensive application form
+                </p>
+            </div>
+
+            <form class="membership-form animate__animated animate__fadeIn" id="membershipApplicationForm">
+                <!-- Personal Information -->
+                <div class="form-section">
+                    <h3 class="section-title">Personal Information</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="form-group">
+                            <label for="firstName" class="form-label">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName" class="form-label">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address *</label>
+                            <input type="email" id="email" name="email" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Contact Number *</label>
+                            <input type="tel" id="phone" name="phone" class="form-input" required>
+                        </div>
+                         <div class="form-group">
+                            <label for="cdcNumber" class="form-label">CDC Number *</label>
+                            <input type="text" id="cdcNumber" name="cdcNumber" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="nextOfKin" class="form-label">Next of Kin *</label>
+                            <input type="text" id="nextOfKin" name="nextOfKin" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="relationship" class="form-label">Relationship *</label>
+                            <input type="text" id="relationship" name="relationship" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dateOfBirth" class="form-label">Date of Birth *</label>
+                            <input type="date" id="dateOfBirth" name="dateOfBirth" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="nationality" class="form-label">Nationality *</label>
+                            <input type="text" id="nationality" name="nationality" class="form-input" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address" class="form-label">Complete Address *</label>
+                        <textarea id="address" name="address" rows="3" class="form-input" required></textarea>
+                    </div>
+                </div>
+
+                <!-- Professional Information -->
+                <div class="form-section">
+                    <h3 class="section-title">Professional Information</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="form-group">
+                            <label for="currentPosition" class="form-label">Current Position *</label>
+                            <input type="text" id="currentPosition" name="currentPosition" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="company" class="form-label">Current Company/Organization</label>
+                            <input type="text" id="company" name="company" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="experience" class="form-label">Years of Experience *</label>
+                            <select id="experience" name="experience" class="form-input" required>
+                                <option value="">Select experience</option>
+                                <option value="0-2">0-2 years</option>
+                                <option value="3-5">3-5 years</option>
+                                <option value="6-10">6-10 years</option>
+                                <option value="11-15">11-15 years</option>
+                                <option value="16+">16+ years</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="maritimeSector" class="form-label">Maritime Sector *</label>
+                            <select id="maritimeSector" name="maritimeSector" class="form-input" required>
+                                <option value="">Select sector</option>
+                                <option value="shipping">Shipping</option>
+                                <option value="ports">Ports & Terminals</option>
+                                <option value="offshore">Offshore</option>
+                                <option value="shipbuilding">Shipbuilding</option>
+                                <option value="logistics">Maritime Logistics</option>
+                                <option value="education">Maritime Education</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="qualifications" class="form-label">Educational Qualifications *</label>
+                        <textarea id="qualifications" name="qualifications" rows="3" class="form-input" placeholder="List your educational qualifications and certifications" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="professionalExperience" class="form-label">Professional Experience *</label>
+                        <textarea id="professionalExperience" name="professionalExperience" rows="3" class="form-input" placeholder="Describe your professional experience and career history" required></textarea>
+                    </div>
+                </div>
+
+                <!-- Membership Type -->
+                <div class="form-section">
+                    <h3 class="section-title">Membership Type</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="form-group">
+                            <label for="membershipType" class="form-label">Membership Category *</label>
+                            <select id="membershipType" name="membershipType" class="form-input" required>
+                                <option value="">Select category</option>
+                                <option value="student">Student Member</option>
+                                <option value="associate">Associate Member</option>
+                                <option value="professional">Professional Member</option>
+                                <option value="corporate">Corporate Member</option>
+                                <option value="life">Life Member</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="referredBy" class="form-label">Referred By (Optional)</label>
+                            <input type="text" id="referredBy" name="referredBy" class="form-input" placeholder="Member name or reference">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Areas of Interest (Select all that apply)</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interests" value="training">
+                                <span>Professional Training</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interests" value="networking">
+                                <span>Networking Events</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interests" value="career">
+                                <span>Career Development</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interests" value="research">
+                                <span>Research & Publications</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interests" value="mentorship">
+                                <span>Mentorship Programs</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interests" value="advocacy">
+                                <span>Industry Advocacy</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Documents Upload -->
+                <div class="form-section">
+                    <h3 class="section-title">Required Documents</h3>
+                    <p class="text-gray-600 mb-4">Please have the following documents ready for upload (max 2MB each):</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="form-group">
+                            <label for="photo" class="form-label">Passport Size Photo *</label>
+                            <input type="file" id="photo" name="photo" class="form-input" accept="image/*" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="idProof" class="form-label">ID Proof (Aadhaar/Passport) *</label>
+                            <input type="file" id="idProof" name="idProof" class="form-input" accept="image/*,.pdf" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="qualificationDocs" class="form-label">Educational Certificates *</label>
+                            <input type="file" id="qualificationDocs" name="qualificationDocs" class="form-input" accept="image/*,.pdf" required multiple>
+                        </div>
+                        <div class="form-group">
+                            <label for="experienceDocs" class="form-label">Experience Certificates (if any)</label>
+                            <input type="file" id="experienceDocs" name="experienceDocs" class="form-input" accept="image/*,.pdf" multiple>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Declaration -->
+                <div class="form-section">
+                    <h3 class="section-title">Declaration</h3>
+                    <div class="bg-blue-50 p-6 rounded-lg mb-6">
+                        <p class="text-gray-700 mb-4">
+                            I hereby declare that all the information provided in this application is true and correct to the best of my knowledge. I understand that any false information may lead to the rejection of my application or termination of membership.
+                        </p>
+                        <p class="text-gray-700">
+                            I agree to abide by the rules and regulations of the United Maritime Association and to promote its objectives and interests.
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="declaration" required>
+                            <span>I agree to the above declaration *</span>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="terms" required>
+                            <span>I agree to the <a href="#" class="text-blue-600 hover:text-blue-800">Terms and Conditions</a> and <a href="#" class="text-blue-600 hover:text-blue-800">Privacy Policy</a> *</span>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="newsletter">
+                            <span>I would like to receive newsletters and updates from UMA</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn-primary-compact btn-lg animate__animated animate__pulse animate__infinite animate__slower">
+                        <span>Submit Application</span>
+                        <i class="fas fa-paper-plane ml-2"></i>
+                    </button>
+                    <p class="text-gray-500 text-sm mt-4">
+                        After submission, our team will review your application and contact you within 3-5 business days.
+                    </p>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Application Process -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 animate__animated animate__fadeIn">
+                <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">
+                    Application Process
+                </span>
+                <h2 class="text-3xl lg:text-4xl font-bold text-slate-800 mb-4" style="font-family: 'Playfair Display', serif;">
+                    How to Apply
+                </h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-blue-600 to-cyan-600 mx-auto mb-6"></div>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Follow these simple steps to become a member of the United Maritime Association
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="process-step animate__animated animate__fadeIn">
+                    <div class="step-number">1</div>
+                    <div class="step-icon bg-gradient-to-br from-blue-500 to-blue-600">
+                        <i class="fas fa-file-alt text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">Fill Application</h3>
+                    <p class="text-gray-600 text-sm">Complete the membership application form with your personal and professional details</p>
+                </div>
+
+                <div class="process-step animate__animated animate__fadeIn" style="animation-delay: 0.2s;">
+                    <div class="step-number">2</div>
+                    <div class="step-icon bg-gradient-to-br from-green-500 to-green-600">
+                        <i class="fas fa-folder-open text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">Submit Documents</h3>
+                    <p class="text-gray-600 text-sm">Provide required documents including ID proof, educational certificates, and experience letters</p>
+                </div>
+
+                <div class="process-step animate__animated animate__fadeIn" style="animation-delay: 0.4s;">
+                    <div class="step-number">3</div>
+                    <div class="step-icon bg-gradient-to-br from-purple-500 to-purple-600">
+                        <i class="fas fa-check-circle text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">Application Review</h3>
+                    <p class="text-gray-600 text-sm">Our membership committee will review your application and qualifications</p>
+                </div>
+
+                <div class="process-step animate__animated animate__fadeIn" style="animation-delay: 0.6s;">
+                    <div class="step-number">4</div>
+                    <div class="step-icon bg-gradient-to-br from-orange-500 to-orange-600">
+                        <i class="fas fa-id-card text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">Get Approved</h3>
+                    <p class="text-gray-600 text-sm">Receive confirmation and welcome package with your membership card and benefits guide</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Member Testimonials -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 animate__animated animate__fadeIn">
+                <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">
+                    Member Testimonials
+                </span>
+                <h2 class="text-3xl lg:text-4xl font-bold text-slate-800 mb-4" style="font-family: 'Playfair Display', serif;">
+                    What Our Members Say
+                </h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-blue-600 to-cyan-600 mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="testimonial-card animate__animated animate__fadeIn">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "UMA has been instrumental in my career growth. The training programs and networking opportunities have opened doors I never thought possible."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800">Captain Rajesh Kumar</h4>
+                            <p class="text-gray-600 text-sm">Senior Marine Officer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card animate__animated animate__fadeIn" style="animation-delay: 0.2s;">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "The medical support and family welfare programs provided by UMA have been a blessing for my family during challenging times."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800">Engineer Priya Sharma</h4>
+                            <p class="text-gray-600 text-sm">Marine Engineer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card animate__animated animate__fadeIn" style="animation-delay: 0.4s;">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "As a young maritime professional, UMA's mentorship program and job placement assistance helped me secure my dream position."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800">Deck Officer Amit Patel</h4>
+                            <p class="text-gray-600 text-sm">Navigation Officer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 relative overflow-hidden">
+        <div class="absolute inset-0 bg-black/20"></div>
+        <div class="absolute top-0 left-0 w-full h-full">
+            <div class="absolute top-20 left-20 w-40 h-40 bg-white rounded-full filter blur-3xl opacity-10 animate-float"></div>
+            <div class="absolute bottom-20 right-20 w-60 h-60 bg-white rounded-full filter blur-3xl opacity-10 animate-float" style="animation-delay: 2s;"></div>
+            <div class="absolute top-1/3 right-1/4 w-32 h-32 bg-white rounded-full filter blur-3xl opacity-10 animate-float" style="animation-delay: 4s;"></div>
+        </div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl lg:text-4xl font-bold text-white mb-8 animate__animated animate__fadeIn" style="font-family: 'Playfair Display', serif;">
+                Ready to Join India's Premier Maritime Association?
+            </h2>
+            <p class="text-xl text-blue-100 mb-12 max-w-3xl mx-auto leading-relaxed animate__animated animate__fadeIn animate__delay-1s">
+                Take the next step in your maritime career with UMA membership today
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center animate__animated animate__fadeIn animate__delay-2s">
+                <a href="#membershipForm" class="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-700 font-bold rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-xl">
+                    <span>Apply Now</span>
+                    <i class="fas fa-arrow-right ml-3"></i>
+                </a>
+                <a href="contact.html" class="inline-flex items-center justify-center px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-bold rounded-full border-2 border-white/30 hover:bg-white/20 transition-all duration-300">
+                    <span>Contact Us</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <!-- About Column -->
+                <div class="reveal">
+                    <div class="flex items-center mb-6">
+                       <div
+                                class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center mr-3 shadow-md">
+                                <a href="http://127.0.0.1:5500/index.html"
+                                    class="w-full h-full flex items-center justify-center">
+                                    <img src="UMA LOGO.jpeg" alt="UMA Logo"
+                                        class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full" />
+                                </a>
+                            </div>
+                        <div>
+                            <h3 class="text-xl font-bold" style="font-family: 'Playfair Display', serif;">UMA</h3>
+                            <p class="text-xs text-blue-400 font-medium -mt-1">The United Maritime Association</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 mb-6">Empowering maritime professionals through education, advocacy, and innovation since 2024.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-facebook-f text-sm"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-twitter text-sm"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-linkedin-in text-sm"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-instagram text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links Column -->
+                <div class="reveal" style="transition-delay: 0.1s">
+                    <h3 class="text-lg font-bold mb-6 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:bg-blue-600">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Home</a></li>
+                        <li><a href="about.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">About Us</a></li>
+                        <li><a href="services.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Services</a></li>
+                        <li><a href="partners.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Partners</a></li>
+                        <li><a href="subsectors.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Subsectors</a></li>
+                        <li><a href="events.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Events</a></li>
+                        <li><a href="gallery.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Gallery</a></li>
+                        <li><a href="contact.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services Column -->
+                <div class="reveal" style="transition-delay: 0.2s">
+                    <h3 class="text-lg font-bold mb-6 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:bg-blue-600">Our Services</h3>
+                    <ul class="space-y-3">
+                        <li><a href="training-education.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Training & Education</a></li>
+                        <li><a href="medical-support.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Medical Support</a></li>
+                        <li><a href="job-placement.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Job Placement</a></li>
+                        <li><a href="family-welfare.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Family Welfare</a></li>
+                        <li><a href="publications.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Publications</a></li>
+                        <li><a href="membership.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Membership</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Column -->
+                <div class="reveal" style="transition-delay: 0.3s">
+                    <h3 class="text-lg font-bold mb-6 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:bg-blue-600">Contact Us</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-slate-400"> A3, 3RD FLOOR, LAKHAN SONA APARTMENT,NEAR RPS MORE,WEST BAILY ROAD,PATNA</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-slate-400">+916124482546</span>
+                        </li>
+                        <li class="flex items-start">
+                             <i class="fas fa-envelope text-blue-400 mt-1 mr-3"></i>
+                            <span><a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@unitedmaritimeassociation.com&su=Enquiry%20from%20Website&body=Dear%20United%20Maritime%20Association%20Team,%0A%0A"
+                            target="_blank"
+                            class="text-slate-400">info@unitedmaritimeassociation.com</span></a>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-clock text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-slate-400">Mon-Fri: 9:00 AM - 6:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-slate-500 text-sm mb-4 md:mb-0">© 2023 The United Maritime Association. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-slate-500 hover:text-blue-400 text-sm transition">Privacy Policy</a>
+                    <a href="#" class="text-slate-500 hover:text-blue-400 text-sm transition">Terms of Service</a>
+                    <a href="#" class="text-slate-500 hover:text-blue-400 text-sm transition">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white shadow-lg transform transition-all duration-300 opacity-0 invisible hover:bg-blue-700 hover:scale-110">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-full');
+        });
+        
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.add('translate-x-full');
+        });
+        
+        // Form submission
+        document.getElementById('membershipApplicationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Simple validation
+            const requiredFields = ['firstName', 'lastName', 'email', 'phone', 'cdcNumber', 'nextOfKin', 'relationship', 'dateOfBirth', 'nationality', 'address', 'currentPosition', 'experience', 'maritimeSector', 'qualifications', 'professionalExperience', 'membershipType'];
+            
+            for (let field of requiredFields) {
+                if (!data[field]) {
+                    alert(`Please fill in the ${field.replace(/([A-Z])/g, ' $1').toLowerCase()} field.`);
+                    return;
+                }
+            }
+            
+            if (!data.declaration || !data.terms) {
+                alert('Please accept the declaration and terms & conditions.');
+                return;
+            }
+            
+            // Simulate form submission
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalText = submitButton.innerHTML;
+            
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Processing Application...';
+            submitButton.disabled = true;
+            
+            setTimeout(() => {
+                alert('Thank you for your membership application! We will review your application and contact you within 3-5 business days.');
+                this.reset();
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
+            }, 3000);
+        });
+
+        // Add scroll animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const animateElements = document.querySelectorAll('.animate__animated');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const animation = entry.target.getAttribute('data-animate');
+                        entry.target.classList.add(animation);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animateElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>

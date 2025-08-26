@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - The United Maritime Association</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        /* Custom animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-delay-1 {
+            animation: float 6s ease-in-out infinite 1s;
+        }
+        
+        .floating-delay-2 {
+            animation: float 6s ease-in-out infinite 2s;
+        }
+        
+        /* Card flip */
+        .flip-card {
+            perspective: 1000px;
+            background: transparent;
+            min-height: 300px;
+        }
+        
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .flip-card-back {
+            transform: rotateY(180deg);
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        /* Gradient underline */
+        .gradient-underline {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .gradient-underline::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            border-radius: 2px;
+        }
+        
+        /* Service cards */
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #f1f5f9;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            transform: scaleX(0);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Process steps */
+        .process-step {
+            position: relative;
+            padding-bottom: 40px;
+        }
+        
+        .process-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            transform: translateX(-50%);
+            opacity: 0.3;
+        }
+        
+        .process-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0 auto 24px;
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .process-step:hover .process-number {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(59, 130, 246, 0.4);
+        }
+        
+        /* Navigation */
+         /* Navbar dropdown */
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+        
+        /* Buttons */
+        .btn-gradient {
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gradient:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        /* Mobile menu */
+        .mobile-menu {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Water wave effect */
+        .water-wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="%23ffffff" opacity=".25"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" fill="%23ffffff" opacity=".5"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%23ffffff"/></svg>');
+            background-size: cover;
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body class="bg-white font-sans">
+ <!-- Top Bar -->
+    <div class="bg-gradient-to-r from-slate-900 to-blue-900 text-white py-2 text-xs md:text-sm">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center space-y-1 md:space-y-0">
+            <div class="flex flex-wrap justify-center md:justify-start items-center space-x-2 md:space-x-6">
+                <div class="flex items-center space-x-2 hover:text-blue-300 transition-fast animate-slide-left">
+                   <i class="fas fa-envelope text-blue-300 text-sm animate-bounce"></i>
+                    <span><a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@unitedmaritimeassociation.com&su=Enquiry%20from%20Website&body=Dear%20United%20Maritime%20Association%20Team,%0A%0A"
+                            target="_blank"
+                            class="hover:text-blue-600 cursor-pointer">info@unitedmaritimeassociation.com</span></a>
+                </div>
+                <div
+                    class="flex items-center space-x-2 hover:text-blue-300 transition-fast animate-slide-left delay-100">
+                    <i class="fas fa-phone text-blue-300 text-sm animate-bounce"></i>
+                    <span>+916124482546</span>
+                </div>
+                <div
+                    class="flex items-center space-x-2 hover:text-blue-300 transition-fast animate-slide-left delay-200">
+                    <i class="fas fa-map-marker-alt text-blue-300 text-sm animate-bounce"></i>
+                    <span>Kolkata, West Bengal, India</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right">
+                    <i class="fab fa-facebook-f text-xs"></i>
+                </a>
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right delay-100">
+                    <i class="fab fa-twitter text-xs"></i>
+                </a>
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right delay-200">
+                    <i class="fab fa-linkedin-in text-xs"></i>
+                </a>
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right delay-300">
+                    <i class="fab fa-instagram text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center">
+                            <div
+                                class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center mr-3 shadow-md">
+                                <a href="http://127.0.0.1:5500/index.html"
+                                    class="w-full h-full flex items-center justify-center">
+                                    <img src="UMA LOGO.jpeg" alt="UMA Logo"
+                                        class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full" />
+                                </a>
+                            </div>
+                            <div>
+                                <h1 class="text-xl font-bold text-slate-800" style="font-family: 'Merriweather', serif;">UMA</h1>
+                                <p class="text-xs text-blue-600 font-medium -mt-1">The United Maritime Association</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden lg:block">
+                    <div class="ml-10 flex items-center space-x-1">
+                        <a href="index.html" class="nav-link px-4 py-2 text-sm font-semibold">Home</a>
+                        
+                        <!-- About Dropdown -->
+                        <div class="dropdown relative">
+                            <a href="about.html" class="nav-link px-4 py-2 text-sm font-semibold dropdown-trigger">
+                                About Us <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </a>
+                            <div class="dropdown-menu absolute left-0 mt-2 w-56 origin-top-left bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 opacity-0 invisible transition-all duration-300 transform -translate-y-2">
+                                <div class="py-1">
+                                    <a href="about.html" class="dropdown-item block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Our Story</a>
+                                    <a href="mission-vision.html" class="dropdown-item block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Mission & Vision</a>
+                                    <a href="objectives.html" class="dropdown-item block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Objectives</a>
+                                    <a href="organization-structure.html" class="dropdown-item block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Organization Structure</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Services Dropdown -->
+                        <div class="dropdown relative">
+                            <a href="services.html" class="nav-link active px-4 py-2 text-sm font-semibold dropdown-trigger">
+                                Services <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </a>
+                            <div class="dropdown-menu absolute left-0 mt-2 w-56 origin-top-left bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 opacity-0 invisible transition-all duration-300 transform -translate-y-2">
+                                <div class="py-1">
+                                    <a href="services.html" class="dropdown-item block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">All Services</a>
+                                    <a href="training-education.html" class="dropdown-item block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Training & Education</a>
+                                    <a href="medical-support.html" class="dropdown-item block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Medical Support</a>
+                                    <a href="job-placement.html" class="dropdown-item block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Job Placement</a>
+                                    <a href="family-welfare.html" class="dropdown-item block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Family Welfare</a>
+                                    <a href="publications.html" class="dropdown-item block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Publications</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <a href="partners.html" class="nav-link px-4 py-2 text-sm font-semibold">Partners</a>
+                        <a href="subsectors.html" class="nav-link px-4 py-2 text-sm font-semibold">Sub Sectors</a>
+                        
+                        <!-- Events Dropdown -->
+                        <div class="dropdown relative">
+                            <a href="events.html" class="nav-link px-4 py-2 text-sm font-semibold dropdown-trigger">
+                                Events <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </a>
+                            <div class="dropdown-menu absolute left-0 mt-2 w-56 origin-top-left bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 opacity-0 invisible transition-all duration-300 transform -translate-y-2">
+                                <div class="py-1">
+                                    <a href="events.html" class="dropdown-item block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Upcoming Events</a>
+                                    <a href="conferences.html" class="dropdown-item block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Conferences</a>
+                                    <a href="webinars.html" class="dropdown-item block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Webinars</a>
+                                    <a href="workshops.html" class="dropdown-item block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Workshops</a>
+                                    <a href="past-events.html" class="dropdown-item block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Past Events</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <a href="gallery.html" class="nav-link px-4 py-2 text-sm font-semibold">Gallery</a>
+                        <a href="membership.html" class="nav-link px-4 py-2 text-sm font-semibold">Membership</a>
+                        <a href="contact.html" class="btn-gradient text-white px-6 py-2 rounded-full shadow-md hover:shadow-lg transition-all duration-300">Contact Us</a>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="lg:hidden">
+                    <button id="mobile-menu-btn" class="text-slate-700 hover:text-blue-600 focus:outline-none p-2">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+       <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="lg:hidden fixed inset-0 bg-white z-50 transform translate-x-full transition-transform duration-300 ease-in-out">
+            <div class="flex flex-col h-full">
+                <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+                    <div class="flex items-center">
+                        <div
+                                class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center mr-3 shadow-md">
+                                <a href="http://127.0.0.1:5500/index.html"
+                                    class="w-full h-full flex items-center justify-center">
+                                    <img src="UMA LOGO.jpeg" alt="UMA Logo"
+                                        class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full" />
+                                </a>
+                            </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-800">UMA</h3>
+                            <p class="text-xs text-blue-600">United Maritime Association</p>
+                        </div>
+                    </div>
+                    <button id="mobile-menu-close" class="text-slate-500 hover:text-slate-700 p-2">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div class="flex-1 overflow-y-auto p-6 space-y-4">
+                    <a href="index.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Home</a>
+                    <a href="about.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">About
+                        Us</a>
+                    <a href="services.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Services</a>
+                    <a href="partners.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Partners</a>
+                    <a href="subsectors.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Sub
+                        Sectors</a>
+                    <a href="events.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Events</a>
+                    <a href="gallery.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Gallery</a>
+                    <a href="membership.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Membership</a>
+                    <a href="contact.html"
+                        class="block py-3 px-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg font-medium text-center mt-8">Contact
+                        Us</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative py-32 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 overflow-hidden">
+        <div class="absolute inset-0 bg-black/20"></div>
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden">
+            <div class="water-wave"></div>
+        </div>
+        <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500 rounded-full filter blur-3xl opacity-10 animate-pulse"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-indigo-500 rounded-full filter blur-3xl opacity-10 animate-pulse delay-1000"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="animate__animated animate__fadeInUp">
+                <h1 class="text-5xl lg:text-7xl font-bold text-white mb-6" style="font-family: 'Merriweather', serif;">
+                    Our <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Services</span>
+                </h1>
+                <p class="text-xl lg:text-2xl text-gray-300 max-w-4xl mx-auto">
+                    Comprehensive Maritime Solutions for Professional Excellence and Industry Growth
+                </p>
+                <div class="mt-8">
+                    <a href="#services" class="inline-flex items-center px-6 py-3 bg-white text-blue-600 font-semibold rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                        Explore Services <i class="fas fa-arrow-down ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Categories -->
+    <section id="services" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate__animated animate__fadeIn">
+                <span class="text-blue-600 font-semibold text-sm uppercase tracking-wider">Service Categories</span>
+                <h2 class="text-4xl lg:text-5xl font-bold text-slate-800 mt-4 mb-6" style="font-family: 'Merriweather', serif;">
+                    Digital & Educational Services
+                </h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-blue-600 to-cyan-600 mx-auto mb-8"></div>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Innovative solutions designed to empower maritime professionals through cutting-edge digital platforms and comprehensive educational programs.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                <div class="flip-card animate__animated animate__fadeInUp">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front bg-white rounded-xl shadow-xl p-8 flex flex-col items-center justify-center border border-gray-100">
+                            <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-6 shadow-lg">
+                                <i class="fas fa-magazine text-white text-3xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-800 mb-3 text-center" style="font-family: 'Merriweather', serif;">e-Magazine</h3>
+                            <p class="text-gray-600 text-center">Digital publications featuring industry insights, maritime news, and professional development content</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3 class="text-xl font-bold text-slate-800 mb-4" style="font-family: 'Merriweather', serif;">e-Magazine Features</h3>
+                            <ul class="text-gray-600 space-y-2 mb-6 text-left">
+                                <li class="flex items-start"><i class="fas fa-check text-blue-500 mt-1 mr-2"></i> Monthly industry analysis</li>
+                                <li class="flex items-start"><i class="fas fa-check text-blue-500 mt-1 mr-2"></i> Expert interviews</li>
+                                <li class="flex items-start"><i class="fas fa-check text-blue-500 mt-1 mr-2"></i> Career development tips</li>
+                                <li class="flex items-start"><i class="fas fa-check text-blue-500 mt-1 mr-2"></i> Regulatory updates</li>
+                            </ul>
+                            <a href="#" class="text-blue-600 font-semibold hover:text-blue-700 transition-colors inline-flex items-center">
+                                Subscribe Now <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flip-card animate__animated animate__fadeInUp animate__delay-1s">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front bg-white rounded-xl shadow-xl p-8 flex flex-col items-center justify-center border border-gray-100">
+                            <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mb-6 shadow-lg">
+                                <i class="fas fa-calendar-alt text-white text-3xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-800 mb-3 text-center" style="font-family: 'Merriweather', serif;">Events</h3>
+                            <p class="text-gray-600 text-center">Maritime conferences, networking sessions, and industry gatherings for professional growth</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3 class="text-xl font-bold text-slate-800 mb-4" style="font-family: 'Merriweather', serif;">Upcoming Events</h3>
+                            <ul class="text-gray-600 space-y-2 mb-6 text-left">
+                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i> Annual Maritime Summit</li>
+                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i> Leadership Workshops</li>
+                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i> Safety Training Seminars</li>
+                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i> Networking Mixers</li>
+                            </ul>
+                            <a href="#" class="text-green-600 font-semibold hover:text-green-700 transition-colors inline-flex items-center">
+                                View Calendar <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flip-card animate__animated animate__fadeInUp animate__delay-2s">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front bg-white rounded-xl shadow-xl p-8 flex flex-col items-center justify-center border border-gray-100">
+                            <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-6 shadow-lg">
+                                <i class="fas fa-video text-white text-3xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-800 mb-3 text-center" style="font-family: 'Merriweather', serif;">Webinars</h3>
+                            <p class="text-gray-600 text-center">Online training sessions, educational seminars, and expert-led discussions</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3 class="text-xl font-bold text-slate-800 mb-4" style="font-family: 'Merriweather', serif;">Webinar Topics</h3>
+                            <ul class="text-gray-600 space-y-2 mb-6 text-left">
+                                <li class="flex items-start"><i class="fas fa-check text-purple-500 mt-1 mr-2"></i> Emerging Technologies</li>
+                                <li class="flex items-start"><i class="fas fa-check text-purple-500 mt-1 mr-2"></i> Career Advancement</li>
+                                <li class="flex items-start"><i class="fas fa-check text-purple-500 mt-1 mr-2"></i> Regulatory Compliance</li>
+                                <li class="flex items-start"><i class="fas fa-check text-purple-500 mt-1 mr-2"></i> Case Study Analysis</li>
+                            </ul>
+                            <a href="#" class="text-purple-600 font-semibold hover:text-purple-700 transition-colors inline-flex items-center">
+                                Register Now <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flip-card animate__animated animate__fadeInUp animate__delay-3s">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front bg-white rounded-xl shadow-xl p-8 flex flex-col items-center justify-center border border-gray-100">
+                            <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mb-6 shadow-lg">
+                                <i class="fas fa-history text-white text-3xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-800 mb-3 text-center" style="font-family: 'Merriweather', serif;">Past Events</h3>
+                            <p class="text-gray-600 text-center">Comprehensive archive of previous conferences, workshops, and maritime activities</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3 class="text-xl font-bold text-slate-800 mb-4" style="font-family: 'Merriweather', serif;">Event Archives</h3>
+                            <ul class="text-gray-600 space-y-2 mb-6 text-left">
+                                <li class="flex items-start"><i class="fas fa-check text-orange-500 mt-1 mr-2"></i> Conference Recordings</li>
+                                <li class="flex items-start"><i class="fas fa-check text-orange-500 mt-1 mr-2"></i> Presentation Slides</li>
+                                <li class="flex items-start"><i class="fas fa-check text-orange-500 mt-1 mr-2"></i> Event Photos</li>
+                                <li class="flex items-start"><i class="fas fa-check text-orange-500 mt-1 mr-2"></i> Participant Feedback</li>
+                            </ul>
+                            <a href="#" class="text-orange-600 font-semibold hover:text-orange-700 transition-colors inline-flex items-center">
+                                Browse Archives <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Services -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate__animated animate__fadeIn">
+                <span class="text-blue-600 font-semibold text-sm uppercase tracking-wider">Core Services</span>
+                <h2 class="text-4xl lg:text-5xl font-bold text-slate-800 mt-4 mb-6" style="font-family: 'Merriweather', serif;">
+                    Comprehensive Maritime Support
+                </h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-blue-600 to-cyan-600 mx-auto mb-8"></div>
+                <p class="text-xl text-gray-600 max-w-4xl mx-auto">
+                    Professional services designed to empower maritime professionals at every stage of their career
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Educational Seminars -->
+                <div class="service-card bg-white rounded-xl p-8 animate__animated animate__fadeInUp">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-6 shadow-lg">
+                        <i class="fas fa-chalkboard-teacher text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4" style="font-family: 'Merriweather', serif;">Educational Seminars & Workshops</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Professional development workshops, industry-specific training programs, and skill enhancement seminars conducted by maritime experts.
+                    </p>
+                    <ul class="text-gray-600 space-y-2 mb-6">
+                        <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2"></i>Navigation & Safety Protocols</li>
+                        <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2"></i>Emergency Response Training</li>
+                        <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2"></i>Leadership Development</li>
+                    </ul>
+                    <a href="#" class="text-blue-600 font-semibold hover:text-blue-700 transition-colors inline-flex items-center">
+                        Learn More <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <!-- e-Magazines and Publications -->
+                <div class="service-card bg-white rounded-xl p-8 animate__animated animate__fadeInUp animate__delay-1s">
+                    <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mb-6 shadow-lg">
+                        <i class="fas fa-newspaper text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4" style="font-family: 'Merriweather', serif;">e-Magazines & Publications</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Monthly digital magazines featuring industry trends, maritime news, technical articles, and professional insights from leading experts.
+                    </p>
+                    <ul class="text-gray-600 space-y-2 mb-6">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Industry Analysis & Reports</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Technical Publications</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Career Guidance Articles</li>
+                    </ul>
+                    <a href="#" class="text-green-600 font-semibold hover:text-green-700 transition-colors inline-flex items-center">
+                        Learn More <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <!-- Advising and Awareness -->
+                <div class="service-card bg-white rounded-xl p-8 animate__animated animate__fadeInUp animate__delay-2s">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-6 shadow-lg">
+                        <i class="fas fa-lightbulb text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4" style="font-family: 'Merriweather', serif;">Advising & Awareness</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Professional counseling services, career guidance, and awareness programs about maritime industry opportunities and regulations.
+                    </p>
+                    <ul class="text-gray-600 space-y-2 mb-6">
+                        <li class="flex items-center"><i class="fas fa-check text-purple-500 mr-2"></i>Career Counseling</li>
+                        <li class="flex items-center"><i class="fas fa-check text-purple-500 mr-2"></i>Regulatory Compliance</li>
+                        <li class="flex items-center"><i class="fas fa-check text-purple-500 mr-2"></i>Industry Awareness</li>
+                    </ul>
+                    <a href="#" class="text-purple-600 font-semibold hover:text-purple-700 transition-colors inline-flex items-center">
+                        Learn More <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <!-- Training and Guidance -->
+                <div class="service-card bg-white rounded-xl p-8 animate__animated animate__fadeInUp animate__delay-3s">
+                    <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mb-6 shadow-lg">
+                        <i class="fas fa-compass text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4" style="font-family: 'Merriweather', serif;">Training & Guidance</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Comprehensive training programs covering maritime operations, safety standards, and professional development pathways.
+                    </p>
+                    <ul class="text-gray-600 space-y-2 mb-6">
+                        <li class="flex items-center"><i class="fas fa-check text-orange-500 mr-2"></i>Skill Enhancement Programs</li>
+                        <li class="flex items-center"><i class="fas fa-check text-orange-500 mr-2"></i>Mentorship Services</li>
+                        <li class="flex items-center"><i class="fas fa-check text-orange-500 mr-2"></i>Certification Courses</li>
+                    </ul>
+                    <a href="#" class="text-orange-600 font-semibold hover:text-orange-700 transition-colors inline-flex items-center">
+                        Learn More <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <!-- Medical and Mental Health Support -->
+                <div class="service-card bg-white rounded-xl p-8 animate__animated animate__fadeInUp animate__delay-4s">
+                    <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center mb-6 shadow-lg">
+                        <i class="fas fa-heartbeat text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4" style="font-family: 'Merriweather', serif;">Medical & Mental Health Support</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Comprehensive healthcare services, mental wellness programs, and medical assistance for seafarers and their families.
+                    </p>
+                    <ul class="text-gray-600 space-y-2 mb-6">
+                        <li class="flex items-center"><i class="fas fa-check text-red-500 mr-2"></i>Healthcare Guidance</li>
+                        <li class="flex items-center"><i class="fas fa-check text-red-500 mr-2"></i>Mental Wellness Programs</li>
+                        <li class="flex items-center"><i class="fas fa-check text-red-500 mr-2"></i>Emergency Medical Support</li>
+                    </ul>
+                    <a href="#" class="text-red-600 font-semibold hover:text-red-700 transition-colors inline-flex items-center">
+                        Learn More <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <!-- Job Generation and Placement -->
+                <div class="service-card bg-white rounded-xl p-8 animate__animated animate__fadeInUp animate__delay-5s">
+                    <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center mb-6 shadow-lg">
+                        <i class="fas fa-briefcase text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4" style="font-family: 'Merriweather', serif;">Job Generation & Placement</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Employment opportunities, job placement services, and career advancement support for maritime professionals.
+                    </p>
+                    <ul class="text-gray-600 space-y-2 mb-6">
+                        <li class="flex items-center"><i class="fas fa-check text-indigo-500 mr-2"></i>Job Placement Services</li>
+                        <li class="flex items-center"><i class="fas fa-check text-indigo-500 mr-2"></i>Career Counseling</li>
+                        <li class="flex items-center"><i class="fas fa-check text-indigo-500 mr-2"></i>Industry Connections</li>
+                    </ul>
+                    <a href="#" class="text-indigo-600 font-semibold hover:text-indigo-700 transition-colors inline-flex items-center">
+                        Learn More <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Services -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate__animated animate__fadeIn">
+                <span class="text-blue-600 font-semibold text-sm uppercase tracking-wider">Additional Services</span>
+                <h2 class="text-4xl lg:text-5xl font-bold text-slate-800 mt-4 mb-6" style="font-family: 'Merriweather', serif;">
+                    Extended Support Services
+                </h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-blue-600 to-cyan-600 mx-auto mb-8"></div>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Specialized programs designed to address the unique needs of maritime professionals and their families.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white rounded-xl shadow-lg p-8 border border-gray-100 hover:shadow-xl transition-all duration-300 animate__animated animate__fadeInLeft">
+                    <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-6 shadow-lg">
+                        <i class="fas fa-building text-white text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-slate-800 mb-3">Infrastructure Development</h4>
+                    <p class="text-gray-600 text-sm">Establishing maritime institutions and training facilities to support industry growth and professional development.</p>
+                    <a href="#" class="inline-block mt-4 text-blue-600 text-sm font-semibold hover:text-blue-700 transition-colors">
+                        Read More <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-8 border border-gray-100 hover:shadow-xl transition-all duration-300 animate__animated animate__fadeInLeft animate__delay-1s">
+                    <div class="w-14 h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mb-6 shadow-lg">
+                        <i class="fas fa-home text-white text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-slate-800 mb-3">Seafarer Family Welfare</h4>
+                    <p class="text-gray-600 text-sm">Supporting families through counseling, financial planning, and community-building initiatives.</p>
+                    <a href="#" class="inline-block mt-4 text-green-600 text-sm font-semibold hover:text-green-700 transition-colors">
+                        Read More <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-8 border border-gray-100 hover:shadow-xl transition-all duration-300 animate__animated animate__fadeInLeft animate__delay-2s">
+                    <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-6 shadow-lg">
+                        <i class="fas fa-venus text-white text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-slate-800 mb-3">Women Empowerment</h4>
+                    <p class="text-gray-600 text-sm">Promoting women's participation through mentorship, training, and networking opportunities.</p>
+                    <a href="#" class="inline-block mt-4 text-purple-600 text-sm font-semibold hover:text-purple-700 transition-colors">
+                        Read More <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-8 border border-gray-100 hover:shadow-xl transition-all duration-300 animate__animated animate__fadeInLeft animate__delay-3s">
+                    <div class="w-14 h-14 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mb-6 shadow-lg">
+                        <i class="fas fa-gavel text-white text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-slate-800 mb-3">Grievance Redressal</h4>
+                    <p class="text-gray-600 text-sm">Fair and transparent resolution of member concerns through dedicated support channels.</p>
+                    <a href="#" class="inline-block mt-4 text-orange-600 text-sm font-semibold hover:text-orange-700 transition-colors">
+                        Read More <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Process -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate__animated animate__fadeIn">
+                <span class="text-blue-600 font-semibold text-sm uppercase tracking-wider">Our Process</span>
+                <h2 class="text-4xl lg:text-5xl font-bold text-slate-800 mt-4 mb-6" style="font-family: 'Merriweather', serif;">
+                    How We Serve You
+                </h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-blue-600 to-cyan-600 mx-auto mb-8"></div>
+                <p class="text-xl text-gray-600 max-w-4xl mx-auto">
+                    Our streamlined process ensures you receive the best possible service and support
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="process-step text-center animate__animated animate__fadeIn">
+                    <div class="process-number">1</div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4" style="font-family: 'Merriweather', serif;">Consultation</h3>
+                    <p class="text-gray-600">Initial assessment of your needs and career objectives through personalized meetings.</p>
+                </div>
+                
+                <div class="process-step text-center animate__animated animate__fadeIn animate__delay-1s">
+                    <div class="process-number">2</div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4" style="font-family: 'Merriweather', serif;">Customization</h3>
+                    <p class="text-gray-600">Tailored service plan designed for your specific requirements and goals.</p>
+                </div>
+                
+                <div class="process-step text-center animate__animated animate__fadeIn animate__delay-2s">
+                    <div class="process-number">3</div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4" style="font-family: 'Merriweather', serif;">Implementation</h3>
+                    <p class="text-gray-600">Expert delivery of services with continuous monitoring and quality assurance.</p>
+                </div>
+                
+                <div class="process-step text-center animate__animated animate__fadeIn animate__delay-3s">
+                    <div class="process-number">4</div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4" style="font-family: 'Merriweather', serif;">Follow-up</h3>
+                    <p class="text-gray-600">Ongoing support and evaluation to ensure service effectiveness and satisfaction.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-gradient-to-br from-slate-900 to-slate-800 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate__animated animate__fadeIn">
+                <span class="text-blue-400 font-semibold text-sm uppercase tracking-wider">Testimonials</span>
+                <h2 class="text-4xl lg:text-5xl font-bold text-white mt-4 mb-6" style="font-family: 'Merriweather', serif;">
+                    What Our Members Say
+                </h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 mx-auto mb-8"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/10 hover:border-blue-400/30 transition-all duration-300 animate__animated animate__fadeInUp">
+                    <div class="flex items-center mb-6">
+                        <div>
+                            <h4 class="font-bold">Captain Rajesh Kumar</h4>
+                            <p class="text-blue-200 text-sm">Master Mariner</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 italic mb-6">
+                        "The UMA's training programs transformed my career. Their expert-led workshops gave me the skills I needed to advance to captain."
+                    </p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/10 hover:border-blue-400/30 transition-all duration-300 animate__animated animate__fadeInUp animate__delay-1s">
+                    <div class="flex items-center mb-6">
+                        <div>
+                            <h4 class="font-bold">Priya Sharma</h4>
+                            <p class="text-blue-200 text-sm">Marine Engineer</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 italic mb-6">
+                        "The family welfare programs helped my children continue their education while I was at sea. This support is invaluable to seafarers."
+                    </p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/10 hover:border-blue-400/30 transition-all duration-300 animate__animated animate__fadeInUp animate__delay-2s">
+                    <div class="flex items-center mb-6">
+                        <div>
+                            <h4 class="font-bold">Vikram Singh</h4>
+                            <p class="text-blue-200 text-sm">Chief Officer</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 italic mb-6">
+                        "Through UMA's job placement service, I found my dream position with a leading shipping company within weeks of registering."
+                    </p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-br from-blue-600 to-blue-800 relative overflow-hidden">
+        <div class="absolute inset-0 bg-black/10"></div>
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden">
+            <div class="water-wave"></div>
+        </div>
+        <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500 rounded-full filter blur-3xl opacity-10 animate-pulse"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-indigo-500 rounded-full filter blur-3xl opacity-10 animate-pulse delay-1000"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="animate__animated animate__fadeInUp">
+                <h2 class="text-4xl lg:text-5xl font-bold text-white mb-6" style="font-family: 'Merriweather', serif;">
+                    Ready to Access Our Services?
+                </h2>
+                <p class="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
+                    Join thousands of maritime professionals who have transformed their careers through our comprehensive service offerings.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="membership.html" class="inline-flex items-center px-8 py-4 bg-white text-blue-600 font-semibold rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg group">
+                        <span>Become a Member</span>
+                        <i class="fas fa-arrow-right ml-3 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    <a href="contact.html" class="inline-flex items-center px-8 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-full hover:bg-white/10 transition-all duration-300 transform hover:scale-105">
+                        <span>Contact Our Team</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- Footer -->
+    <footer class="bg-slate-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <!-- About Column -->
+                <div class="reveal">
+                    <div class="flex items-center mb-6">
+                       <div
+                                class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center mr-3 shadow-md">
+                                <a href="http://127.0.0.1:5500/index.html"
+                                    class="w-full h-full flex items-center justify-center">
+                                    <img src="UMA LOGO.jpeg" alt="UMA Logo"
+                                        class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full" />
+                                </a>
+                            </div>
+                        <div>
+                            <h3 class="text-xl font-bold" style="font-family: 'Playfair Display', serif;">UMA</h3>
+                            <p class="text-xs text-blue-400 font-medium -mt-1">The United Maritime Association</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 mb-6">Empowering maritime professionals through education, advocacy, and innovation since 2024.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-facebook-f text-sm"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-twitter text-sm"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-linkedin-in text-sm"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-instagram text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links Column -->
+                <div class="reveal" style="transition-delay: 0.1s">
+                    <h3 class="text-lg font-bold mb-6 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:bg-blue-600">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Home</a></li>
+                        <li><a href="about.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">About Us</a></li>
+                        <li><a href="services.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Services</a></li>
+                        <li><a href="partners.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Partners</a></li>
+                        <li><a href="subsectors.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Subsectors</a></li>
+                        <li><a href="events.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Events</a></li>
+                        <li><a href="gallery.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Gallery</a></li>
+                        <li><a href="contact.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services Column -->
+                <div class="reveal" style="transition-delay: 0.2s">
+                    <h3 class="text-lg font-bold mb-6 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:bg-blue-600">Our Services</h3>
+                    <ul class="space-y-3">
+                        <li><a href="training-education.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Training & Education</a></li>
+                        <li><a href="medical-support.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Medical Support</a></li>
+                        <li><a href="job-placement.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Job Placement</a></li>
+                        <li><a href="family-welfare.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Family Welfare</a></li>
+                        <li><a href="publications.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Publications</a></li>
+                        <li><a href="membership.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Membership</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Column -->
+                <div class="reveal" style="transition-delay: 0.3s">
+                    <h3 class="text-lg font-bold mb-6 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:bg-blue-600">Contact Us</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-slate-400">A3, 3RD FLOOR, LAKHAN SONA APARTMENT,NEAR RPS MORE,WEST BAILY ROAD,PATNA</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-slate-400">+916124482546</span>
+                        </li>
+                        <li class="flex items-start">
+                             <i class="fas fa-envelope text-blue-400 mt-1 mr-3"></i>
+                            <span><a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@unitedmaritimeassociation.com&su=Enquiry%20from%20Website&body=Dear%20United%20Maritime%20Association%20Team,%0A%0A"
+                            target="_blank"
+                            class="text-slate-400">info@unitedmaritimeassociation.com</span></a>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-clock text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-slate-400">Mon-Fri: 9:00 AM - 6:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-slate-500 text-sm mb-4 md:mb-0">© 2023 The United Maritime Association. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-slate-500 hover:text-blue-400 text-sm transition">Privacy Policy</a>
+                    <a href="#" class="text-slate-500 hover:text-blue-400 text-sm transition">Terms of Service</a>
+                    <a href="#" class="text-slate-500 hover:text-blue-400 text-sm transition">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white shadow-lg transform transition-all duration-300 opacity-0 invisible hover:bg-blue-700 hover:scale-110">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-full');
+            mobileMenu.classList.add('translate-x-0');
+        });
+        
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-0');
+            mobileMenu.classList.add('translate-x-full');
+        });
+        
+        // Dropdown menus
+        const dropdownTriggers = document.querySelectorAll('.dropdown-trigger');
+        
+        dropdownTriggers.forEach(trigger => {
+            trigger.addEventListener('mouseenter', () => {
+                const dropdown = trigger.parentElement.querySelector('.dropdown-menu');
+                dropdown.classList.remove('opacity-0', 'invisible', '-translate-y-2');
+                dropdown.classList.add('opacity-100', 'visible', 'translate-y-0');
+            });
+            
+            trigger.addEventListener('mouseleave', () => {
+                const dropdown = trigger.parentElement.querySelector('.dropdown-menu');
+                dropdown.classList.remove('opacity-100', 'visible', 'translate-y-0');
+                dropdown.classList.add('opacity-0', 'invisible', '-translate-y-2');
+            });
+        });
+        
+        // Scroll animations
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate__animated');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementPosition < windowHeight - 100) {
+                    const animationClass = element.classList.contains('animate__fadeInUp') ? 'animate__fadeInUp' :
+                                          element.classList.contains('animate__fadeInLeft') ? 'animate__fadeInLeft' :
+                                          element.classList.contains('animate__fadeInRight') ? 'animate__fadeInRight' :
+                                          'animate__fadeIn';
+                    
+                    element.classList.add(animationClass);
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>

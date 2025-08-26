@@ -1,0 +1,1747 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The United Maritime Association - Premier Maritime Excellence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Enhanced animations */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(2deg);
+            }
+        }
+
+        @keyframes wave {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.05);
+                opacity: 0.9;
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes cardHover {
+            0% {
+                transform: translateY(0) rotateY(0);
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            }
+
+            50% {
+                transform: translateY(-10px) rotateY(5deg);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            }
+
+            100% {
+                transform: translateY(0) rotateY(0);
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes flip {
+            0% {
+                transform: perspective(1000px) rotateY(0);
+            }
+
+            50% {
+                transform: perspective(1000px) rotateY(90deg);
+            }
+
+            100% {
+                transform: perspective(1000px) rotateY(0);
+            }
+        }
+
+        @keyframes waterRipple {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(3);
+                opacity: 0;
+            }
+        }
+
+        @keyframes floatHorizontal {
+
+            0%,
+            100% {
+                transform: translateX(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateX(-15px) rotate(2deg);
+            }
+        }
+
+        @keyframes shine {
+            0% {
+                background-position: -100%;
+            }
+
+            100% {
+                background-position: 100%;
+            }
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes borderPulse {
+
+            0%,
+            100% {
+                border-color: rgba(59, 130, 246, 0.5);
+            }
+
+            50% {
+                border-color: rgba(59, 130, 246, 0.9);
+            }
+        }
+
+        /* Animation classes */
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .animate-float-horizontal {
+            animation: floatHorizontal 8s ease-in-out infinite;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .animate-scale-in {
+            animation: scaleIn 0.6s ease-out forwards;
+        }
+
+        .animate-pulse {
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .animate-rotate {
+            animation: rotate 12s linear infinite;
+        }
+
+        .animate-slide-left {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+
+        .animate-slide-right {
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+
+        .animate-card-hover {
+            animation: cardHover 6s ease-in-out infinite;
+        }
+
+        .animate-gradient-bg {
+            animation: gradientBG 15s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        .animate-flip {
+            animation: flip 1.5s ease-in-out infinite;
+        }
+
+        .animate-water-ripple {
+            animation: waterRipple 2s ease-out infinite;
+        }
+
+        .animate-shine {
+            animation: shine 3s linear infinite;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            background-size: 200% auto;
+        }
+
+        .animate-bounce {
+            animation: bounce 2s ease infinite;
+        }
+
+        .animate-border-pulse {
+            animation: borderPulse 3s ease-in-out infinite;
+        }
+
+        .wave {
+            animation: wave 8s linear infinite;
+        }
+
+        /* Smooth transitions */
+        .transition-slow {
+            transition: all 0.5s ease;
+        }
+
+        .transition-medium {
+            transition: all 0.3s ease;
+        }
+
+        .transition-fast {
+            transition: all 0.2s ease;
+        }
+
+        /* Navbar dropdown */
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero section overlay */
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 58, 138, 0.8) 100%);
+        }
+
+        /* Parallax effect */
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        /* Hover effects */
+        .hover-grow {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hover-grow:hover {
+            transform: scale(1.03);
+        }
+
+        .hover-underline {
+            position: relative;
+        }
+
+        .hover-underline::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: currentColor;
+            transition: width 0.3s ease;
+        }
+
+        .hover-underline:hover::after {
+            width: 100%;
+        }
+
+        /* Card hover effect */
+        .card-hover-effect:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Enhanced Flip card container */
+        .flip-card {
+            perspective: 1000px;
+            height: 100%;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+
+        /* Scroll reveal */
+        [data-scroll] {
+            opacity: 0;
+            will-change: transform, opacity;
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        [data-scroll="fade"] {
+            transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        [data-scroll].is-visible {
+            opacity: 1;
+            transform: translateY(0) !important;
+        }
+
+        /* Dark text overlay for better readability */
+        .dark-text-overlay {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            display: inline-block;
+        }
+
+        /* Footer wave animation */
+        .footer-wave-container {
+            position: relative;
+            height: 150px;
+            overflow: hidden;
+        }
+
+        .footer-wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            background-repeat: repeat no-repeat;
+            background-position: 0 bottom;
+            transform-origin: center bottom;
+        }
+
+        .footer-wave-top {
+            background-size: 50% 100px;
+            animation: wave 8s linear infinite;
+        }
+
+        .footer-wave-middle {
+            background-size: 50% 120px;
+            animation: wave 10s linear infinite reverse;
+            opacity: 0.5;
+        }
+
+        .footer-wave-bottom {
+            background-size: 50% 100px;
+            animation: wave 12s linear infinite;
+            opacity: 0.3;
+        }
+
+        /* Water ripple effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(0);
+            pointer-events: none;
+        }
+
+        /* Floating bubbles */
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        /* Shimmer effect */
+        .shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shimmer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shine 3s infinite;
+        }
+
+        /* Animated border */
+        .animated-border {
+            position: relative;
+        }
+
+        .animated-border::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 2px solid transparent;
+            border-radius: inherit;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #3b82f6) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+            animation: gradientBG 3s linear infinite;
+            background-size: 200% 200%;
+        }
+
+        /* Enhanced card styling */
+        .service-card {
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Pulse shadow effect */
+        .pulse-shadow {
+            animation: pulse-shadow 2s infinite;
+        }
+
+        @keyframes pulse-shadow {
+            0% {
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+            }
+        }
+
+        /* Glow effect */
+        .glow {
+            filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.6));
+            transition: filter 0.3s ease;
+        }
+
+        .glow:hover {
+            filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.8));
+        }
+
+        /* Enhanced ripple effect */
+        .ripple-effect {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple-effect span.ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple 600ms linear;
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Testimonial Card Styles */
+        .testimonial-container {
+            position: relative;
+        }
+
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card>div {
+            transition: all 0.3s ease;
+        }
+
+        /* When container is hovered, blur all cards */
+        .testimonial-container:hover .testimonial-card:not(:hover) {
+            filter: blur(2px);
+            opacity: 0.8;
+            transform: scale(0.98);
+        }
+
+        /* Style for the hovered card */
+        .testimonial-card:hover>div {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            z-index: 10;
+        }
+
+        /* Footer reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Underline animation for footer links */
+        .underline-animation {
+            position: relative;
+        }
+
+        .underline-animation::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #3b82f6;
+            transition: width 0.3s ease;
+        }
+
+        .underline-animation:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body class="bg-white font-inter">
+
+    <!-- Top Bar -->
+    <div class="bg-gradient-to-r from-slate-900 to-blue-900 text-white py-2 text-xs md:text-sm">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center space-y-1 md:space-y-0">
+            <div class="flex flex-wrap justify-center md:justify-start items-center space-x-2 md:space-x-6">
+                <div class="flex items-center space-x-2 hover:text-blue-300 transition-fast animate-slide-left">
+                    <i class="fas fa-envelope text-blue-300 text-sm animate-bounce"></i>
+                    <span><a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@unitedmaritimeassociation.com&su=Enquiry%20from%20Website&body=Dear%20United%20Maritime%20Association%20Team,%0A%0A"
+                            target="_blank"
+                            class="hover:text-blue-600 cursor-pointer">info@unitedmaritimeassociation.com</span></a>
+                </div>
+                <div
+                    class="flex items-center space-x-2 hover:text-blue-300 transition-fast animate-slide-left delay-100">
+                    <i class="fas fa-phone text-blue-300 text-sm animate-bounce"></i>
+                    <span>+91 6124482546</span>
+                </div>
+                <div
+                    class="flex items-center space-x-2 hover:text-blue-300 transition-fast animate-slide-left delay-200">
+                    <i class="fas fa-map-marker-alt text-blue-300 text-sm animate-bounce"></i>
+                    <span>Kolkata, West Bengal, India</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right">
+                    <i class="fab fa-facebook-f text-xs"></i>
+                </a>
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right delay-100">
+                    <i class="fab fa-twitter text-xs"></i>
+                </a>
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right delay-200">
+                    <i class="fab fa-linkedin-in text-xs"></i>
+                </a>
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right delay-300">
+                    <i class="fab fa-instagram text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center hover-grow animate-slide-left">
+                            <div
+                                class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center mr-3 shadow-md">
+                                <a href="http://127.0.0.1:5500/index.html"
+                                    class="w-full h-full flex items-center justify-center">
+                                    <img src="UMA LOGO.jpeg" alt="UMA Logo"
+                                        class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full" />
+                                </a>
+                            </div>
+                            <div>
+                                <h1 class="text-xl font-bold text-slate-800"
+                                    style="font-family: 'Playfair Display', serif;">UMA</h1>
+                                <p class="text-xs text-blue-600 font-medium -mt-1">The United Maritime Association</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden lg:block">
+                    <div class="ml-10 flex items-center space-x-1">
+                        <a href="index.html"
+                            class="px-4 py-2 text-sm font-medium text-blue-700 border-b-2 border-blue-700 hover-underline animate-slide-right">Home</a>
+
+                        <!-- About Dropdown -->
+                        <div class="dropdown relative animate-slide-right delay-100">
+                            <a href="about.html"
+                                class="px-4 py-2 text-sm font-medium text-slate-700 hover:text-blue-700 transition-slow flex items-center hover-underline">
+                                About Us <i
+                                    class="fas fa-chevron-down ml-1 text-xs transition-transform duration-300"></i>
+                            </a>
+                            <div
+                                class="dropdown-menu absolute left-0 mt-2 w-56 origin-top-left bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
+                                <div class="py-1">
+                                    <a href="about.html"
+                                        class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-fast">Our
+                                        Story</a>
+                                    <a href="mission-vision.html"
+                                        class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-fast">Mission
+                                        & Vision</a>
+                                    <a href="objectives.html"
+                                        class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-fast">Objectives</a>
+                                    <a href="organization-structure.html"
+                                        class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-fast">Organization
+                                        Structure</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Services Dropdown -->
+                        <div class="dropdown relative animate-slide-right delay-200">
+                            <a href="services.html"
+                                class="px-4 py-2 text-sm font-medium text-slate-700 hover:text-blue-700 transition-slow flex items-center hover-underline">
+                                Services <i
+                                    class="fas fa-chevron-down ml-1 text-xs transition-transform duration-300"></i>
+                            </a>
+                            <div
+                                class="dropdown-menu absolute left-0 mt-2 w-56 origin-top-left bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
+                                <div class="py-1">
+                                    <a href="services.html"
+                                        class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-fast">All
+                                        Services</a>
+                                    <a href="training-education.html"
+                                        class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-fast">Training
+                                        & Education</a>
+                                    <a href="medical-support.html"
+                                        class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-fast">Medical
+                                        Support</a>
+                                    <a href="job-placement.html"
+                                        class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-fast">Job
+                                        Placement</a>
+                                    <a href="family-welfare.html"
+                                        class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-fast">Family
+                                        Welfare</a>
+                                    <a href="publications.html"
+                                        class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-fast">Publications</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="partners.html"
+                            class="px-4 py-2 text-sm font-medium text-slate-700 hover:text-blue-700 transition-slow hover-underline animate-slide-right delay-300">Partners</a>
+                        <a href="subsectors.html"
+                            class="px-4 py-2 text-sm font-medium text-slate-700 hover:text-blue-700 transition-slow hover-underline animate-slide-right delay-400">Sub
+                            Sectors</a>
+
+                        <!-- Events Dropdown -->
+                        <div class="dropdown relative animate-slide-right delay-500">
+                            <a href="events.html"
+                                class="px-4 py-2 text-sm font-medium text-slate-700 hover:text-blue-700 transition-slow flex items-center hover-underline">
+                                Events <i
+                                    class="fas fa-chevron-down ml-1 text-xs transition-transform duration-300"></i>
+                            </a>
+                            <div
+                                class="dropdown-menu absolute left-0 mt-2 w-56 origin-top-left bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
+                                <div class="py-1">
+                                    <a href="events.html"
+                                        class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-fast">Upcoming
+                                        Events</a>
+                                    <a href="conferences.html"
+                                        class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-fast">Conferences</a>
+                                    <a href="webinars.html"
+                                        class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-fast">Webinars</a>
+                                    <a href="workshops.html"
+                                        class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-fast">Workshops</a>
+                                    <a href="past-events.html"
+                                        class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-fast">Past
+                                        Events</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="gallery.html"
+                            class="px-4 py-2 text-sm font-medium text-slate-700 hover:text-blue-700 transition-slow hover-underline animate-slide-right delay-600">Gallery</a>
+                        <a href="membership.html"
+                            class="px-4 py-2 text-sm font-medium text-slate-700 hover:text-blue-700 transition-slow hover-underline animate-slide-right delay-700">Membership</a>
+                        <a href="contact.html"
+                            class="ml-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-2 rounded-full hover:from-blue-700 hover:to-blue-800 transition-slow transform hover:scale-105 shadow-md hover:shadow-lg animate-slide-right delay-800">Contact
+                            Us</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="lg:hidden">
+                    <button id="mobile-menu-btn"
+                        class="text-slate-700 hover:text-blue-600 focus:outline-none p-2 transition-slow animate-slide-right">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+       <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="lg:hidden fixed inset-0 bg-white z-50 transform translate-x-full transition-transform duration-300 ease-in-out">
+            <div class="flex flex-col h-full">
+                <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+                    <div class="flex items-center">
+                        <div
+                                class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center mr-3 shadow-md">
+                                <a href="http://127.0.0.1:5500/index.html"
+                                    class="w-full h-full flex items-center justify-center">
+                                    <img src="UMA LOGO.jpeg" alt="UMA Logo"
+                                        class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full" />
+                                </a>
+                            </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-800">UMA</h3>
+                            <p class="text-xs text-blue-600">United Maritime Association</p>
+                        </div>
+                    </div>
+                    <button id="mobile-menu-close" class="text-slate-500 hover:text-slate-700 p-2">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div class="flex-1 overflow-y-auto p-6 space-y-4">
+                    <a href="index.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Home</a>
+                    <a href="about.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">About
+                        Us</a>
+                    <a href="services.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Services</a>
+                    <a href="partners.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Partners</a>
+                    <a href="subsectors.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Sub
+                        Sectors</a>
+                    <a href="events.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Events</a>
+                    <a href="gallery.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Gallery</a>
+                    <a href="membership.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Membership</a>
+                    <a href="contact.html"
+                        class="block py-3 px-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg font-medium text-center mt-8">Contact
+                        Us</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden bg-slate-900">
+        <!-- Background Image -->
+        <div
+            class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2094&q=80')] bg-cover bg-center opacity-40 parallax">
+        </div>
+
+        <!-- Overlay -->
+        <div class="hero-overlay absolute inset-0"></div>
+
+        <!-- Floating Elements -->
+        <div class="absolute inset-0">
+            <div class="absolute top-20 left-10 w-20 h-20 bg-blue-500/10 rounded-full blur-xl animate-pulse"></div>
+            <div
+                class="absolute top-40 right-20 w-32 h-32 bg-cyan-500/10 rounded-full blur-xl animate-pulse delay-1000">
+            </div>
+            <div
+                class="absolute bottom-20 left-1/4 w-24 h-24 bg-indigo-500/10 rounded-full blur-xl animate-pulse delay-2000">
+            </div>
+            <div class="absolute top-1/3 right-1/4 w-16 h-16 bg-white/5 rounded-full animate-float"></div>
+            <div class="absolute bottom-1/4 left-1/3 w-12 h-12 bg-blue-400/10 rounded-full animate-float delay-2000">
+            </div>
+
+            <!-- Floating bubbles -->
+            <div class="bubble w-8 h-8 top-1/4 left-1/5" style="animation-delay: 0s;"></div>
+            <div class="bubble w-12 h-12 top-1/3 right-1/6" style="animation-delay: 2s;"></div>
+            <div class="bubble w-6 h-6 bottom-1/5 left-1/4" style="animation-delay: 4s;"></div>
+            <div class="bubble w-10 h-10 bottom-1/3 right-1/5" style="animation-delay: 6s;"></div>
+
+            <!-- Animated ship icon -->
+            <div class="absolute top-1/2 right-1/4 w-16 h-16 text-white animate-float-horizontal">
+                <i class="fas fa-ship text-4xl glow"></i>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="text-white space-y-8" data-scroll="fade">
+                    <div class="space-y-6">
+                        <div
+                            class="inline-flex items-center px-4 py-2 bg-blue-600/20 backdrop-blur-sm border border-blue-400/30 rounded-full text-blue-300 text-sm font-medium animate-slide-left dark-text-overlay">
+                            <i class="fas fa-star mr-2 animate-pulse"></i>
+                            Established 2024 - Leading Maritime Excellence
+                        </div>
+
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight animate-slide-left dark-text-overlay"
+                            style="font-family: 'Playfair Display', serif;" data-scroll>
+                            The United <span
+                                class="gradient-text bg-gradient-to-r from-blue-400 to-cyan-400">Maritime</span>
+                            Association
+                        </h1>
+
+                        <p class="text-lg text-gray-300 leading-relaxed max-w-xl animate-slide-left delay-200 dark-text-overlay"
+                            data-scroll>
+                            Empowering maritime professionals through comprehensive training, medical support, and
+                            career development services across India's maritime industry.
+                        </p>
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 animate-slide-left delay-300" data-scroll>
+                        <a href="membership.html"
+                            class="group ripple-effect inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-lg hover:from-blue-700 hover:to-blue-800 transition-slow transform hover:scale-[1.02] shadow-lg hover:shadow-xl">
+                            <span>Join The UMA</span>
+                            <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-slow"></i>
+                        </a>
+                        <a href="about.html"
+                            class="group ripple-effect inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 bg-white/10 backdrop-blur-sm text-white font-bold rounded-lg border border-white/30 hover:bg-white/20 transition-slow hover:shadow-lg dark-text-overlay">
+                            <span>Learn More</span>
+                            <i class="fas fa-compass ml-2 group-hover:rotate-45 transition-slow"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Content - Stats Card -->
+                <div class="relative" data-scroll>
+                    <div
+                        class="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20 shadow-2xl overflow-hidden hover-grow transition-slow animated-border">
+                        <!-- Stats Grid -->
+                        <div class="grid grid-cols-2 gap-6 mb-6">
+                            <div
+                                class="bg-white/5 rounded-xl p-6 text-center border border-white/10 hover:bg-white/10 transition-slow hover-grow">
+                                <div class="text-3xl font-bold text-blue-400 mb-2 animate-pulse">3000+</div>
+                                <p class="text-gray-300 text-sm">Active Members</p>
+                            </div>
+                            <div
+                                class="bg-white/5 rounded-xl p-6 text-center border border-white/10 hover:bg-white/10 transition-slow hover-grow">
+                                <div class="text-3xl font-bold text-blue-400 mb-2 animate-pulse">4</div>
+                                <p class="text-gray-300 text-sm">Office Locations</p>
+                            </div>
+                            <div
+                                class="bg-white/5 rounded-xl p-6 text-center border border-white/10 hover:bg-white/10 transition-slow hover-grow">
+                                <div class="text-3xl font-bold text-blue-400 mb-2 animate-pulse">50+</div>
+                                <p class="text-gray-300 text-sm">Industry Partners</p>
+                            </div>
+                            <div
+                                class="bg-white/5 rounded-xl p-6 text-center border border-white/10 hover:bg-white/10 transition-slow hover-grow">
+                                <div class="text-3xl font-bold text-blue-400 mb-2 animate-pulse">100+</div>
+                                <p class="text-gray-300 text-sm">Training Programs</p>
+                            </div>
+                        </div>
+
+                        <!-- Certification Badges -->
+                        <div class="flex flex-wrap justify-center gap-2">
+                            <div
+                                class="bg-gradient-to-r from-green-500 to-green-600 px-3 py-1 rounded-full text-white text-xs font-bold hover-grow transition-slow">
+                                ISO Certified
+                            </div>
+                            <div
+                                class="bg-gradient-to-r from-blue-500 to-blue-600 px-3 py-1 rounded-full text-white text-xs font-bold hover-grow transition-slow">
+                                ILO Compliant
+                            </div>
+                            <div
+                                class="bg-gradient-to-r from-purple-500 to-purple-600 px-3 py-1 rounded-full text-white text-xs font-bold hover-grow transition-slow">
+                                MLC 2006
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Floating Elements -->
+                    <div
+                        class="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-xl shadow-lg flex items-center justify-center transform rotate-6 hover:rotate-0 transition-slow animate-float">
+                        <i class="fas fa-award text-white"></i>
+                    </div>
+                    <div
+                        class="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl shadow-lg flex items-center justify-center transform -rotate-6 hover:rotate-0 transition-slow animate-float delay-2000">
+                        <i class="fas fa-globe text-white animate-rotate"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Down Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
+            <a href="#features" class="text-white/80 hover:text-white transition-slow dark-text-overlay">
+                <i class="fas fa-chevron-down text-2xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-scroll="fade">
+                <span
+                    class="inline-block px-4 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium mb-4 animate-slide-left">
+                    Our Commitment
+                </span>
+                <h2 class="text-3xl font-bold text-slate-800 mb-4 animate-slide-left delay-100"
+                    style="font-family: 'Playfair Display', serif;">
+                    Maritime Excellence Through Innovation
+                </h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto animate-slide-left delay-200">
+                    We provide comprehensive solutions tailored to the needs of maritime professionals and organizations
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Flip Card 1 -->
+                <div class="flip-card h-[400px]" data-scroll data-scroll-class="animate-fade-in">
+                    <div class="flip-card-inner h-full">
+                        <div
+                            class="flip-card-front bg-white rounded-xl p-8 shadow-md border border-gray-100 hover-grow transition-slow">
+                            <div
+                                class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-6 animate-pulse">
+                                <i class="fas fa-graduation-cap text-white text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-800 mb-3">Professional Training</h3>
+                            <p class="text-gray-600 mb-4">World-class maritime training programs designed to meet
+                                international standards and industry requirements.</p>
+                            <div class="text-blue-600 font-medium animate-pulse">Hover to learn more →</div>
+                        </div>
+                        <div
+                            class="flip-card-back bg-gradient-to-br from-blue-600 to-blue-700 text-white p-8 flex flex-col justify-center">
+                            <h3 class="text-xl font-bold mb-3">Training Programs</h3>
+                            <ul class="space-y-2 text-blue-100">
+                                <li class="flex items-start animate-slide-left delay-100">
+                                    <i class="fas fa-check mt-1 mr-2 text-blue-300"></i>
+                                    <span>STCW Certification</span>
+                                </li>
+                                <li class="flex items-start animate-slide-left delay-200">
+                                    <i class="fas fa-check mt-1 mr-2 text-blue-300"></i>
+                                    <span>Safety & Survival Training</span>
+                                </li>
+                                <li class="flex items-start animate-slide-left delay-300">
+                                    <i class="fas fa-check mt-1 mr-2 text-blue-300"></i>
+                                    <span>Technical Skills Development</span>
+                                </li>
+                                <li class="flex items-start animate-slide-left delay-400">
+                                    <i class="fas fa-check mt-1 mr-2 text-blue-300"></i>
+                                    <span>Leadership Courses</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Flip Card 2 -->
+                <div class="flip-card h-[400px]" data-scroll data-scroll-class="animate-fade-in"
+                    data-scroll-delay="100">
+                    <div class="flip-card-inner h-full">
+                        <div
+                            class="flip-card-front bg-white rounded-xl p-8 shadow-md border border-gray-100 hover-grow transition-slow">
+                            <div
+                                class="w-14 h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mb-6 animate-pulse">
+                                <i class="fas fa-heartbeat text-white text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-800 mb-3">Medical Services</h3>
+                            <p class="text-gray-600 mb-4">ILO/MLC compliant medical examinations and healthcare services
+                                for seafarers.</p>
+                            <div class="text-blue-600 font-medium animate-pulse">Hover to learn more →</div>
+                        </div>
+                        <div
+                            class="flip-card-back bg-gradient-to-br from-green-600 to-green-700 text-white p-8 flex flex-col justify-center">
+                            <h3 class="text-xl font-bold mb-3">Medical Services</h3>
+                            <ul class="space-y-2 text-green-100">
+                                <li class="flex items-start animate-slide-left delay-100">
+                                    <i class="fas fa-check mt-1 mr-2 text-green-300"></i>
+                                    <span>Seafarer Medical Exams</span>
+                                </li>
+                                <li class="flex items-start animate-slide-left delay-200">
+                                    <i class="fas fa-check mt-1 mr-2 text-green-300"></i>
+                                    <span>Vaccination Programs</span>
+                                </li>
+                                <li class="flex items-start animate-slide-left delay-300">
+                                    <i class="fas fa-check mt-1 mr-2 text-green-300"></i>
+                                    <span>Dental & Vision Care</span>
+                                </li>
+                                <li class="flex items-start animate-slide-left delay-400">
+                                    <i class="fas fa-check mt-1 mr-2 text-green-300"></i>
+                                    <span>Mental Health Support</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Flip Card 3 -->
+                <div class="flip-card h-[400px]" data-scroll data-scroll-class="animate-fade-in"
+                    data-scroll-delay="200">
+                    <div class="flip-card-inner h-full">
+                        <div
+                            class="flip-card-front bg-white rounded-xl p-8 shadow-md border border-gray-100 hover-grow transition-slow">
+                            <div
+                                class="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-6 animate-pulse">
+                                <i class="fas fa-briefcase text-white text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-800 mb-3">Career Placement</h3>
+                            <p class="text-gray-600 mb-4">Connecting qualified maritime professionals with leading
+                                shipping companies.</p>
+                            <div class="text-blue-600 font-medium animate-pulse">Hover to learn more →</div>
+                        </div>
+                        <div
+                            class="flip-card-back bg-gradient-to-br from-purple-600 to-purple-700 text-white p-8 flex flex-col justify-center">
+                            <h3 class="text-xl font-bold mb-3">Career Services</h3>
+                            <ul class="space-y-2 text-purple-100">
+                                <li class="flex items-start animate-slide-left delay-100">
+                                    <i class="fas fa-check mt-1 mr-2 text-purple-300"></i>
+                                    <span>Job Placement Assistance</span>
+                                </li>
+                                <li class="flex items-start animate-slide-left delay-200">
+                                    <i class="fas fa-check mt-1 mr-2 text-purple-300"></i>
+                                    <span>Resume Building</span>
+                                </li>
+                                <li class="flex items-start animate-slide-left delay-300">
+                                    <i class="fas fa-check mt-1 mr-2 text-purple-300"></i>
+                                    <span>Interview Preparation</span>
+                                </li>
+                                <li class="flex items-start animate-slide-left delay-400">
+                                    <i class="fas fa-check mt-1 mr-2 text-purple-300"></i>
+                                    <span>Career Counseling</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="relative" data-scroll>
+                    <div class="relative rounded-2xl overflow-hidden shadow-xl hover-grow transition-slow shimmer">
+                        <img src="images/our community home page.jpeg"
+                            alt="Maritime Professionals" class="w-full h-auto">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent">
+                        </div>
+                        <div class="absolute bottom-0 left-0 p-6 text-white">
+                            <h3 class="text-xl font-bold">Since 2024</h3>
+                            <p class="text-blue-200">Serving the maritime community</p>
+                        </div>
+                    </div>
+
+                    <div class="absolute -bottom-6 -right-6 bg-white p-6 rounded-xl shadow-lg w-2/3 z-10 hover-grow transition-slow"
+                        data-scroll data-scroll-class="animate-slide-right">
+                        <div class="flex items-center">
+                            <div
+                                class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4 animate-pulse">
+                                <i class="fas fa-users text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800">Our Community</h4>
+                                <p class="text-sm text-gray-600">3000+ maritime professionals</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6" data-scroll data-scroll-class="animate-slide-left">
+                    <span
+                        class="inline-block px-4 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium animate-slide-left">
+                        About UMA
+                    </span>
+                    <h2 class="text-3xl font-bold text-slate-800 animate-slide-left delay-100"
+                        style="font-family: 'Playfair Display', serif;">
+                        Leading the Way in Maritime Excellence
+                    </h2>
+                    <p class="text-gray-600 animate-slide-left delay-200">
+                        The United Maritime Association (UMA) is India's premier maritime organization dedicated to
+                        empowering seafarers and maritime professionals through comprehensive training, medical support,
+                        and career development services.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-start animate-slide-left delay-300">
+                            <div class="flex-shrink-0 mt-1">
+                                <i class="fas fa-check-circle text-blue-600 animate-pulse"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-gray-800 font-medium">Industry-recognized certification programs</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start animate-slide-left delay-400">
+                            <div class="flex-shrink-0 mt-1">
+                                <i class="fas fa-check-circle text-blue-600 animate-pulse"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-gray-800 font-medium">Strategic partnerships with leading maritime
+                                    companies</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start animate-slide-left delay-500">
+                            <div class="flex-shrink-0 mt-1">
+                                <i class="fas fa-check-circle text-blue-600 animate-pulse"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-gray-800 font-medium">Multi-location presence across India</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="about.html"
+                        class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-lg hover:from-blue-700 hover:to-blue-800 transition-slow transform hover:scale-[1.02] shadow-md hover:shadow-lg animate-slide-left delay-600 ripple-effect">
+                        <span>Our Story</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-gradient-to-r from-slate-900 to-blue-900 text-white animate-gradient-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="p-6 hover-grow transition-slow" data-scroll data-scroll-class="animate-fade-in">
+                    <div class="text-4xl font-bold text-blue-400 mb-2 counter" data-target="3000">0</div>
+                    <p class="text-gray-300">Active Members</p>
+                </div>
+                <div class="p-6 hover-grow transition-slow" data-scroll data-scroll-class="animate-fade-in"
+                    data-scroll-delay="100">
+                    <div class="text-4xl font-bold text-blue-400 mb-2 counter" data-target="50">0</div>
+                    <p class="text-gray-300">Industry Partners</p>
+                </div>
+                <div class="p-6 hover-grow transition-slow" data-scroll data-scroll-class="animate-fade-in"
+                    data-scroll-delay="200">
+                    <div class="text-4xl font-bold text-blue-400 mb-2 counter" data-target="100">0</div>
+                    <p class="text-gray-300">Training Programs</p>
+                </div>
+                <div class="p-6 hover-grow transition-slow" data-scroll data-scroll-class="animate-fade-in"
+                    data-scroll-delay="300">
+                    <div class="text-4xl font-bold text-blue-400 mb-2 counter" data-target="4">0</div>
+                    <p class="text-gray-300">Office Locations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Improved counter animation function
+        function animateCounters() {
+            const counters = document.querySelectorAll('.counter');
+            const duration = 2000; // Animation duration in ms
+            const startDelay = 300; // Delay before starting animation
+
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const start = 0;
+                const startTime = performance.now();
+
+                // Only animate if element is in view and not already animated
+                if (counter.getAttribute('data-animated') !== 'true') {
+                    counter.setAttribute('data-animated', 'true');
+
+                    setTimeout(() => {
+                        const animate = (currentTime) => {
+                            const elapsedTime = currentTime - startTime;
+                            const progress = Math.min(elapsedTime / duration, 1);
+                            const currentValue = Math.floor(progress * target);
+
+                            counter.textContent = currentValue;
+
+                            if (progress < 1) {
+                                requestAnimationFrame(animate);
+                            } else {
+                                // Add "+" for numbers over 50
+                                if (target >= 50) {
+                                    counter.textContent = target + '+';
+                                } else {
+                                    counter.textContent = target;
+                                }
+                            }
+                        };
+
+                        requestAnimationFrame(animate);
+                    }, startDelay);
+                }
+            });
+        }
+
+        // Initialize counters when section comes into view
+        document.addEventListener('DOMContentLoaded', function () {
+            const statsSection = document.querySelector('section.bg-gradient-to-r.from-slate-900.to-blue-900');
+
+            if (statsSection) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            animateCounters();
+                            observer.unobserve(entry.target); // Stop observing after triggering
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                observer.observe(statsSection);
+            }
+
+            // Fallback for browsers without IntersectionObserver
+            if (!('IntersectionObserver' in window)) {
+                animateCounters();
+            }
+        });
+    </script>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-scroll="fade">
+                <span
+                    class="inline-block px-4 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium mb-4 animate-slide-left">
+                    Testimonials
+                </span>
+                <h2 class="text-3xl font-bold text-slate-800 mb-4 animate-slide-left delay-100"
+                    style="font-family: 'Playfair Display', serif;">
+                    What Our Members Say
+                </h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto animate-slide-left delay-200">
+                    Hear from maritime professionals who have benefited from UMA's services
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 testimonial-container">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card">
+                    <div class="bg-white p-8 rounded-xl shadow-md transition-all duration-300 border border-gray-100">
+                        <div class="flex items-center mb-4">
+                            <div
+                                class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold mr-4 animate-pulse">
+                                AK</div>
+                            <div>
+                                <h4 class="font-bold text-slate-800">Amit Kumar</h4>
+                                <p class="text-sm text-gray-500">Chief Engineer</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">"UMA's training programs transformed my career. The instructors
+                            are industry veterans who provide practical knowledge you can't get from textbooks alone."
+                        </p>
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star animate-bounce" style="animation-delay: 0s;"></i>
+                            <i class="fas fa-star animate-bounce" style="animation-delay: 0.2s;"></i>
+                            <i class="fas fa-star animate-bounce" style="animation-delay: 0.4s;"></i>
+                            <i class="fas fa-star animate-bounce" style="animation-delay: 0.6s;"></i>
+                            <i class="fas fa-star animate-bounce" style="animation-delay: 0.8s;"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card">
+                    <div class="bg-white p-8 rounded-xl shadow-md transition-all duration-300 border border-gray-100">
+                        <div class="flex items-center mb-4">
+                            <div
+                                class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold mr-4 animate-pulse">
+                                PS</div>
+                            <div>
+                                <h4 class="font-bold text-slate-800">Priya Singh</h4>
+                                <p class="text-sm text-gray-500">Deck Officer</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">"The medical services at UMA are efficient and professional. I
+                            completed all my required examinations in one visit, saving me valuable time between
+                            contracts."</p>
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star animate-bounce" style="animation-delay: 0s;"></i>
+                            <i class="fas fa-star animate-bounce" style="animation-delay: 0.2s;"></i>
+                            <i class="fas fa-star animate-bounce" style="animation-delay: 0.4s;"></i>
+                            <i class="fas fa-star animate-bounce" style="animation-delay: 0.6s;"></i>
+                            <i class="fas fa-star animate-bounce" style="animation-delay: 0.8s;"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card">
+                    <div class="bg-white p-8 rounded-xl shadow-md transition-all duration-300 border border-gray-100">
+                        <div class="flex items-center mb-4">
+                            <div
+                                class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-bold mr-4 animate-pulse">
+                                RJ</div>
+                            <div>
+                                <h4 class="font-bold text-slate-800">Rajesh Joshi</h4>
+                                <p class="text-sm text-gray-500">Marine Superintendent</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">"As an employer, we value the quality of candidates from UMA's
+                            placement services. They understand the industry's needs and provide well-trained
+                            professionals."</p>
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star animate-bounce" style="animation-delay: 0s;"></i>
+                            <i class="fas fa-star animate-bounce" style="animation-delay: 0.2s;"></i>
+                            <i class="fas fa-star animate-bounce" style="animation-delay: 0.4s;"></i>
+                            <i class="fas fa-star animate-bounce" style="animation-delay: 0.6s;"></i>
+                            <i class="fas fa-star-half-alt animate-bounce" style="animation-delay: 0.8s;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-gradient-to-br from-blue-600 to-blue-800 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+        </div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 md:p-12 border border-white/20 shadow-2xl hover-grow transition-slow"
+                data-scroll="fade">
+                <div class="text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 animate-slide-left"
+                        style="font-family: 'Playfair Display', serif;">
+                        Ready to Advance Your Maritime Career?
+                    </h2>
+                    <p class="text-xl text-blue-100 mb-8 max-w-3xl mx-auto animate-slide-left delay-100">
+                        Join thousands of maritime professionals who trust UMA for their training, certification, and
+                        career development needs.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="membership.html"
+                            class="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-700 font-bold rounded-lg hover:bg-gray-100 transition-slow transform hover:scale-[1.02] shadow-xl hover:shadow-2xl ripple-effect animate-slide-left delay-200">
+                            <span>Become a Member</span>
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                        <a href="contact.html"
+                            class="inline-flex items-center justify-center px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-bold rounded-lg border-2 border-white/30 hover:bg-white/20 transition-slow hover:shadow-xl ripple-effect animate-slide-left delay-300">
+                            <span>Contact Our Team</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <!-- About Column -->
+                <div class="reveal">
+                    <div class="flex items-center mb-6">
+                       <div
+                                class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center mr-3 shadow-md">
+                                <a href="http://127.0.0.1:5500/index.html"
+                                    class="w-full h-full flex items-center justify-center">
+                                    <img src="UMA LOGO.jpeg" alt="UMA Logo"
+                                        class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full" />
+                                </a>
+                            </div>
+                        <div>
+                            <h3 class="text-xl font-bold" style="font-family: 'Playfair Display', serif;">UMA</h3>
+                            <p class="text-xs text-blue-400 font-medium -mt-1">The United Maritime Association</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 mb-6">Empowering maritime professionals through education, advocacy, and
+                        innovation since 2024.</p>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-facebook-f text-sm"></i>
+                        </a>
+                        <a href="#"
+                            class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-twitter text-sm"></i>
+                        </a>
+                        <a href="#"
+                            class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-linkedin-in text-sm"></i>
+                        </a>
+                        <a href="#"
+                            class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-instagram text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links Column -->
+                <div class="reveal" style="transition-delay: 0.1s">
+                    <h3
+                        class="text-lg font-bold mb-6 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:bg-blue-600">
+                        Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Home</a></li>
+                        <li><a href="about.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">About Us</a>
+                        </li>
+                        <li><a href="services.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Services</a>
+                        </li>
+                        <li><a href="partners.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Partners</a>
+                        </li>
+                        <li><a href="subsectors.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Subsectors</a>
+                        </li>
+                        <li><a href="events.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Events</a>
+                        </li>
+                        <li><a href="gallery.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Gallery</a>
+                        </li>
+                        <li><a href="contact.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Services Column -->
+                <div class="reveal" style="transition-delay: 0.2s">
+                    <h3
+                        class="text-lg font-bold mb-6 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:bg-blue-600">
+                        Our Services</h3>
+                    <ul class="space-y-3">
+                        <li><a href="training-education.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Training &
+                                Education</a></li>
+                        <li><a href="medical-support.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Medical
+                                Support</a></li>
+                        <li><a href="job-placement.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Job
+                                Placement</a></li>
+                        <li><a href="family-welfare.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Family
+                                Welfare</a></li>
+                        <li><a href="publications.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Publications</a>
+                        </li>
+                        <li><a href="membership.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Membership</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact Column -->
+                <div class="reveal" style="transition-delay: 0.3s">
+                    <h3
+                        class="text-lg font-bold mb-6 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:bg-blue-600">
+                        Contact Us</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-slate-400"> A3, 3RD FLOOR, LAKHAN SONA APARTMENT,NEAR RPS MORE,WEST BAILY ROAD,PATNA</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-slate-400">+916124482546</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-blue-400 mt-1 mr-3"></i>
+                            <span><a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@unitedmaritimeassociation.com&su=Enquiry%20from%20Website&body=Dear%20United%20Maritime%20Association%20Team,%0A%0A"
+                                    target="_blank" class="text-slate-400">info@unitedmaritimeassociation.com</span></a>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-clock text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-slate-400">Mon-Fri: 9:00 AM - 6:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-slate-500 text-sm mb-4 md:mb-0">© 2023 The United Maritime Association. All rights
+                    reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-slate-500 hover:text-blue-400 text-sm transition">Privacy Policy</a>
+                    <a href="#" class="text-slate-500 hover:text-blue-400 text-sm transition">Terms of Service</a>
+                    <a href="#" class="text-slate-500 hover:text-blue-400 text-sm transition">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top"
+        class="fixed bottom-8 right-8 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white shadow-lg transform transition-all duration-300 opacity-0 invisible hover:bg-blue-700 hover:scale-110">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Preloader
+        window.addEventListener('load', function () {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-full');
+            document.body.style.overflow = 'hidden';
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.add('translate-x-full');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Ripple effect for buttons
+        document.querySelectorAll('.ripple-effect').forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                ripple.style.left = `${x}px`;
+                ripple.style.top = `${y}px`;
+
+                this.appendChild(ripple);
+
+                setTimeout(() => {
+                    ripple.remove();
+                    window.location.href = this.getAttribute('href');
+                }, 600);
+            });
+        });
+
+        // Scroll reveal animation
+        const scrollElements = document.querySelectorAll('[data-scroll]');
+
+        const elementInView = (el, dividend = 1) => {
+            const elementTop = el.getBoundingClientRect().top;
+            return (
+                elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend
+            );
+        };
+
+        const elementOutofView = (el) => {
+            const elementTop = el.getBoundingClientRect().top;
+            return (
+                elementTop > (window.innerHeight || document.documentElement.clientHeight)
+            );
+        };
+
+        const displayScrollElement = (element) => {
+            element.classList.add('is-visible');
+        };
+
+        const hideScrollElement = (element) => {
+            element.classList.remove('is-visible');
+        };
+
+        const handleScrollAnimation = () => {
+            scrollElements.forEach((el) => {
+                if (elementInView(el, 1.25)) {
+                    displayScrollElement(el);
+                } else if (elementOutofView(el)) {
+                    hideScrollElement(el);
+                }
+            });
+        };
+
+        window.addEventListener('scroll', () => {
+            handleScrollAnimation();
+        });
+
+        // Initialize scroll animations on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            handleScrollAnimation();
+        });
+
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible');
+                backToTopBtn.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopBtn.classList.remove('opacity-100', 'visible');
+                backToTopBtn.classList.add('opacity-0', 'invisible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Footer reveal animation
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 150;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                } else {
+                    reveals[i].classList.remove('active');
+                }
+            }
+        }
+
+        window.addEventListener('scroll', reveal);
+        window.addEventListener('load', reveal);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Past Events - The United Maritime Association</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        /* Custom styles */
+        .org-level {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .org-card {
+            background: white;
+            padding: 24px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #f1f5f9;
+            text-align: center;
+            width: 100%;
+            max-width: 280px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .org-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            transform: scaleX(0);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .org-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .org-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .org-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .org-card:hover .org-icon {
+            transform: scale(1.1);
+        }
+
+        /* Navigation styles */
+        .nav-link {
+            color: #1e293b;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #3b82f6;
+        }
+
+        .nav-link.active {
+            color: #3b82f6;
+            font-weight: 600;
+        }
+
+        .nav-link.active:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background-color: #3b82f6;
+            border-radius: 50%;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 12px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 8px 20px;
+            color: #475569;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            color: #3b82f6;
+            background: #f8fafc;
+        }
+
+        /* Mobile menu styles */
+        .mobile-menu {
+            overflow-y: auto;
+        }
+
+        .mobile-nav-item {
+            display: block;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 4px;
+            color: #334155;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-item:hover {
+            background: #f1f5f9;
+            color: #3b82f6;
+        }
+
+        .mobile-nav-item.active {
+            background: #3b82f6;
+            color: white;
+        }
+
+        /* Section spacing */
+        section {
+            padding: 80px 0;
+        }
+        
+        /* Event Card Styles */
+        .event-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1px solid #e2e8f0;
+            position: relative;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .event-date {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #3b82f6;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .event-content {
+            padding: 25px;
+        }
+        
+        .event-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            background: #e0f2fe;
+            color: #0369a1;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        /* Floating animation for hero section */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Pulse animation for CTA */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        /* Scroll reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Gradient text animation */
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #06b6d4, #3b82f6);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: gradientText 3s linear infinite;
+        }
+        
+        @keyframes gradientText {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+        
+        /* Parallax Effect */
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        /* Glow Animation */
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px rgba(59, 130, 246, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.8); }
+            100% { box-shadow: 0 0 5px rgba(59, 130, 246, 0.5); }
+        }
+        
+        .glow {
+            animation: glow 3s infinite;
+        }
+        
+        /* Transition speeds */
+        .transition-slow {
+            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        .transition-medium {
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        .transition-fast {
+            transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        /* Custom underline animation */
+        .underline-animation {
+            position: relative;
+        }
+        
+        .underline-animation:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #3b82f6;
+            transition: width 0.4s ease;
+        }
+        
+        .underline-animation:hover:after {
+            width: 100%;
+        }
+        
+        /* Hover Grow Effect */
+        .hover-grow {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-grow:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+   <!-- Top Bar -->
+    <div class="bg-gradient-to-r from-slate-900 to-blue-900 text-white py-2 text-xs md:text-sm">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center space-y-1 md:space-y-0">
+            <div class="flex flex-wrap justify-center md:justify-start items-center space-x-2 md:space-x-6">
+                <div class="flex items-center space-x-2 hover:text-blue-300 transition-fast animate-slide-left">
+                    <i class="fas fa-envelope text-blue-300 text-sm animate-bounce"></i>
+                    <span><a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@unitedmaritimeassociation.com&su=Enquiry%20from%20Website&body=Dear%20United%20Maritime%20Association%20Team,%0A%0A"
+                            target="_blank"
+                            class="hover:text-blue-600 cursor-pointer">info@unitedmaritimeassociation.com</span></a>
+                </div>
+                <div
+                    class="flex items-center space-x-2 hover:text-blue-300 transition-fast animate-slide-left delay-100">
+                    <i class="fas fa-phone text-blue-300 text-sm animate-bounce"></i>
+                    <span>+916124482546</span>
+                </div>
+                <div
+                    class="flex items-center space-x-2 hover:text-blue-300 transition-fast animate-slide-left delay-200">
+                    <i class="fas fa-map-marker-alt text-blue-300 text-sm animate-bounce"></i>
+                    <span>Kolkata, West Bengal, India</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right">
+                    <i class="fab fa-facebook-f text-xs"></i>
+                </a>
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right delay-100">
+                    <i class="fab fa-twitter text-xs"></i>
+                </a>
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right delay-200">
+                    <i class="fab fa-linkedin-in text-xs"></i>
+                </a>
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right delay-300">
+                    <i class="fab fa-instagram text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center">
+                            <div
+                                class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center mr-3 shadow-md">
+                                <a href="http://127.0.0.1:5500/index.html"
+                                    class="w-full h-full flex items-center justify-center">
+                                    <img src="UMA LOGO.jpeg" alt="UMA Logo"
+                                        class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full" />
+                                </a>
+                            </div>
+                            <div>
+                                <h1 class="text-xl font-bold text-slate-800"
+                                    style="font-family: 'Playfair Display', serif;">UMA</h1>
+                                <p class="text-xs text-blue-600 font-medium -mt-1">The United Maritime Association</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden lg:block">
+                    <div class="ml-10 flex items-center space-x-1">
+                        <a href="index.html" class="nav-link px-4 py-2 text-sm font-semibold">Home</a>
+
+                        <!-- About Dropdown -->
+                        <div class="dropdown">
+                            <a href="about.html" class="nav-link px-4 py-2 text-sm font-semibold dropdown-trigger">
+                                About Us <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="about.html" class="dropdown-item">Our Story</a>
+                                <a href="mission-vision.html" class="dropdown-item active">Mission & Vision</a>
+                                <a href="objectives.html" class="dropdown-item">Objectives</a>
+                                <a href="organization-structure.html" class="dropdown-item">Organization
+                                    Structure</a>
+                            </div>
+                        </div>
+
+                        <!-- Services Dropdown -->
+                        <div class="dropdown">
+                            <a href="services.html" class="nav-link px-4 py-2 text-sm font-semibold dropdown-trigger">
+                                Services <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="services.html" class="dropdown-item">All Services</a>
+                                <a href="training-education.html" class="dropdown-item">Training & Education</a>
+                                <a href="medical-support.html" class="dropdown-item">Medical Support</a>
+                                <a href="job-placement.html" class="dropdown-item">Job Placement</a>
+                                <a href="family-welfare.html" class="dropdown-item">Family Welfare</a>
+                                <a href="publications.html" class="dropdown-item">Publications</a>
+                            </div>
+                        </div>
+
+                        <a href="partners.html" class="nav-link px-4 py-2 text-sm font-semibold">Partners</a>
+                        <a href="subsectors.html" class="nav-link px-4 py-2 text-sm font-semibold">Sub Sectors</a>
+
+                        <!-- Events Dropdown -->
+                        <div class="dropdown">
+                            <a href="events.html" class="nav-link px-4 py-2 text-sm font-semibold dropdown-trigger">
+                                Events <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="events.html" class="dropdown-item">Upcoming Events</a>
+                                <a href="conferences.html" class="dropdown-item">Conferences</a>
+                                <a href="webinars.html" class="dropdown-item">Webinars</a>
+                                <a href="workshops.html" class="dropdown-item">Workshops</a>
+                                <a href="past-events.html" class="dropdown-item">Past Events</a>
+                            </div>
+                        </div>
+
+                        <a href="gallery.html" class="nav-link px-4 py-2 text-sm font-semibold">Gallery</a>
+                        <a href="membership.html" class="nav-link px-4 py-2 text-sm font-semibold">Membership</a>
+                        <a href="contact.html"
+                            class="nav-link bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-2 rounded-full hover:from-blue-700 hover:to-blue-800 transition-all duration-300 transform hover:scale-105 shadow-md">Contact
+                            Us</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="lg:hidden">
+                    <button id="mobile-menu-btn" class="text-slate-700 hover:text-blue-600 focus:outline-none p-2">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+<!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="lg:hidden fixed inset-0 bg-white z-50 transform translate-x-full transition-transform duration-300 ease-in-out">
+            <div class="flex flex-col h-full">
+                <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+                    <div class="flex items-center">
+                        <div
+                                class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center mr-3 shadow-md">
+                                <a href="http://127.0.0.1:5500/index.html"
+                                    class="w-full h-full flex items-center justify-center">
+                                    <img src="UMA LOGO.jpeg" alt="UMA Logo"
+                                        class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full" />
+                                </a>
+                            </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-800">UMA</h3>
+                            <p class="text-xs text-blue-600">United Maritime Association</p>
+                        </div>
+                    </div>
+                    <button id="mobile-menu-close" class="text-slate-500 hover:text-slate-700 p-2">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div class="flex-1 overflow-y-auto p-6 space-y-4">
+                    <a href="index.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Home</a>
+                    <a href="about.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">About
+                        Us</a>
+                    <a href="services.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Services</a>
+                    <a href="partners.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Partners</a>
+                    <a href="subsectors.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Sub
+                        Sectors</a>
+                    <a href="events.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Events</a>
+                    <a href="gallery.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Gallery</a>
+                    <a href="membership.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Membership</a>
+                    <a href="contact.html"
+                        class="block py-3 px-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg font-medium text-center mt-8">Contact
+                        Us</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative py-20 md:py-28 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2094&q=80')] bg-cover bg-center opacity-30 parallax"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/30 to-transparent"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="animate__animated animate__fadeInUp">
+                <div class="inline-block px-4 py-2 bg-blue-600/20 backdrop-blur-sm border border-blue-400/30 rounded-full text-blue-300 text-sm font-medium mb-6 glow">
+                    <i class="fas fa-history mr-2"></i>
+                    Our Legacy
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 font-playfair">
+                    Past <span class="gradient-text bg-gradient-to-r from-blue-400 to-cyan-400">Events</span>
+                </h1>
+                <p class="text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto">
+                    Relive our memorable events, conferences, and workshops that shaped the maritime community
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Breadcrumbs -->
+    <div class="bg-gray-50 py-4 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol class="flex items-center space-x-4">
+                    <li>
+                        <div>
+                            <a href="index.html" class="text-blue-600 hover:text-blue-800 transition">
+                                <i class="fas fa-home"></i>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <a href="events.html" class="ml-4 text-sm font-medium text-blue-600 hover:text-blue-800 transition">Events</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="ml-4 text-sm font-medium text-gray-500">Past Events</span>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Past Events Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate__animated animate__fadeIn">
+                <span class="inline-block px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold mb-4 shadow-sm">
+                    <i class="fas fa-calendar-alt mr-2"></i>Event Archives
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-playfair">Our Past Events</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Explore our successful events that brought together maritime professionals from across the industry</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Event 1 -->
+                <div class="reveal event-card hover-grow">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1431540015161-0bf868a2d407?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                             alt="Maritime Conference" 
+                             class="w-full h-48 object-cover">
+                        <div class="event-date">
+                            <i class="far fa-calendar-alt mr-1"></i> 15 May 2023
+                        </div>
+                    </div>
+                    <div class="event-content">
+                        <span class="event-tag">Conference</span>
+                        <h3 class="text-xl font-bold mb-3 text-gray-900">Annual Maritime Conference 2023</h3>
+                        <p class="text-gray-600 mb-4">Our flagship event brought together 500+ maritime professionals to discuss industry trends, challenges, and innovations.</p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-map-marker-alt mr-2 text-blue-500"></i>
+                            <span>Kolkata, India</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 2 -->
+                <div class="reveal event-card hover-grow" style="transition-delay: 0.1s">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1524179091875-bf99a9a9a57a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                             alt="Women Empowerment Workshop" 
+                             class="w-full h-48 object-cover">
+                        <div class="event-date">
+                            <i class="far fa-calendar-alt mr-1"></i> 8 Mar 2023
+                        </div>
+                    </div>
+                    <div class="event-content">
+                        <span class="event-tag">Workshop</span>
+                        <h3 class="text-xl font-bold mb-3 text-gray-900">Women in Maritime Workshop</h3>
+                        <p class="text-gray-600 mb-4">Celebrating International Women's Day with a special workshop focused on empowering women in the maritime sector.</p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-map-marker-alt mr-2 text-blue-500"></i>
+                            <span>Patna, India</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 3 -->
+                <div class="reveal event-card hover-grow" style="transition-delay: 0.2s">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1579389083078-4e7018379f7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                             alt="Safety Training" 
+                             class="w-full h-48 object-cover">
+                        <div class="event-date">
+                            <i class="far fa-calendar-alt mr-1"></i> 22 Feb 2023
+                        </div>
+                    </div>
+                    <div class="event-content">
+                        <span class="event-tag">Training</span>
+                        <h3 class="text-xl font-bold mb-3 text-gray-900">Advanced Safety Protocols Training</h3>
+                        <p class="text-gray-600 mb-4">Intensive 3-day training program covering the latest safety protocols and emergency procedures for maritime professionals.</p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-map-marker-alt mr-2 text-blue-500"></i>
+                            <span>Ranchi, India</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 4 -->
+                <div class="reveal event-card hover-grow">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                             alt="Webinar Series" 
+                             class="w-full h-48 object-cover">
+                        <div class="event-date">
+                            <i class="far fa-calendar-alt mr-1"></i> Jan 2023
+                        </div>
+                    </div>
+                    <div class="event-content">
+                        <span class="event-tag">Webinar Series</span>
+                        <h3 class="text-xl font-bold mb-3 text-gray-900">Digitalization in Maritime Webinars</h3>
+                        <p class="text-gray-600 mb-4">4-part webinar series exploring digital transformation in the maritime industry with global experts.</p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-globe mr-2 text-blue-500"></i>
+                            <span>Virtual Event</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 5 -->
+                <div class="reveal event-card hover-grow" style="transition-delay: 0.1s">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" 
+                             alt="Career Fair" 
+                             class="w-full h-48 object-cover">
+                        <div class="event-date">
+                            <i class="far fa-calendar-alt mr-1"></i> 15 Dec 2022
+                        </div>
+                    </div>
+                    <div class="event-content">
+                        <span class="event-tag">Career Fair</span>
+                        <h3 class="text-xl font-bold mb-3 text-gray-900">Maritime Career Connect 2022</h3>
+                        <p class="text-gray-600 mb-4">Connecting 200+ maritime job seekers with leading employers from shipping companies and maritime institutions.</p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-map-marker-alt mr-2 text-blue-500"></i>
+                            <span>Lucknow, India</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 6 -->
+                <div class="reveal event-card hover-grow" style="transition-delay: 0.2s">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" 
+                             alt="Seminar" 
+                             class="w-full h-48 object-cover">
+                        <div class="event-date">
+                            <i class="far fa-calendar-alt mr-1"></i> 20 Nov 2022
+                        </div>
+                    </div>
+                    <div class="event-content">
+                        <span class="event-tag">Seminar</span>
+                        <h3 class="text-xl font-bold mb-3 text-gray-900">Sustainable Shipping Practices</h3>
+                        <p class="text-gray-600 mb-4">Expert-led seminar on implementing eco-friendly practices and technologies in maritime operations.</p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-map-marker-alt mr-2 text-blue-500"></i>
+                            <span>Kolkata, India</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="mt-16 flex justify-center">
+                <nav class="flex items-center space-x-2">
+                    <a href="#" class="px-4 py-2 border border-gray-300 rounded-md text-gray-500 hover:bg-blue-50 hover:text-blue-600">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                    <a href="#" class="px-4 py-2 border border-blue-500 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                        1
+                    </a>
+                    <a href="#" class="px-4 py-2 border border-gray-300 rounded-md text-gray-500 hover:bg-blue-50 hover:text-blue-600">
+                        2
+                    </a>
+                    <a href="#" class="px-4 py-2 border border-gray-300 rounded-md text-gray-500 hover:bg-blue-50 hover:text-blue-600">
+                        3
+                    </a>
+                    <span class="px-4 py-2 text-gray-500">...</span>
+                    <a href="#" class="px-4 py-2 border border-gray-300 rounded-md text-gray-500 hover:bg-blue-50 hover:text-blue-600">
+                        8
+                    </a>
+                    <a href="#" class="px-4 py-2 border border-gray-300 rounded-md text-gray-500 hover:bg-blue-50 hover:text-blue-600">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Categories Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate__animated animate__fadeIn">
+                <span class="inline-block px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-semibold mb-4 shadow-md">
+                    <i class="fas fa-tags mr-2"></i>Browse By Category
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-playfair">Event Categories</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Explore our past events by category</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <a href="#" class="reveal bg-white rounded-xl shadow-md p-6 text-center hover:bg-blue-50 transition-colors duration-300 border border-gray-100 hover:border-blue-200">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600">
+                        <i class="fas fa-users text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2 text-gray-900">Conferences</h3>
+                    <p class="text-sm text-gray-500">12 Events</p>
+                </a>
+
+                <a href="#" class="reveal bg-white rounded-xl shadow-md p-6 text-center hover:bg-blue-50 transition-colors duration-300 border border-gray-100 hover:border-blue-200" style="transition-delay: 0.1s">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600">
+                        <i class="fas fa-chalkboard-teacher text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2 text-gray-900">Workshops</h3>
+                    <p class="text-sm text-gray-500">8 Events</p>
+                </a>
+
+                <a href="#" class="reveal bg-white rounded-xl shadow-md p-6 text-center hover:bg-blue-50 transition-colors duration-300 border border-gray-100 hover:border-blue-200" style="transition-delay: 0.2s">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600">
+                        <i class="fas fa-laptop text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2 text-gray-900">Webinars</h3>
+                    <p class="text-sm text-gray-500">15 Events</p>
+                </a>
+
+                <a href="#" class="reveal bg-white rounded-xl shadow-md p-6 text-center hover:bg-blue-50 transition-colors duration-300 border border-gray-100 hover:border-blue-200" style="transition-delay: 0.3s">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600">
+                        <i class="fas fa-briefcase text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2 text-gray-900">Career Fairs</h3>
+                    <p class="text-sm text-gray-500">5 Events</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-gradient-to-br from-blue-600 to-blue-800 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate__animated animate__fadeIn">
+                <span class="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-semibold mb-4">
+                    <i class="fas fa-quote-left mr-2"></i>Participant Feedback
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 font-playfair">What Our Attendees Say</h2>
+                <p class="text-xl text-blue-100 max-w-3xl mx-auto">Hear from maritime professionals who participated in our past events</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="reveal bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 hover:border-white/30 transition-all duration-300">
+                    <div class="flex items-center mb-6">
+                        <div>
+                            <h4 class="font-bold">Capt. Rajesh Kumar</h4>
+                            <p class="text-sm text-blue-200">Merchant Navy Officer</p>
+                        </div>
+                    </div>
+                    <p class="italic text-blue-100 mb-4">"The Annual Maritime Conference organized by UMA was one of the most informative events I've attended. The sessions on emerging technologies in navigation were particularly valuable."</p>
+                    <div class="flex text-yellow-300">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="reveal bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 hover:border-white/30 transition-all duration-300" style="transition-delay: 0.1s">
+                    <div class="flex items-center mb-6">
+                        <div>
+                            <h4 class="font-bold">Priya Sharma</h4>
+                            <p class="text-sm text-blue-200">Marine Engineer</p>
+                        </div>
+                    </div>
+                    <p class="italic text-blue-100 mb-4">"The Women in Maritime Workshop was truly inspiring. It provided great networking opportunities and practical advice for women navigating careers in this industry."</p>
+                    <div class="flex text-yellow-300">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="reveal bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 hover:border-white/30 transition-all duration-300" style="transition-delay: 0.2s">
+                    <div class="flex items-center mb-6">
+                        <div>
+                            <h4 class="font-bold">Amit Patel</h4>
+                            <p class="text-sm text-blue-200">Shipping Company HR</p>
+                        </div>
+                    </div>
+                    <p class="italic text-blue-100 mb-4">"As an employer, the Maritime Career Connect event helped us find several qualified candidates. UMA's events are always well-organized and attract top talent."</p>
+                    <div class="flex text-yellow-300">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-10 text-center text-white shadow-xl relative overflow-hidden">
+                <div class="absolute -top-10 -right-10 w-32 h-32 bg-blue-500 rounded-full opacity-20"></div>
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-blue-400 rounded-full opacity-20"></div>
+                <div class="relative z-10">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 font-playfair">Stay Updated on Our Future Events</h2>
+                    <p class="text-xl text-blue-100 max-w-3xl mx-auto mb-8">Don't miss out on our upcoming conferences, workshops, and webinars designed for maritime professionals.</p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <a href="events.html" class="px-8 py-3 bg-white text-blue-700 rounded-full font-semibold hover:bg-blue-50 hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                            View Upcoming Events
+                        </a>
+                        <a href="membership.html" class="px-8 py-3 bg-transparent border-2 border-white rounded-full font-semibold hover:bg-white/10 hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                            Join Our Community
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <!-- About Column -->
+                <div class="reveal">
+                    <div class="flex items-center mb-6">
+                       <div
+                                class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center mr-3 shadow-md">
+                                <a href="http://127.0.0.1:5500/index.html"
+                                    class="w-full h-full flex items-center justify-center">
+                                    <img src="UMA LOGO.jpeg" alt="UMA Logo"
+                                        class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full" />
+                                </a>
+                            </div>
+                        <div>
+                            <h3 class="text-xl font-bold" style="font-family: 'Playfair Display', serif;">UMA</h3>
+                            <p class="text-xs text-blue-400 font-medium -mt-1">The United Maritime Association</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 mb-6">Empowering maritime professionals through education, advocacy, and innovation since 2024.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-facebook-f text-sm"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-twitter text-sm"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-linkedin-in text-sm"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-instagram text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links Column -->
+                <div class="reveal" style="transition-delay: 0.1s">
+                    <h3 class="text-lg font-bold mb-6 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:bg-blue-600">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Home</a></li>
+                        <li><a href="about.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">About Us</a></li>
+                        <li><a href="services.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Services</a></li>
+                        <li><a href="partners.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Partners</a></li>
+                        <li><a href="subsectors.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Subsectors</a></li>
+                        <li><a href="events.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Events</a></li>
+                        <li><a href="gallery.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Gallery</a></li>
+                        <li><a href="contact.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services Column -->
+                <div class="reveal" style="transition-delay: 0.2s">
+                    <h3 class="text-lg font-bold mb-6 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:bg-blue-600">Our Services</h3>
+                    <ul class="space-y-3">
+                        <li><a href="training-education.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Training & Education</a></li>
+                        <li><a href="medical-support.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Medical Support</a></li>
+                        <li><a href="job-placement.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Job Placement</a></li>
+                        <li><a href="family-welfare.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Family Welfare</a></li>
+                        <li><a href="publications.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Publications</a></li>
+                        <li><a href="membership.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Membership</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Column -->
+                <div class="reveal" style="transition-delay: 0.3s">
+                    <h3 class="text-lg font-bold mb-6 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:bg-blue-600">Contact Us</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-slate-400"> A3, 3RD FLOOR, LAKHAN SONA APARTMENT,NEAR RPS MORE,WEST BAILY ROAD,PATNA</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-slate-400">+916124482546</span>
+                        </li>
+                        <li class="flex items-start">
+                             <i class="fas fa-envelope text-blue-400 mt-1 mr-3"></i>
+                            <span><a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@unitedmaritimeassociation.com&su=Enquiry%20from%20Website&body=Dear%20United%20Maritime%20Association%20Team,%0A%0A"
+                            target="_blank"
+                            class="text-slate-400">info@unitedmaritimeassociation.com</span></a>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-clock text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-slate-400">Mon-Fri: 9:00 AM - 6:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-slate-500 text-sm mb-4 md:mb-0">© 2023 The United Maritime Association. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-slate-500 hover:text-blue-400 text-sm transition">Privacy Policy</a>
+                    <a href="#" class="text-slate-500 hover:text-blue-400 text-sm transition">Terms of Service</a>
+                    <a href="#" class="text-slate-500 hover:text-blue-400 text-sm transition">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white shadow-lg transform transition-all duration-300 opacity-0 invisible hover:bg-blue-700 hover:scale-110">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-full');
+            mobileMenu.classList.add('translate-x-0');
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-0');
+            mobileMenu.classList.add('translate-x-full');
+        });
+
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible');
+                backToTopBtn.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopBtn.classList.remove('opacity-100', 'visible');
+                backToTopBtn.classList.add('opacity-0', 'invisible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Scroll Reveal Animation
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                } else {
+                    reveals[i].classList.remove('active');
+                }
+            }
+        }
+
+        window.addEventListener('scroll', reveal);
+        window.addEventListener('load', reveal);
+
+        // Dropdown Menu for Mobile
+        const mobileDropdowns = document.querySelectorAll('.mobile-dropdown-trigger');
+        
+        mobileDropdowns.forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                const menu = trigger.nextElementSibling;
+                const icon = trigger.querySelector('i');
+                
+                menu.classList.toggle('hidden');
+                menu.classList.toggle('block');
+                
+                if (icon.classList.contains('fa-chevron-down')) {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                } else {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

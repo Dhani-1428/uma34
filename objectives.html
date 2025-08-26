@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objectives - The United Maritime Association</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        /* Custom styles */
+        .org-level {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .org-card {
+            background: white;
+            padding: 24px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #f1f5f9;
+            text-align: center;
+            width: 100%;
+            max-width: 280px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .org-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            transform: scaleX(0);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .org-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .org-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .org-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .org-card:hover .org-icon {
+            transform: scale(1.1);
+        }
+
+        .org-responsibilities {
+            text-align: left;
+            margin-top: 16px;
+        }
+
+        .responsibility-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 6px;
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .department-card {
+            background: white;
+            padding: 28px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #f1f5f9;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .department-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .department-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .department-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .department-functions {
+            margin-top: 16px;
+        }
+
+        .office-card {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #f1f5f9;
+            text-align: center;
+        }
+
+        .office-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .office-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Navigation styles to match About page */
+        .nav-link {
+            color: #1e293b;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #3b82f6;
+        }
+
+        .nav-link.active {
+            color: #3b82f6;
+            font-weight: 600;
+        }
+
+        .nav-link.active:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background-color: #3b82f6;
+            border-radius: 50%;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 12px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 8px 20px;
+            color: #475569;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            color: #3b82f6;
+            background: #f8fafc;
+        }
+
+        /* Mobile menu styles */
+        .mobile-menu {
+            overflow-y: auto;
+        }
+
+        .mobile-nav-item {
+            display: block;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 4px;
+            color: #334155;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-item:hover {
+            background: #f1f5f9;
+            color: #3b82f6;
+        }
+
+        .mobile-nav-item.active {
+            background: #3b82f6;
+            color: white;
+        }
+
+        /* Animation classes */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s forwards;
+        }
+
+        .delay-100 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-200 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-300 {
+            animation-delay: 0.3s;
+        }
+
+        .delay-400 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-500 {
+            animation-delay: 0.5s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* CTA button styles */
+        .btn-white {
+            display: inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-blue-700 bg-white hover:bg-blue-50 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1
+        }
+
+        .btn-outline-white {
+            display: inline-flex items-center justify-center px-6 py-3 border-2 border-white text-base font-medium rounded-full text-white hover:bg-white hover:bg-opacity-10 transition-all duration-300
+        }
+
+        /* Section spacing */
+        section {
+            padding: 80px 0;
+        }
+        
+        /* Enhanced Mission/Vision Card Styles with Animations */
+        .mission-vision-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            padding: 40px;
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mission-vision-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 0;
+        }
+        
+        .mission-vision-card:hover::before {
+            opacity: 1;
+        }
+        
+        .mission-vision-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .mission-vision-card h2 {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .mission-vision-card:hover h2 {
+            color: #3b82f6;
+        }
+        
+        .mission-vision-card h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+        
+        .mission-vision-card:hover h2:after {
+            width: 80px;
+        }
+        
+        /* Enhanced Objective Item Styles with Animations */
+        .objective-item {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1px solid #f1f5f9;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .objective-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+        
+        .objective-item:hover::after {
+            transform: scaleX(1);
+        }
+        
+        .objective-item:hover {
+            transform: translateY(-10px) rotate(1deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .objective-item h3 {
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .objective-item:hover h3 {
+            color: #3b82f6;
+        }
+        
+        .objective-item h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: #3b82f6;
+            transition: width 0.3s ease;
+        }
+        
+        .objective-item:hover h3:after {
+            width: 50px;
+        }
+        
+        /* Enhanced Service Card Styles with Animations */
+        .service-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            text-align: center;
+            border: 1px solid #f1f5f9;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 0;
+        }
+        
+        .service-card:hover::before {
+            opacity: 1;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px) rotate(-1deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #3b82f6, #6366f1);
+            color: white;
+            font-size: 24px;
+            transition: all 0.5s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .service-card:hover .service-icon {
+            transform: rotate(15deg) scale(1.1);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        .service-card h3 {
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+        
+        .service-card:hover h3 {
+            color: #3b82f6;
+        }
+        
+        .service-card h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 2px;
+            background: #3b82f6;
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover h3:after {
+            width: 50px;
+            background: #06b6d4;
+        }
+        
+        /* Floating animation for hero section */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Pulse animation for CTA */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        /* Rotating animation for icons */
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .rotate-on-hover:hover {
+            animation: rotate 1s linear;
+        }
+        
+        /* Bounce animation */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .bounce-on-hover:hover {
+            animation: bounce 0.5s ease infinite;
+        }
+        
+        /* Scroll reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Gradient text animation */
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #06b6d4, #3b82f6);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: gradientText 3s linear infinite;
+        }
+        
+        @keyframes gradientText {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* FIXED FLIP CARD STYLES */
+        .flip-card {
+            perspective: 1000px;
+            height: 100%;
+            min-height: 400px; /* Fixed height */
+        }
+        
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            min-height: 400px; /* Match parent height */
+        }
+        
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #f1f5f9;
+            background: white;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-card-front::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            transform: scaleX(0);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .flip-card:hover .flip-card-front::before {
+            transform: scaleX(1);
+        }
+
+        /* Ensure all cards have equal height */
+        .objectives-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .objective-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .objective-features {
+            margin-top: 16px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #6b7280;
+            transition: all 0.2s ease;
+        }
+        
+        .feature-item:hover {
+            color: #1f2937;
+            transform: translateX(4px);
+        }
+        
+        /* Strategy Cards */
+        .strategy-card {
+            background: white;
+            padding: 32px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #f1f5f9;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            filter: blur(0);
+            transform: scale(1);
+            transition: all 0.3s ease;
+        }
+        
+        .strategy-card:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+            filter: blur(0) !important;
+            z-index: 10;
+        }
+        
+        .strategy-cards-container:hover .strategy-card:not(:hover) {
+            filter: blur(2px);
+            transform: scale(0.95);
+        }
+        
+        .strategy-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 auto 20px;
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+        }
+        
+        /* Testimonial Cards */
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        /* Stats */
+        .stat-item {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Animations */
+        .animate-delay-100 {
+            animation-delay: 0.1s;
+        }
+        
+        .animate-delay-200 {
+            animation-delay: 0.2s;
+        }
+        
+        .animate-delay-300 {
+            animation-delay: 0.3s;
+        }
+        
+        .animate-delay-400 {
+            animation-delay: 0.4s;
+        }
+        
+        .animate-delay-500 {
+            animation-delay: 0.5s;
+        }
+
+        /* Particle animation */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.3);
+            animation: float 15s infinite linear;
+            z-index: 1;
+        }
+
+        /* Ripple effect */
+        .ripple {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple:after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+            background-repeat: no-repeat;
+            background-position: 50%;
+            transform: scale(10, 10);
+            opacity: 0;
+            transition: transform .5s, opacity 1s;
+        }
+
+        .ripple:active:after {
+            transform: scale(0, 0);
+            opacity: .3;
+            transition: 0s;
+        }
+
+        /* Mobile menu transition */
+        .translate-x-full {
+            transform: translateX(100%);
+        }
+
+        /* Underline animation for footer links */
+        .underline-animation {
+            position: relative;
+        }
+
+        .underline-animation:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: #3b82f6;
+            transition: width 0.3s ease;
+        }
+
+        .underline-animation:hover:after {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+     <!-- Top Bar -->
+    <div class="bg-gradient-to-r from-slate-900 to-blue-900 text-white py-2 text-xs md:text-sm">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center space-y-1 md:space-y-0">
+            <div class="flex flex-wrap justify-center md:justify-start items-center space-x-2 md:space-x-6">
+                <div class="flex items-center space-x-2 hover:text-blue-300 transition-fast animate-slide-left">
+                    <i class="fas fa-envelope text-blue-300 text-sm animate-bounce"></i>
+                    <span><a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@unitedmaritimeassociation.com&su=Enquiry%20from%20Website&body=Dear%20United%20Maritime%20Association%20Team,%0A%0A"
+                            target="_blank"
+                            class="hover:text-blue-600 cursor-pointer">info@unitedmaritimeassociation.com</span></a>
+                </div>
+                <div
+                    class="flex items-center space-x-2 hover:text-blue-300 transition-fast animate-slide-left delay-100">
+                    <i class="fas fa-phone text-blue-300 text-sm animate-bounce"></i>
+                    <span>+916124482546</span>
+                </div>
+                <div
+                    class="flex items-center space-x-2 hover:text-blue-300 transition-fast animate-slide-left delay-200">
+                    <i class="fas fa-map-marker-alt text-blue-300 text-sm animate-bounce"></i>
+                    <span>Kolkata, West Bengal, India</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right">
+                    <i class="fab fa-facebook-f text-xs"></i>
+                </a>
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right delay-100">
+                    <i class="fab fa-twitter text-xs"></i>
+                </a>
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right delay-200">
+                    <i class="fab fa-linkedin-in text-xs"></i>
+                </a>
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right delay-300">
+                    <i class="fab fa-instagram text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center">
+                           <div
+                                class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center mr-3 shadow-md">
+                                <a href="http://127.0.0.1:5500/index.html"
+                                    class="w-full h-full flex items-center justify-center">
+                                    <img src="UMA LOGO.jpeg" alt="UMA Logo"
+                                        class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full" />
+                                </a>
+                            </div>
+                            <div>
+                                <h1 class="text-xl font-bold text-slate-800"
+                                    style="font-family: 'Playfair Display', serif;">UMA</h1>
+                                <p class="text-xs text-blue-600 font-medium -mt-1">The United Maritime Association</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden lg:block">
+                    <div class="ml-10 flex items-center space-x-1">
+                        <a href="index.html" class="nav-link px-4 py-2 text-sm font-semibold">Home</a>
+
+                        <!-- About Dropdown -->
+                        <div class="dropdown">
+                            <a href="about.html" class="nav-link px-4 py-2 text-sm font-semibold dropdown-trigger">
+                                About Us <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="about.html" class="dropdown-item">Our Story</a>
+                                <a href="mission-vision.html" class="dropdown-item">Mission & Vision</a>
+                                <a href="objectives.html" class="dropdown-item active">Objectives</a>
+                                <a href="organization-structure.html" class="dropdown-item">Organization
+                                    Structure</a>
+                            </div>
+                        </div>
+
+                        <!-- Services Dropdown -->
+                        <div class="dropdown">
+                            <a href="services.html" class="nav-link px-4 py-2 text-sm font-semibold dropdown-trigger">
+                                Services <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="services.html" class="dropdown-item">All Services</a>
+                                <a href="training-education.html" class="dropdown-item">Training & Education</a>
+                                <a href="medical-support.html" class="dropdown-item">Medical Support</a>
+                                <a href="job-placement.html" class="dropdown-item">Job Placement</a>
+                                <a href="family-welfare.html" class="dropdown-item">Family Welfare</a>
+                                <a href="publications.html" class="dropdown-item">Publications</a>
+                            </div>
+                        </div>
+
+                        <a href="partners.html" class="nav-link px-4 py-2 text-sm font-semibold">Partners</a>
+                        <a href="subsectors.html" class="nav-link px-4 py-2 text-sm font-semibold">Sub Sectors</a>
+
+                        <!-- Events Dropdown -->
+                        <div class="dropdown">
+                            <a href="events.html" class="nav-link px-4 py-2 text-sm font-semibold dropdown-trigger">
+                                Events <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="events.html" class="dropdown-item">Upcoming Events</a>
+                                <a href="conferences.html" class="dropdown-item">Conferences</a>
+                                <a href="webinars.html" class="dropdown-item">Webinars</a>
+                                <a href="workshops.html" class="dropdown-item">Workshops</a>
+                                <a href="past-events.html" class="dropdown-item">Past Events</a>
+                            </div>
+                        </div>
+
+                        <a href="gallery.html" class="nav-link px-4 py-2 text-sm font-semibold">Gallery</a>
+                        <a href="membership.html" class="nav-link px-4 py-2 text-sm font-semibold">Membership</a>
+                        <a href="contact.html"
+                            class="nav-link bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-2 rounded-full hover:from-blue-700 hover:to-blue-800 transition-all duration-300 transform hover:scale-105 shadow-md">Contact
+                            Us</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="lg:hidden">
+                    <button id="mobile-menu-btn" class="text-slate-700 hover:text-blue-600 focus:outline-none p-2">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+<!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="lg:hidden fixed inset-0 bg-white z-50 transform translate-x-full transition-transform duration-300 ease-in-out">
+            <div class="flex flex-col h-full">
+                <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+                    <div class="flex items-center">
+                        <div
+                                class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center mr-3 shadow-md">
+                                <a href="http://127.0.0.1:5500/index.html"
+                                    class="w-full h-full flex items-center justify-center">
+                                    <img src="UMA LOGO.jpeg" alt="UMA Logo"
+                                        class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full" />
+                                </a>
+                            </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-800">UMA</h3>
+                            <p class="text-xs text-blue-600">United Maritime Association</p>
+                        </div>
+                    </div>
+                    <button id="mobile-menu-close" class="text-slate-500 hover:text-slate-700 p-2">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div class="flex-1 overflow-y-auto p-6 space-y-4">
+                    <a href="index.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Home</a>
+                    <a href="about.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">About
+                        Us</a>
+                    <a href="services.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Services</a>
+                    <a href="partners.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Partners</a>
+                    <a href="subsectors.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Sub
+                        Sectors</a>
+                    <a href="events.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Events</a>
+                    <a href="gallery.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Gallery</a>
+                    <a href="membership.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Membership</a>
+                    <a href="contact.html"
+                        class="block py-3 px-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg font-medium text-center mt-8">Contact
+                        Us</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+   <!-- Hero Section -->
+    <section class="relative py-32 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 overflow-hidden particles-container">
+        <!-- Floating particles -->
+        <div class="particle" style="width: 5px; height: 5px; top: 10%; left: 20%; animation-duration: 20s;"></div>
+        <div class="particle" style="width: 8px; height: 8px; top: 20%; left: 80%; animation-duration: 25s;"></div>
+        <div class="particle" style="width: 3px; height: 3px; top: 60%; left: 30%; animation-duration: 15s;"></div>
+        <div class="particle" style="width: 6px; height: 6px; top: 70%; left: 70%; animation-duration: 18s;"></div>
+        <div class="particle" style="width: 4px; height: 4px; top: 30%; left: 50%; animation-duration: 22s;"></div>
+        
+        <div class="absolute inset-0 bg-black/20 z-0"></div>
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1516054575922-f0b8eeadec1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')] bg-cover bg-center mix-blend-overlay opacity-30 z-0"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center">
+                <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 animate__animated animate__fadeInDown" style="font-family: 'Playfair Display', serif;">
+                    Our Strategic Objectives
+                </h1>
+                <p class="text-xl text-blue-100 max-w-3xl mx-auto mb-10 animate__animated animate__fadeIn animate__delay-1s">
+                    Discover the core objectives that drive our mission to revolutionize the maritime industry through innovation, collaboration, and excellence.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Objectives Section -->
+    <section id="objectives" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4" style="font-family: 'Playfair Display', serif;">
+                    Our Core Objectives
+                </h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-blue-600 to-blue-400 mx-auto mb-6"></div>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    The United Maritime Association is committed to achieving these strategic objectives to empower maritime professionals and enhance industry standards.
+                </p>
+            </div>
+
+            <!-- Strategy Cards with Interactive Hover Effect -->
+            <div class="strategy-cards-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="strategy-card reveal">
+                    <div class="strategy-number">1</div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4">Promote continual professional development
+</h3>
+                    <p class="text-gray-600 mb-6">
+                        Enhance the skills and competencies of maritime professionals through continuous training programs, workshops, and certification courses.
+                    </p>
+                    <div class="objective-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle text-blue-500 mr-2"></i>
+                            <span>Specialized training programs</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle text-blue-500 mr-2"></i>
+                            <span>Industry-recognized certifications</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle text-blue-500 mr-2"></i>
+                            <span>Leadership development</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="strategy-card reveal">
+                    <div class="strategy-number">2</div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4">Foster maritime industry growth</h3>
+                    <p class="text-gray-600 mb-6">
+                        Foster partnerships between maritime organizations, educational institutions, and government agencies to drive innovation and best practices.
+                    </p>
+                    <div class="objective-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle text-blue-500 mr-2"></i>
+                            <span>Public-private partnerships</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle text-blue-500 mr-2"></i>
+                            <span>Knowledge sharing platforms</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle text-blue-500 mr-2"></i>
+                            <span>Joint research initiatives</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="strategy-card reveal">
+                    <div class="strategy-number">3</div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4">Encourage community outreach and awareness</h3>
+                    <p class="text-gray-600 mb-6">
+                              Foster community outreach and raise awareness through active engagement and shared initiatives.
+                    </p>
+                    <div class="objective-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle text-blue-500 mr-2"></i>
+                            <span>Host local events</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle text-blue-500 mr-2"></i>
+                            <span>Collaborate with community groups</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle text-blue-500 mr-2"></i>
+                            <span>Share updates on social media</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="strategy-card reveal">
+                    <div class="strategy-number">4</div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4">Support seafarers' welfare</h3>
+                    <p class="text-gray-600 mb-6">
+                        Promote safety standards and improve the welfare of maritime professionals through comprehensive support programs.
+                    </p>
+                    <div class="objective-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle text-blue-500 mr-2"></i>
+                            <span>Safety training programs</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle text-blue-500 mr-2"></i>
+                            <span>Mental health initiatives</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle text-blue-500 mr-2"></i>
+                            <span>Emergency response systems</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="strategy-card reveal">
+                    <div class="strategy-number">5</div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4">Maritime education Training and Guidance</h3>
+                    <p class="text-gray-600 mb-6">
+                        Drive digital transformation in the maritime sector by promoting cutting-edge technologies and innovative solutions.
+                    </p>
+                    <div class="objective-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle text-blue-500 mr-2"></i>
+                            <span>Digital skills training</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle text-blue-500 mr-2"></i>
+                            <span>Emerging technology awareness</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle text-blue-500 mr-2"></i>
+                            <span>Innovation challenges</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="strategy-card reveal">
+                    <div class="strategy-number">6</div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4">Sustainability Initiatives</h3>
+                    <p class="text-gray-600 mb-6">
+                        Champion environmental stewardship and sustainable practices across all maritime operations and activities.
+                    </p>
+                    <div class="objective-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle text-blue-500 mr-2"></i>
+                            <span>Green shipping practices</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle text-blue-500 mr-2"></i>
+                            <span>Carbon footprint reduction</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle text-blue-500 mr-2"></i>
+                            <span>Eco-friendly port operations</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6" style="font-family: 'Playfair Display', serif;">
+                Ready to Join Our Mission?
+            </h2>
+            <p class="text-xl text-blue-100 max-w-3xl mx-auto mb-10">
+                Become part of a growing community dedicated to advancing the maritime industry through collaboration, innovation, and professional excellence.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                <a href="membership.html" class="btn-white ripple pulse">
+                    Join Now <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+                <a href="contact.html" class="btn-outline-white ripple">
+                    Contact Us <i class="fas fa-envelope ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+   <!-- Footer -->
+    <footer class="bg-slate-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <!-- About Column -->
+                <div class="reveal">
+                    <div class="flex items-center mb-6">
+                       <div
+                                class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center mr-3 shadow-md">
+                                <a href="http://127.0.0.1:5500/index.html"
+                                    class="w-full h-full flex items-center justify-center">
+                                    <img src="UMA LOGO.jpeg" alt="UMA Logo"
+                                        class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full" />
+                                </a>
+                            </div>
+                        <div>
+                            <h3 class="text-xl font-bold" style="font-family: 'Playfair Display', serif;">UMA</h3>
+                            <p class="text-xs text-blue-400 font-medium -mt-1">The United Maritime Association</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 mb-6">Empowering maritime professionals through education, advocacy, and innovation since 2024.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-facebook-f text-sm"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-twitter text-sm"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-linkedin-in text-sm"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-instagram text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links Column -->
+                <div class="reveal" style="transition-delay: 0.1s">
+                    <h3 class="text-lg font-bold mb-6 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:bg-blue-600">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Home</a></li>
+                        <li><a href="about.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">About Us</a></li>
+                        <li><a href="services.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Services</a></li>
+                        <li><a href="partners.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Partners</a></li>
+                        <li><a href="subsectors.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Subsectors</a></li>
+                        <li><a href="events.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Events</a></li>
+                        <li><a href="gallery.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Gallery</a></li>
+                        <li><a href="contact.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services Column -->
+                <div class="reveal" style="transition-delay: 0.2s">
+                    <h3 class="text-lg font-bold mb-6 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:bg-blue-600">Our Services</h3>
+                    <ul class="space-y-3">
+                        <li><a href="training-education.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Training & Education</a></li>
+                        <li><a href="medical-support.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Medical Support</a></li>
+                        <li><a href="job-placement.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Job Placement</a></li>
+                        <li><a href="family-welfare.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Family Welfare</a></li>
+                        <li><a href="publications.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Publications</a></li>
+                        <li><a href="membership.html" class="text-slate-400 hover:text-blue-400 transition underline-animation">Membership</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Column -->
+                <div class="reveal" style="transition-delay: 0.3s">
+                    <h3 class="text-lg font-bold mb-6 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:bg-blue-600">Contact Us</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-slate-400"> A3, 3RD FLOOR, LAKHAN SONA APARTMENT,NEAR RPS MORE,WEST BAILY ROAD,PATNA</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-slate-400">+916124482546</span>
+                        </li>
+                        <li class="flex items-start">
+                             <i class="fas fa-envelope text-blue-400 mt-1 mr-3"></i>
+                            <span><a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@unitedmaritimeassociation.com&su=Enquiry%20from%20Website&body=Dear%20United%20Maritime%20Association%20Team,%0A%0A"
+                            target="_blank"
+                            class="text-slate-400">info@unitedmaritimeassociation.com</span></a>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-clock text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-slate-400">Mon-Fri: 9:00 AM - 6:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-slate-500 text-sm mb-4 md:mb-0">© 2023 The United Maritime Association. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-slate-500 hover:text-blue-400 text-sm transition">Privacy Policy</a>
+                    <a href="#" class="text-slate-500 hover:text-blue-400 text-sm transition">Terms of Service</a>
+                    <a href="#" class="text-slate-500 hover:text-blue-400 text-sm transition">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white shadow-lg transform transition-all duration-300 opacity-0 invisible hover:bg-blue-700 hover:scale-110">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-full');
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.add('translate-x-full');
+        });
+
+        // Back to Top Button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Scroll reveal animation
+        function reveal() {
+            const reveals = document.querySelectorAll(".reveal");
+            
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                } else {
+                    reveals[i].classList.remove("active");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+        reveal(); // Initialize
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,2139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - The United Maritime Association</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        /* Custom styles */
+        .org-level {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .org-card {
+            background: white;
+            padding: 24px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #f1f5f9;
+            text-align: center;
+            width: 100%;
+            max-width: 280px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .org-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            transform: scaleX(0);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .org-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .org-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .org-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .org-card:hover .org-icon {
+            transform: scale(1.1);
+        }
+
+        /* Navigation styles */
+        .nav-link {
+            color: #1e293b;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #3b82f6;
+        }
+
+        .nav-link.active {
+            color: #3b82f6;
+            font-weight: 600;
+        }
+
+        .nav-link.active:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background-color: #3b82f6;
+            border-radius: 50%;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 12px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 8px 20px;
+            color: #475569;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            color: #3b82f6;
+            background: #f8fafc;
+        }
+
+        /* Mobile menu styles */
+        .mobile-menu {
+            overflow-y: auto;
+        }
+
+        .mobile-nav-item {
+            display: block;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 4px;
+            color: #334155;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-item:hover {
+            background: #f1f5f9;
+            color: #3b82f6;
+        }
+
+        .mobile-nav-item.active {
+            background: #3b82f6;
+            color: white;
+        }
+
+        /* Section spacing */
+        section {
+            padding: 80px 0;
+        }
+
+        /* Gallery Styles */
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            height: 280px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            padding: 20px;
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        /* Video Gallery Styles */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Filter Controls */
+        .filter-btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: #f1f5f9;
+            color: #64748b;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #3b82f6;
+            color: white;
+        }
+
+        /* Animation for gallery items */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .gallery-animate {
+            animation: fadeIn 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        /* Floating animation for hero section */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Pulse animation for CTA */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .pulse {
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        /* Rotating animation for icons */
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .rotate-on-hover:hover {
+            animation: rotate 1s linear;
+        }
+
+        /* Bounce animation */
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .bounce-on-hover:hover {
+            animation: bounce 0.5s ease infinite;
+        }
+
+        /* Scroll reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Gradient text animation */
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #06b6d4, #3b82f6);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: gradientText 3s linear infinite;
+        }
+
+        @keyframes gradientText {
+            0% {
+                background-position: 0% center;
+            }
+
+            100% {
+                background-position: 200% center;
+            }
+        }
+
+        /* New Wave Animation */
+        @keyframes wave {
+            0% {
+                transform: translateX(0) translateZ(0) scaleY(1)
+            }
+
+            50% {
+                transform: translateX(-25%) translateZ(0) scaleY(0.8)
+            }
+
+            100% {
+                transform: translateX(-50%) translateZ(0) scaleY(1)
+            }
+        }
+
+        .wave-animation {
+            animation: wave 8s ease-in-out infinite alternate;
+        }
+
+        /* Parallax Effect */
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* Glow Animation */
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+            }
+
+            100% {
+                box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+            }
+        }
+
+        .glow {
+            animation: glow 3s infinite;
+        }
+
+        /* Morph Animation */
+        @keyframes morph {
+            0% {
+                border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+            }
+
+            50% {
+                border-radius: 30% 60% 70% 40%/50% 60% 30% 60%;
+            }
+
+            100% {
+                border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+            }
+        }
+
+        .morph {
+            animation: morph 8s ease-in-out infinite;
+        }
+
+        /* Transition speeds */
+        .transition-slow {
+            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .transition-medium {
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .transition-fast {
+            transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* Custom underline animation */
+        .underline-animation {
+            position: relative;
+        }
+
+        .underline-animation:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #3b82f6;
+            transition: width 0.4s ease;
+        }
+
+        .underline-animation:hover:after {
+            width: 100%;
+        }
+
+        /* Text shadow animation */
+        @keyframes textShadow {
+            0% {
+                text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+            }
+
+            50% {
+                text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+            }
+
+            100% {
+                text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+            }
+        }
+
+        .text-shadow-animate {
+            animation: textShadow 3s infinite;
+        }
+
+        /* Background pan animation */
+        @keyframes pan {
+            0% {
+                background-position: 0% 0%;
+            }
+
+            100% {
+                background-position: 100% 100%;
+            }
+        }
+
+        .pan-bg {
+            animation: pan 15s linear infinite;
+        }
+
+        /* 3D Flip Animation */
+        .flip-container {
+            perspective: 1000px;
+        }
+
+        .flipper {
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        .flip-container:hover .flipper {
+            transform: rotateY(180deg);
+        }
+
+        .front,
+        .back {
+            backface-visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .back {
+            transform: rotateY(180deg);
+        }
+
+        /* Hover Grow Effect */
+        .hover-grow {
+            transition: transform 0.3s ease;
+        }
+
+        .hover-grow:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+    <!-- Top Bar -->
+    <div class="bg-gradient-to-r from-slate-900 to-blue-900 text-white py-2 text-xs md:text-sm">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center space-y-1 md:space-y-0">
+            <div class="flex flex-wrap justify-center md:justify-start items-center space-x-2 md:space-x-6">
+                <div class="flex items-center space-x-2 hover:text-blue-300 transition-fast animate-slide-left">
+                    <i class="fas fa-envelope text-blue-300 text-sm animate-bounce"></i>
+                    <span><a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@unitedmaritimeassociation.com&su=Enquiry%20from%20Website&body=Dear%20United%20Maritime%20Association%20Team,%0A%0A"
+                            target="_blank"
+                            class="hover:text-blue-600 cursor-pointer">info@unitedmaritimeassociation.com</span></a>
+                </div>
+                <div
+                    class="flex items-center space-x-2 hover:text-blue-300 transition-fast animate-slide-left delay-100">
+                    <i class="fas fa-phone text-blue-300 text-sm animate-bounce"></i>
+                    <span>+916124482546</span>
+                </div>
+                <div
+                    class="flex items-center space-x-2 hover:text-blue-300 transition-fast animate-slide-left delay-200">
+                    <i class="fas fa-map-marker-alt text-blue-300 text-sm animate-bounce"></i>
+                    <span>Kolkata, West Bengal, India</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right">
+                    <i class="fab fa-facebook-f text-xs"></i>
+                </a>
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right delay-100">
+                    <i class="fab fa-twitter text-xs"></i>
+                </a>
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right delay-200">
+                    <i class="fab fa-linkedin-in text-xs"></i>
+                </a>
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right delay-300">
+                    <i class="fab fa-instagram text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center">
+                            <div
+                                class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center mr-3 shadow-md">
+                                <a href="http://127.0.0.1:5500/index.html"
+                                    class="w-full h-full flex items-center justify-center">
+                                    <img src="UMA LOGO.jpeg" alt="UMA Logo"
+                                        class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full" />
+                                </a>
+                            </div>
+                            <div>
+                                <h1 class="text-xl font-bold text-slate-800"
+                                    style="font-family: 'Playfair Display', serif;">UMA</h1>
+                                <p class="text-xs text-blue-600 font-medium -mt-1">The United Maritime Association</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden lg:block">
+                    <div class="ml-10 flex items-center space-x-1">
+                        <a href="index.html" class="nav-link px-4 py-2 text-sm font-semibold">Home</a>
+
+                        <!-- About Dropdown -->
+                        <div class="dropdown">
+                            <a href="about.html" class="nav-link px-4 py-2 text-sm font-semibold dropdown-trigger">
+                                About Us <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="about.html" class="dropdown-item">Our Story</a>
+                                <a href="mission-vision.html" class="dropdown-item active">Mission & Vision</a>
+                                <a href="objectives.html" class="dropdown-item">Objectives</a>
+                                <a href="organization-structure.html" class="dropdown-item">Organization
+                                    Structure</a>
+                            </div>
+                        </div>
+
+                        <!-- Services Dropdown -->
+                        <div class="dropdown">
+                            <a href="services.html" class="nav-link px-4 py-2 text-sm font-semibold dropdown-trigger">
+                                Services <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="services.html" class="dropdown-item">All Services</a>
+                                <a href="training-education.html" class="dropdown-item">Training & Education</a>
+                                <a href="medical-support.html" class="dropdown-item">Medical Support</a>
+                                <a href="job-placement.html" class="dropdown-item">Job Placement</a>
+                                <a href="family-welfare.html" class="dropdown-item">Family Welfare</a>
+                                <a href="publications.html" class="dropdown-item">Publications</a>
+                            </div>
+                        </div>
+
+                        <a href="partners.html" class="nav-link px-4 py-2 text-sm font-semibold">Partners</a>
+                        <a href="subsectors.html" class="nav-link px-4 py-2 text-sm font-semibold">Sub Sectors</a>
+
+                        <!-- Events Dropdown -->
+                        <div class="dropdown">
+                            <a href="events.html" class="nav-link px-4 py-2 text-sm font-semibold dropdown-trigger">
+                                Events <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="events.html" class="dropdown-item">Upcoming Events</a>
+                                <a href="conferences.html" class="dropdown-item">Conferences</a>
+                                <a href="webinars.html" class="dropdown-item">Webinars</a>
+                                <a href="workshops.html" class="dropdown-item">Workshops</a>
+                                <a href="past-events.html" class="dropdown-item">Past Events</a>
+                            </div>
+                        </div>
+
+                        <a href="gallery.html" class="nav-link px-4 py-2 text-sm font-semibold">Gallery</a>
+                        <a href="membership.html" class="nav-link px-4 py-2 text-sm font-semibold">Membership</a>
+                        <a href="contact.html"
+                            class="nav-link bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-2 rounded-full hover:from-blue-700 hover:to-blue-800 transition-all duration-300 transform hover:scale-105 shadow-md">Contact
+                            Us</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="lg:hidden">
+                    <button id="mobile-menu-btn" class="text-slate-700 hover:text-blue-600 focus:outline-none p-2">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="lg:hidden fixed inset-0 bg-white z-50 transform translate-x-full transition-transform duration-300 ease-in-out">
+            <div class="flex flex-col h-full">
+                <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+                    <div class="flex items-center">
+                        <div
+                                class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center mr-3 shadow-md">
+                                <a href="http://127.0.0.1:5500/index.html"
+                                    class="w-full h-full flex items-center justify-center">
+                                    <img src="UMA LOGO.jpeg" alt="UMA Logo"
+                                        class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full" />
+                                </a>
+                            </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-800">UMA</h3>
+                            <p class="text-xs text-blue-600">United Maritime Association</p>
+                        </div>
+                    </div>
+                    <button id="mobile-menu-close" class="text-slate-500 hover:text-slate-700 p-2">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div class="flex-1 overflow-y-auto p-6 space-y-4">
+                    <a href="index.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Home</a>
+                    <a href="about.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">About
+                        Us</a>
+                    <a href="services.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Services</a>
+                    <a href="partners.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Partners</a>
+                    <a href="subsectors.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Sub
+                        Sectors</a>
+                    <a href="events.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Events</a>
+                    <a href="gallery.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Gallery</a>
+                    <a href="membership.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Membership</a>
+                    <a href="contact.html"
+                        class="block py-3 px-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg font-medium text-center mt-8">Contact
+                        Us</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Hero Section -->
+    <section class="relative py-20 md:py-28 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 overflow-hidden">
+        <div
+            class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2094&q=80')] bg-cover bg-center opacity-30 parallax">
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/30 to-transparent"></div>
+
+        <!-- Floating waves animation -->
+
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="animate__animated animate__fadeInUp">
+                <div
+                    class="inline-block px-4 py-2 bg-blue-600/20 backdrop-blur-sm border border-blue-400/30 rounded-full text-blue-300 text-sm font-medium mb-6 glow">
+                    <i class="fas fa-camera-retro mr-2"></i>
+                    Visual Journey
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 font-playfair">
+                    UMA <span class="gradient-text bg-gradient-to-r from-blue-400 to-cyan-400">Gallery</span>
+                </h1>
+                <p class="text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto">
+                    Explore our events, conferences, and activities through photos and videos
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Breadcrumbs -->
+    <div class="bg-gray-50 py-4 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol class="flex items-center space-x-4">
+                    <li>
+                        <div>
+                            <a href="index.html" class="text-blue-600 hover:text-blue-800 transition">
+                                <i class="fas fa-home"></i>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <a href="#"
+                                class="ml-4 text-sm font-medium text-blue-600 hover:text-blue-800 transition">Gallery</a>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+            <!-- Photo Gallery with Lightbox -->
+            <div class="mb-16">
+                <h2 class="text-3xl font-bold text-center mb-12 font-playfair relative">
+                    <span class="relative inline-block">
+                        Photo Gallery
+                        <span
+                            class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full"></span>
+                    </span>
+                </h2>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Image 1 (Legend/Chart) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="charts"
+                        style="animation-delay: 0.1s">
+                        <a href="image1.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Performance metrics and charts">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image1.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Image 2 (Legend/Chart) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="charts"
+                        style="animation-delay: 0.1s">
+                        <a href="image2.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Performance metrics and charts">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image2.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Image 3 (Legend/Chart) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="charts"
+                        style="animation-delay: 0.1s">
+                        <a href="image3.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Performance metrics and charts">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image3.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+
+                    </div>
+                    <!-- Image 4 (Legend/Chart) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="charts"
+                        style="animation-delay: 0.1s">
+                        <a href="image4.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Performance metrics and charts">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image4.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Image 5 (Legend/Chart) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="charts"
+                        style="animation-delay: 0.1s">
+                        <a href="image5.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Performance metrics and charts">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image5.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Image 6 (Tax Webinar) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="events"
+                        style="animation-delay: 0.2s">
+                        <a href="image6.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="For Indian Seafarers, July 2025">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image6.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 7 (Association) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="association"
+                        style="animation-delay: 0.3s">
+                        <a href="image7.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Our headquarters in Palma">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image7.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 8 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image8.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image8.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 9 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image9.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image9.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 10 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image10.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image10.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 11 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image11.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image11.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Image 12 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image12.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image12.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Image 13 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image13.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image13.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Image 14 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image14.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image14.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Image 15 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image15.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image15.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 16 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image16.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image16.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Image 17 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image17.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image17.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 18 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image18.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image18.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 19 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image19.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image19.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 20 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image20.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image20.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 21 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image21.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image21.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 22 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image22.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image22.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 23 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image23.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image23.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 24 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image24.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image24.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 25 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image25.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image25.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 26 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image26.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image26.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 27 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image27.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image27.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 28 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image28.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image28.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 29 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image29.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image29.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 30 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image30.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image30.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 31 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image31.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image31.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 32 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image32.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image32.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 33 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image33.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image33.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 34 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image34.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image34.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 35 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image35.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image35.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 36 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image36.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image36.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 37 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image37.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image37.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 38 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image38.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image38.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 39 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image39.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image39.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 40 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image40.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image40.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 41 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image41.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image41.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 42 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image42.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image42.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 43 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image43.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image43.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 44 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image44.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image44.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 45 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image45.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image45.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 46 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image46.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image46.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 47 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image47.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image47.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 48 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image48.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image48.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 49 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image49.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image49.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 50 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image50.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image50.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 51 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image51.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image51.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 52 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image52.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image52.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 53 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image53.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image53.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 54 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image54.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image54.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 55 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image55.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image55.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 56 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image56.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image56.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 57 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image57.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image57.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 58 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image58.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image58.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 59 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image59.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image59.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 60 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image60.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image60.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 61 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image61.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image61.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 62 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image62.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image62.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 63 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image63.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image63.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 64 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image64.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image64.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 65 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image65.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image65.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 66 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image66.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image66.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 67 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image67.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image67.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 68 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image68.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image68.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Image 69 (Machinery) -->
+                    <div class="gallery-item reveal gallery-animate" data-category="equipment"
+                        style="animation-delay: 0.4s">
+                        <a href="image69.jpeg" class="lightbox-trigger" data-title="United Maritime Association"
+                            data-desc="Latest equipment installations">
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                <img src="image69.jpeg" alt="United Maritime Association"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Lightbox Modal -->
+                    <div id="lightbox-modal"
+                        class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+                        <div class="relative max-w-6xl w-full max-h-screen" id="lightbox-content">
+                            <button id="lightbox-close"
+                                class="absolute -top-12 right-0 text-white text-3xl hover:text-blue-400 z-10">&times;</button>
+                            <div class="lightbox-inner-content">
+                                <img id="lightbox-image" src="" alt=""
+                                    class="w-full h-auto max-h-[90vh] object-contain mx-auto">
+                                <div class="text-white text-center mt-4">
+                                    <h3 id="lightbox-title" class="text-xl font-bold"></h3>
+                                    <p id="lightbox-desc" class="text-gray-300"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        // Lightbox functionality
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const triggers = document.querySelectorAll('.lightbox-trigger');
+                            const modal = document.getElementById('lightbox-modal');
+                            const modalContent = document.getElementById('lightbox-content');
+                            const modalImg = document.getElementById('lightbox-image');
+                            const modalTitle = document.getElementById('lightbox-title');
+                            const modalDesc = document.getElementById('lightbox-desc');
+                            const closeBtn = document.getElementById('lightbox-close');
+
+                            // Open lightbox
+                            triggers.forEach(trigger => {
+                                trigger.addEventListener('click', function (e) {
+                                    e.preventDefault();
+                                    modalImg.src = this.href;
+                                    modalTitle.textContent = this.dataset.title;
+                                    modalDesc.textContent = this.dataset.desc;
+                                    modal.classList.remove('hidden');
+                                    document.body.style.overflow = 'hidden';
+                                });
+                            });
+
+                            // Close lightbox
+                            function closeLightbox() {
+                                modal.classList.add('hidden');
+                                document.body.style.overflow = 'auto';
+                            }
+
+                            // Click events
+                            closeBtn.addEventListener('click', closeLightbox);
+
+                            modal.addEventListener('click', function (e) {
+                                // Close if clicking outside the content area
+                                if (e.target === modal) {
+                                    closeLightbox();
+                                }
+                            });
+
+                            // Keyboard escape
+                            document.addEventListener('keydown', function (e) {
+                                if (e.key === 'Escape') {
+                                    closeLightbox();
+                                }
+                            });
+                        });
+                    </script>
+
+                    <style>
+                        .lightbox-trigger {
+                            cursor: pointer;
+                            transition: transform 0.3s ease;
+                        }
+
+                        .lightbox-trigger:hover {
+                            transform: scale(1.02);
+                        }
+
+                        #lightbox-modal {
+                            transition: opacity 0.3s ease;
+                            cursor: pointer;
+                        }
+
+                        #lightbox-content {
+                            cursor: auto;
+                        }
+
+                        .lightbox-inner-content {
+                            pointer-events: auto;
+                        }
+                    </style>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Past Events Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span
+                    class="inline-block px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-semibold mb-4 shadow-md">
+                    <i class="fas fa-calendar-alt mr-2"></i>Event Archives
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-playfair">Past Events</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Relive the memorable moments from our previous events
+                    and conferences</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Event 1 -->
+                <div class="reveal flip-container h-96" style="transition-delay: 0.1s">
+                    <div class="flipper h-full">
+                        <div
+                            class="front bg-white rounded-xl shadow-lg overflow-hidden h-full flex flex-col border-2 border-blue-100">
+                            <div class="h-48 overflow-hidden">
+                                <img src="image63.jpeg" alt="Annual Conference" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-6 flex-grow">
+                                <div class="flex items-center mb-2">
+                                    <span
+                                        class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">Opening</span>
+                                    <span class="text-gray-500 text-sm ml-auto">August 8th, 2025</span>
+                                </div>
+                                <h3 class="text-xl font-bold mb-2 text-gray-900">The United Maritime Association (UMA)
+                                </h3>
+                                <p class="text-gray-600">Invites you to the grand opening of its new Marine Club in
+                                    Patna on 🗓️ August 8th, 2025, at 3:00 🕐 pm.</p>
+                            </div>
+                        </div>
+                        <div
+                            class="back bg-blue-600 rounded-xl shadow-lg p-6 h-full flex flex-col justify-center items-center text-center text-white">
+                            <h3 class="text-xl font-bold mb-4">The United Maritime Association (UMA) Opening</h3>
+                            <p class="mb-4">August 8th, 2025</p>
+                            <ul class="text-left text-sm space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle mr-2 mt-1 text-blue-200"></i>
+                                    <span>Address: United Maritime Association.
+                                        A3, 3rd Floor, Lakhan Sona Apartment
+                                        Near RPS More, West Bailey Road, Patna
+                                        Pin Code: 800503</span>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 2 -->
+                <div class="reveal flip-container h-96" style="transition-delay: 0.2s">
+                    <div class="flipper h-full">
+                        <div
+                            class="front bg-white rounded-xl shadow-lg overflow-hidden h-full flex flex-col border-2 border-blue-100">
+                            <div class="h-48 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1521791055366-0d553872125f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80"
+                                    alt="Safety Workshop" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-6 flex-grow">
+                                <div class="flex items-center mb-2">
+                                    <span
+                                        class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">Workshop</span>
+                                    <span class="text-gray-500 text-sm ml-auto">March 8, 2024</span>
+                                </div>
+                                <h3 class="text-xl font-bold mb-2 text-gray-900">Advanced Safety Workshop</h3>
+                                <p class="text-gray-600">Hands-on training for maritime safety professionals</p>
+                            </div>
+                        </div>
+                        <div
+                            class="back bg-blue-600 rounded-xl shadow-lg p-6 h-full flex flex-col justify-center items-center text-center text-white">
+                            <h3 class="text-xl font-bold mb-4">Advanced Safety Workshop</h3>
+                            <p class="mb-4">March 8, 2024</p>
+                            <ul class="text-left text-sm space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle mr-2 mt-1 text-blue-200"></i>
+                                    <span>120 participants</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle mr-2 mt-1 text-blue-200"></i>
+                                    <span>Practical simulations</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle mr-2 mt-1 text-blue-200"></i>
+                                    <span>Certification provided</span>
+                                </li>
+                            </ul>
+                            <button
+                                class="mt-6 px-4 py-2 bg-white text-blue-600 rounded-full text-sm font-semibold hover:bg-blue-50 transition">View
+                                Photos</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 3 -->
+                <div class="reveal flip-container h-96" style="transition-delay: 0.3s">
+                    <div class="flipper h-full">
+                        <div
+                            class="front bg-white rounded-xl shadow-lg overflow-hidden h-full flex flex-col border-2 border-blue-100">
+                            <div class="h-48 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80"
+                                    alt="Training Program" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-6 flex-grow">
+                                <div class="flex items-center mb-2">
+                                    <span
+                                        class="bg-purple-100 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded">Training</span>
+                                    <span class="text-gray-500 text-sm ml-auto">January 20, 2024</span>
+                                </div>
+                                <h3 class="text-xl font-bold mb-2 text-gray-900">Navigation Training Program</h3>
+                                <p class="text-gray-600">Enhancing navigation skills for maritime professionals</p>
+                            </div>
+                        </div>
+                        <div
+                            class="back bg-blue-600 rounded-xl shadow-lg p-6 h-full flex flex-col justify-center items-center text-center text-white">
+                            <h3 class="text-xl font-bold mb-4">Navigation Training Program</h3>
+                            <p class="mb-4">January 20, 2024</p>
+                            <ul class="text-left text-sm space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle mr-2 mt-1 text-blue-200"></i>
+                                    <span>4-week intensive program</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle mr-2 mt-1 text-blue-200"></i>
+                                    <span>Simulator-based training</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle mr-2 mt-1 text-blue-200"></i>
+                                    <span>Industry-recognized certification</span>
+                                </li>
+                            </ul>
+                            <button
+                                class="mt-6 px-4 py-2 bg-white text-blue-600 rounded-full text-sm font-semibold hover:bg-blue-50 transition">View
+                                Photos</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="past-events.html"
+                    class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-blue-600 hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
+                    View All Past Events
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center animate__animated animate__pulse animate__infinite animate__slower">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 font-playfair">Want to Attend Our Next Event?</h2>
+                <p class="text-xl text-blue-100 max-w-3xl mx-auto mb-8">Join our community of maritime professionals and
+                    stay updated on upcoming conferences, workshops, and training programs.</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="events.html"
+                        class="px-8 py-3 bg-white text-blue-700 rounded-full font-semibold hover:bg-blue-50 hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                        Upcoming Events
+                    </a>
+                    <a href="membership.html"
+                        class="px-8 py-3 bg-transparent border-2 border-white rounded-full font-semibold hover:bg-white/10 hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                        Become a Member
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <!-- About Column -->
+                <div class="reveal">
+                    <div class="flex items-center mb-6">
+                        <div
+                            class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center mr-3 shadow-md">
+                            <a href="http://127.0.0.1:5500/index.html"
+                                class="w-full h-full flex items-center justify-center">
+                                <img src="UMA LOGO.jpeg" alt="UMA Logo"
+                                    class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full" />
+                            </a>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold" style="font-family: 'Playfair Display', serif;">UMA</h3>
+                            <p class="text-xs text-blue-400 font-medium -mt-1">The United Maritime Association</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 mb-6">Empowering maritime professionals through education, advocacy, and
+                        innovation since 2024.</p>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-facebook-f text-sm"></i>
+                        </a>
+                        <a href="#"
+                            class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-twitter text-sm"></i>
+                        </a>
+                        <a href="#"
+                            class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-linkedin-in text-sm"></i>
+                        </a>
+                        <a href="#"
+                            class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-instagram text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links Column -->
+                <div class="reveal" style="transition-delay: 0.1s">
+                    <h3
+                        class="text-lg font-bold mb-6 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:bg-blue-600">
+                        Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Home</a></li>
+                        <li><a href="about.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">About Us</a>
+                        </li>
+                        <li><a href="services.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Services</a>
+                        </li>
+                        <li><a href="partners.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Partners</a>
+                        </li>
+                        <li><a href="subsectors.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Subsectors</a>
+                        </li>
+                        <li><a href="events.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Events</a>
+                        </li>
+                        <li><a href="gallery.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Gallery</a>
+                        </li>
+                        <li><a href="contact.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Services Column -->
+                <div class="reveal" style="transition-delay: 0.2s">
+                    <h3
+                        class="text-lg font-bold mb-6 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:bg-blue-600">
+                        Our Services</h3>
+                    <ul class="space-y-3">
+                        <li><a href="training-education.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Training &
+                                Education</a></li>
+                        <li><a href="medical-support.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Medical
+                                Support</a></li>
+                        <li><a href="job-placement.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Job
+                                Placement</a></li>
+                        <li><a href="family-welfare.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Family
+                                Welfare</a></li>
+                        <li><a href="publications.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Publications</a>
+                        </li>
+                        <li><a href="membership.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Membership</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact Column -->
+                <div class="reveal" style="transition-delay: 0.3s">
+                    <h3
+                        class="text-lg font-bold mb-6 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:bg-blue-600">
+                        Contact Us</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-slate-400"> A3, 3RD FLOOR, LAKHAN SONA APARTMENT,NEAR RPS MORE,WEST BAILY ROAD,PATNA</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-slate-400">+916124482546</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-blue-400 mt-1 mr-3"></i>
+                            <span><a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@unitedmaritimeassociation.com&su=Enquiry%20from%20Website&body=Dear%20United%20Maritime%20Association%20Team,%0A%0A"
+                                    target="_blank" class="text-slate-400">info@unitedmaritimeassociation.com</span></a>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-clock text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-slate-400">Mon-Fri: 9:00 AM - 6:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-slate-500 text-sm mb-4 md:mb-0">© 2024 The United Maritime Association. All rights
+                    reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-slate-500 hover:text-blue-400 text-sm transition">Privacy Policy</a>
+                    <a href="#" class="text-slate-500 hover:text-blue-400 text-sm transition">Terms of Service</a>
+                    <a href="#" class="text-slate-500 hover:text-blue-400 text-sm transition">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top"
+        class="fixed bottom-8 right-8 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white shadow-lg transform transition-all duration-300 opacity-0 invisible hover:bg-blue-700 hover:scale-110">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-full');
+            mobileMenu.classList.add('translate-x-0');
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-0');
+            mobileMenu.classList.add('translate-x-full');
+        });
+
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible');
+                backToTopBtn.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopBtn.classList.remove('opacity-100', 'visible');
+                backToTopBtn.classList.add('opacity-0', 'invisible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Scroll Reveal Animation
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 150;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                } else {
+                    reveals[i].classList.remove('active');
+                }
+            }
+        }
+
+        window.addEventListener('scroll', reveal);
+        window.addEventListener('load', reveal);
+
+        // Gallery Filter Functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item, .video-container');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+
+                const filterValue = button.getAttribute('data-filter');
+
+                galleryItems.forEach(item => {
+                    if (filterValue === 'all') {
+                        item.style.display = 'block';
+                    } else {
+                        const itemCategories = item.getAttribute('data-category').split(' ');
+                        if (itemCategories.includes(filterValue)) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+
+        // Animate gallery items on load
+        const galleryAnimateItems = document.querySelectorAll('.gallery-animate');
+
+        galleryAnimateItems.forEach((item, index) => {
+            setTimeout(() => {
+                item.style.opacity = '1';
+            }, 100 * index);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

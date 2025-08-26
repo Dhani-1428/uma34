@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - The United Maritime Association</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        /* Custom animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes rotateIn {
+            from {
+                opacity: 0;
+                transform: rotate(-15deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: rotate(0);
+            }
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: scale(1.3);
+                opacity: 0;
+            }
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% center;
+            }
+
+            50% {
+                background-position: 100% center;
+            }
+
+            100% {
+                background-position: 0% center;
+            }
+        }
+
+        @keyframes wave {
+            0% {
+                transform: translateX(0) translateZ(0) scaleY(1)
+            }
+
+            50% {
+                transform: translateX(-25%) translateZ(0) scaleY(0.8)
+            }
+
+            100% {
+                transform: translateX(-50%) translateZ(0) scaleY(1)
+            }
+        }
+
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+            }
+
+            100% {
+                box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+            }
+        }
+
+        @keyframes morph {
+            0% {
+                border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+            }
+
+            50% {
+                border-radius: 30% 60% 70% 40%/50% 60% 30% 60%;
+            }
+
+            100% {
+                border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+            }
+        }
+
+        @keyframes textShadow {
+            0% {
+                text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+            }
+
+            50% {
+                text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+            }
+
+            100% {
+                text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+            }
+        }
+
+        @keyframes pan {
+            0% {
+                background-position: 0% 0%;
+            }
+
+            100% {
+                background-position: 100% 100%;
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .pulse {
+            animation: pulse 4s ease infinite;
+        }
+
+        .slide-in-left {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+
+        .slide-in-right {
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+
+        .rotate-in {
+            animation: rotateIn 0.8s ease-out forwards;
+        }
+
+        .wave-animation {
+            animation: wave 8s ease-in-out infinite alternate;
+        }
+
+        .glow {
+            animation: glow 3s infinite;
+        }
+
+        .morph {
+            animation: morph 8s ease-in-out infinite;
+        }
+
+        .text-shadow-animate {
+            animation: textShadow 3s infinite;
+        }
+
+        .pan-bg {
+            animation: pan 15s linear infinite;
+        }
+
+        .delay-100 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-200 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-300 {
+            animation-delay: 0.3s;
+        }
+
+        .delay-400 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-500 {
+            animation-delay: 0.5s;
+        }
+
+        /* Smooth transitions */
+        .transition-slow {
+            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .transition-medium {
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .transition-fast {
+            transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* Navbar styles */
+        .nav-link {
+            color: #1e293b;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #3b82f6;
+        }
+
+        .nav-link.active {
+            color: #3b82f6;
+            font-weight: 600;
+        }
+
+        .nav-link.active:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background-color: #3b82f6;
+            border-radius: 50%;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 12px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 8px 20px;
+            color: #475569;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            color: #3b82f6;
+            background: #f8fafc;
+        }
+
+        /* Mobile menu styles */
+        .mobile-menu {
+            overflow-y: auto;
+        }
+
+        .mobile-nav-item {
+            display: block;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 4px;
+            color: #334155;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-item:hover {
+            background: #f1f5f9;
+            color: #3b82f6;
+        }
+
+        .mobile-nav-item.active {
+            background: #3b82f6;
+            color: white;
+        }
+
+        /* Objective card styling */
+        .objective-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1.25rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #f1f5f9;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .objective-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            transform: scaleX(0);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .objective-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .objective-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .objective-icon {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .objective-card:hover .objective-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Gradient text animation */
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #06b6d4, #3b82f6);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: gradientText 3s linear infinite;
+        }
+
+        /* Ripple effect */
+        .ripple {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple:after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            animation: ripple 2s linear infinite;
+        }
+
+        /* Hover Effects */
+        .hover-grow {
+            transition: transform 0.3s ease;
+        }
+
+        .hover-grow:hover {
+            transform: scale(1.03);
+        }
+
+        .hover-rotate {
+            transition: transform 0.5s ease;
+        }
+
+        .hover-rotate:hover {
+            transform: rotate(5deg);
+        }
+
+        /* Parallax effect */
+        .hero-parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* Hero section overlay */
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 58, 138, 0.8) 100%);
+        }
+
+        /* Custom underline animation */
+        .underline-animation {
+            position: relative;
+        }
+
+        .underline-animation:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #3b82f6;
+            transition: width 0.4s ease;
+        }
+
+        .underline-animation:hover:after {
+            width: 100%;
+        }
+
+        /* 3D Flip Animation */
+        .flip-container {
+            perspective: 1000px;
+        }
+
+        .flipper {
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        .flip-container:hover .flipper {
+            transform: rotateY(180deg);
+        }
+
+        .front,
+        .back {
+            backface-visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .back {
+            transform: rotateY(180deg);
+        }
+
+        /* Bounce animation */
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .bounce-on-hover:hover {
+            animation: bounce 0.5s ease infinite;
+        }
+
+        /* Scroll reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+    <!-- Top Bar -->
+    <div class="bg-gradient-to-r from-slate-900 to-blue-900 text-white py-2 text-xs md:text-sm">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center space-y-1 md:space-y-0">
+            <div class="flex flex-wrap justify-center md:justify-start items-center space-x-2 md:space-x-6">
+                <div class="flex items-center space-x-2 hover:text-blue-300 transition-fast animate-slide-left">
+                    <i class="fas fa-envelope text-blue-300 text-sm animate-bounce"></i>
+                    <span><a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@unitedmaritimeassociation.com&su=Enquiry%20from%20Website&body=Dear%20United%20Maritime%20Association%20Team,%0A%0A"
+                            target="_blank"
+                            class="hover:text-blue-600 cursor-pointer">info@unitedmaritimeassociation.com</span></a>
+                </div>
+                <div
+                    class="flex items-center space-x-2 hover:text-blue-300 transition-fast animate-slide-left delay-100">
+                    <i class="fas fa-phone text-blue-300 text-sm animate-bounce"></i>
+                    <span>+916124482546</span>
+                </div>
+                <div
+                    class="flex items-center space-x-2 hover:text-blue-300 transition-fast animate-slide-left delay-200">
+                    <i class="fas fa-map-marker-alt text-blue-300 text-sm animate-bounce"></i>
+                    <span>Kolkata, West Bengal, India</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right">
+                    <i class="fab fa-facebook-f text-xs"></i>
+                </a>
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right delay-100">
+                    <i class="fab fa-twitter text-xs"></i>
+                </a>
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right delay-200">
+                    <i class="fab fa-linkedin-in text-xs"></i>
+                </a>
+                <a href="#"
+                    class="w-6 h-6 md:w-7 md:h-7 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-slow hover:rotate-12 animate-slide-right delay-300">
+                    <i class="fab fa-instagram text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center">
+                            <div
+                                class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center mr-3 shadow-md">
+                                <a href="http://127.0.0.1:5500/index.html"
+                                    class="w-full h-full flex items-center justify-center">
+                                    <img src="UMA LOGO.jpeg" alt="UMA Logo"
+                                        class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full" />
+                                </a>
+                            </div>
+                            <div>
+                                <h1 class="text-xl font-bold text-slate-800"
+                                    style="font-family: 'Playfair Display', serif;">UMA</h1>
+                                <p class="text-xs text-blue-600 font-medium -mt-1">The United Maritime Association</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden lg:block">
+                    <div class="ml-10 flex items-center space-x-1">
+                        <a href="index.html" class="nav-link px-4 py-2 text-sm font-semibold">Home</a>
+
+                        <!-- About Dropdown -->
+                        <div class="dropdown">
+                            <a href="about.html" class="nav-link px-4 py-2 text-sm font-semibold dropdown-trigger">
+                                About Us <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="about.html" class="dropdown-item">Our Story</a>
+                                <a href="mission-vision.html" class="dropdown-item active">Mission & Vision</a>
+                                <a href="objectives.html" class="dropdown-item">Objectives</a>
+                                <a href="organization-structure.html" class="dropdown-item">Organization
+                                    Structure</a>
+                            </div>
+                        </div>
+
+                        <!-- Services Dropdown -->
+                        <div class="dropdown">
+                            <a href="services.html" class="nav-link px-4 py-2 text-sm font-semibold dropdown-trigger">
+                                Services <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="services.html" class="dropdown-item">All Services</a>
+                                <a href="training-education.html" class="dropdown-item">Training & Education</a>
+                                <a href="medical-support.html" class="dropdown-item">Medical Support</a>
+                                <a href="job-placement.html" class="dropdown-item">Job Placement</a>
+                                <a href="family-welfare.html" class="dropdown-item">Family Welfare</a>
+                                <a href="publications.html" class="dropdown-item">Publications</a>
+                            </div>
+                        </div>
+
+                        <a href="partners.html" class="nav-link px-4 py-2 text-sm font-semibold">Partners</a>
+                        <a href="subsectors.html" class="nav-link px-4 py-2 text-sm font-semibold">Sub Sectors</a>
+
+                        <!-- Events Dropdown -->
+                        <div class="dropdown">
+                            <a href="events.html" class="nav-link px-4 py-2 text-sm font-semibold dropdown-trigger">
+                                Events <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="events.html" class="dropdown-item">Upcoming Events</a>
+                                <a href="conferences.html" class="dropdown-item">Conferences</a>
+                                <a href="webinars.html" class="dropdown-item">Webinars</a>
+                                <a href="workshops.html" class="dropdown-item">Workshops</a>
+                                <a href="past-events.html" class="dropdown-item">Past Events</a>
+                            </div>
+                        </div>
+
+                        <a href="gallery.html" class="nav-link px-4 py-2 text-sm font-semibold">Gallery</a>
+                        <a href="membership.html" class="nav-link px-4 py-2 text-sm font-semibold">Membership</a>
+                        <a href="contact.html"
+                            class="nav-link bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-2 rounded-full hover:from-blue-700 hover:to-blue-800 transition-all duration-300 transform hover:scale-105 shadow-md">Contact
+                            Us</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="lg:hidden">
+                    <button id="mobile-menu-btn" class="text-slate-700 hover:text-blue-600 focus:outline-none p-2">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+       <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="lg:hidden fixed inset-0 bg-white z-50 transform translate-x-full transition-transform duration-300 ease-in-out">
+            <div class="flex flex-col h-full">
+                <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+                    <div class="flex items-center">
+                        <div
+                                class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center mr-3 shadow-md">
+                                <a href="http://127.0.0.1:5500/index.html"
+                                    class="w-full h-full flex items-center justify-center">
+                                    <img src="UMA LOGO.jpeg" alt="UMA Logo"
+                                        class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full" />
+                                </a>
+                            </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-800">UMA</h3>
+                            <p class="text-xs text-blue-600">United Maritime Association</p>
+                        </div>
+                    </div>
+                    <button id="mobile-menu-close" class="text-slate-500 hover:text-slate-700 p-2">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div class="flex-1 overflow-y-auto p-6 space-y-4">
+                    <a href="index.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Home</a>
+                    <a href="about.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">About
+                        Us</a>
+                    <a href="services.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Services</a>
+                    <a href="partners.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Partners</a>
+                    <a href="subsectors.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Sub
+                        Sectors</a>
+                    <a href="events.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Events</a>
+                    <a href="gallery.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Gallery</a>
+                    <a href="membership.html"
+                        class="block py-3 px-4 text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg font-medium">Membership</a>
+                    <a href="contact.html"
+                        class="block py-3 px-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg font-medium text-center mt-8">Contact
+                        Us</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section class="relative py-20 md:py-28 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 overflow-hidden">
+        <div
+            class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2094&q=80')] bg-cover bg-center opacity-30 hero-parallax">
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/30 to-transparent"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="animate__animated animate__fadeInUp">
+                <div
+                    class="inline-block px-4 py-2 bg-blue-600/20 backdrop-blur-sm border border-blue-400/30 rounded-full text-blue-300 text-sm font-medium mb-6 glow">
+                    <i class="fas fa-bullseye mr-2"></i>
+                    Our Purpose
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 font-playfair">
+                    About <span class="gradient-text bg-gradient-to-r from-blue-400 to-cyan-400">UMA</span>
+                </h1>
+                <p class="text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto">
+                    Pioneering Maritime Excellence Through Vision, Innovation, and Commitment
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Breadcrumbs -->
+    <div class="bg-gray-50 py-4 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol class="flex items-center space-x-4">
+                    <li>
+                        <div>
+                            <a href="index.html" class="text-blue-600 hover:text-blue-800 transition">
+                                <i class="fas fa-home"></i>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <a href="about.html"
+                                class="ml-4 text-sm font-medium text-blue-600 hover:text-blue-800 transition">About
+                                Us</a>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Background Section -->
+    <section class="py-16 md:py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
+                <div class="slide-in-left">
+                    <span
+                        class="inline-block px-4 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium mb-4">
+                        Our Heritage
+                    </span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mt-4 mb-6"
+                        style="font-family: 'Playfair Display', serif;">
+                        Distinguished Maritime Legacy
+                    </h2>
+                    <div class="w-20 h-1 bg-gradient-to-r from-blue-600 to-cyan-600 mb-8"></div>
+
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        The United Maritime Association (UMA) was founded in 2024 by a group of passionate mariners with
+                        a shared vision to promote excellence, innovation, and sustainability in the maritime industry.
+                        Today, we're a thriving community of over 3,000 members, with offices in Kolkata, Patna, Ranchi,
+                        and Lucknow dedicated to supporting seafarers and driving industry growth.
+                    </p>
+
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        Our association represents the convergence of tradition and innovation, creating a strong,
+                        inclusive community of maritime professionals committed to advancing the industry.
+                    </p>
+
+                    <div
+                        class="bg-gradient-to-r from-blue-50 to-cyan-50 p-6 rounded-2xl border-l-4 border-blue-500 hover-grow">
+                        <p class="text-lg text-slate-700 font-semibold italic">
+                            "Join us in our mission to empower seafarers, elevate the industry, and promote
+                            sustainability. Together, we can make a difference!"
+                        </p>
+                    </div>
+                </div>
+
+                <div class="slide-in-right">
+                    <div class="relative">
+                        <div
+                            class="absolute -top-6 -left-6 w-32 h-32 bg-blue-100 rounded-full opacity-20 animate-pulse">
+                        </div>
+                        <div
+                            class="absolute -bottom-6 -right-6 w-40 h-40 bg-blue-200 rounded-full opacity-10 animate-pulse delay-300">
+                        </div>
+                        <div class="bg-gradient-to-br from-blue-50 to-cyan-50 p-8 rounded-3xl shadow-xl hover-grow">
+                            <div class="text-center mb-8">
+                                <div
+                                    class="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 overflow-hidden shadow-lg">
+                                    <a href="http://127.0.0.1:5500/index.html"
+                                        class="w-full h-full flex items-center justify-center">
+                                        <img src="UMA LOGO.jpeg" alt="UMA Logo" class="w-full h-full object-cover" />
+                                    </a>
+                                </div>
+                                <h3 class="text-2xl font-bold text-slate-800 mb-2"
+                                    style="font-family: 'Playfair Display', serif;">Established 2024</h3>
+                                <p class="text-gray-600">A New Era of Maritime Excellence</p>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-6">
+                                <div class="text-center">
+                                    <div class="counter text-3xl font-bold text-blue-600 mb-2" data-target="3000">0
+                                    </div>
+                                    <p class="text-gray-600 font-medium">Active Members</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="counter text-3xl font-bold text-blue-600 mb-2" data-target="4">0</div>
+                                    <p class="text-gray-600 font-medium">Office Locations</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="counter text-3xl font-bold text-blue-600 mb-2" data-target="10">0</div>
+                                    <p class="text-gray-600 font-medium">Core Services</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="counter text-3xl font-bold text-blue-600 mb-2" data-target="50">0</div>
+                                    <p class="text-gray-600 font-medium">Industry Partners</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="py-16 md:py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 md:mb-16">
+                <span class="inline-block px-4 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium mb-4">
+                    Our Mission
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-6"
+                    style="font-family: 'Playfair Display', serif;">
+                    Fostering Maritime Excellence
+                </h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-blue-600 to-cyan-600 mx-auto mb-8"></div>
+            </div>
+
+            <div class="bg-white p-8 md:p-12 rounded-3xl shadow-xl border border-gray-100 text-center fade-in-up">
+                <div
+                    class="w-24 h-24 bg-gradient-to-br from-blue-100 to-cyan-100 rounded-full flex items-center justify-center mx-auto mb-8 pulse">
+                    <i class="fas fa-compass text-blue-600 text-4xl"></i>
+                </div>
+                <h3 class="text-2xl md:text-3xl font-bold text-slate-800 mb-6"
+                    style="font-family: 'Playfair Display', serif;">
+                    Comprehensive Maritime Professional Development
+                </h3>
+                <p class="text-lg md:text-xl text-gray-600 leading-relaxed max-w-4xl mx-auto">
+                    To foster maritime professional development, provide valuable services, and promote the traditions
+                    and standards of the maritime sector in India. We are committed to creating an ecosystem where every
+                    seafarer can achieve their highest potential while contributing to the nation's maritime supremacy.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Overview -->
+    <section class="py-16 md:py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 md:mb-16">
+                <span class="inline-block px-4 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium mb-4">
+                    Our Services
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-6"
+                    style="font-family: 'Playfair Display', serif;">
+                    Comprehensive Maritime Solutions
+                </h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-blue-600 to-cyan-600 mx-auto mb-8"></div>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                    We offer a complete range of services designed to support maritime professionals throughout their
+                    careers
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="objective-card fade-in-up hover-rotate">
+                    <div class="objective-icon bg-blue-500">
+                        <i class="fas fa-graduation-cap text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4" style="font-family: 'Playfair Display', serif;">
+                        Training & Education
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Educational seminars, workshops, and comprehensive training programs to enhance seafarers'
+                        skills and knowledge in navigation, safety protocols, and emergency procedures.
+                    </p>
+                </div>
+
+                <div class="objective-card fade-in-up delay-100 hover-rotate">
+                    <div class="objective-icon bg-green-500">
+                        <i class="fas fa-heartbeat text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4" style="font-family: 'Playfair Display', serif;">
+                        Medical Support
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Comprehensive healthcare services including ILO medical examinations, mental health support,
+                        counseling, and wellness programs for seafarers.
+                    </p>
+                </div>
+
+                <div class="objective-card fade-in-up delay-200 hover-rotate">
+                    <div class="objective-icon bg-purple-500">
+                        <i class="fas fa-briefcase text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4" style="font-family: 'Playfair Display', serif;">
+                        Job Placement
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Career counseling, job search support, and connections with potential employers across various
+                        maritime sectors.
+                    </p>
+                </div>
+
+                <div class="objective-card fade-in-up delay-300 hover-rotate">
+                    <div class="objective-icon bg-orange-500">
+                        <i class="fas fa-home text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4" style="font-family: 'Playfair Display', serif;">
+                        Family Welfare
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Support programs for seafarers' families including education assistance, healthcare support, and
+                        community building initiatives.
+                    </p>
+                </div>
+
+                <div class="objective-card fade-in-up delay-400 hover-rotate">
+                    <div class="objective-icon bg-red-500">
+                        <i class="fas fa-female text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4" style="font-family: 'Playfair Display', serif;">
+                        Women Empowerment
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Programs to promote women's participation in the maritime sector, leadership development, and
+                        career advancement opportunities.
+                    </p>
+                </div>
+
+                <div class="objective-card fade-in-up delay-500 hover-rotate">
+                    <div class="objective-icon bg-indigo-500">
+                        <i class="fas fa-book text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4" style="font-family: 'Playfair Display', serif;">
+                        Publications
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        e-Magazines, industry reports, and knowledge sharing platforms to keep members informed about
+                        maritime trends and best practices.
+                    </p>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="services.html"
+                    class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-lg hover:from-blue-700 hover:to-blue-800 transition-slow transform hover:scale-[1.02] shadow-lg hover-rotate">
+                    <span>View All Services</span>
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Objectives Section -->
+    <section class="py-16 md:py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 md:mb-16">
+                <span class="inline-block px-4 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium mb-4">
+                    Our Objectives
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-6"
+                    style="font-family: 'Playfair Display', serif;">
+                    Pillars of Maritime Excellence
+                </h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-blue-600 to-cyan-600 mx-auto mb-8"></div>
+                <p class="text-lg md:text-xl text-gray-600 max-w-4xl mx-auto">
+                    Strategic objectives that guide our every endeavor and shape the future of maritime professionals
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="objective-card fade-in-up hover-rotate">
+                    <div class="objective-icon bg-blue-500">
+                        <i class="fas fa-graduation-cap text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4" style="font-family: 'Playfair Display', serif;">
+                        Professional Development
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Promote continual professional development through standardized training programs, mentorship,
+                        and skill enhancement initiatives.
+                    </p>
+                </div>
+
+                <div class="objective-card fade-in-up delay-100 hover-rotate">
+                    <div class="objective-icon bg-green-500">
+                        <i class="fas fa-industry text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4" style="font-family: 'Playfair Display', serif;">
+                        Industry Growth
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Foster maritime industry growth through infrastructure development, technology adoption, and
+                        strategic partnerships.
+                    </p>
+                </div>
+
+                <div class="objective-card fade-in-up delay-200 hover-rotate">
+                    <div class="objective-icon bg-purple-500">
+                        <i class="fas fa-university text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4" style="font-family: 'Playfair Display', serif;">
+                        Education Excellence
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Deliver world-class maritime education and training that aligns with international standards and
+                        industry requirements.
+                    </p>
+                </div>
+
+                <div class="objective-card fade-in-up delay-300 hover-rotate">
+                    <div class="objective-icon bg-orange-500">
+                        <i class="fas fa-hands-helping text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4" style="font-family: 'Playfair Display', serif;">
+                        Seafarer Welfare
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Support the holistic well-being of seafarers through healthcare, mental wellness programs, and
+                        family support services.
+                    </p>
+                </div>
+
+                <div class="objective-card fade-in-up delay-400 hover-rotate">
+                    <div class="objective-icon bg-red-500">
+                        <i class="fas fa-bullhorn text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4" style="font-family: 'Playfair Display', serif;">
+                        Community Outreach
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Encourage community engagement and raise awareness about the maritime industry's vital role in
+                        global commerce.
+                    </p>
+                </div>
+
+                <div class="objective-card fade-in-up delay-500 hover-rotate">
+                    <div class="objective-icon bg-indigo-500">
+                        <i class="fas fa-laptop-code text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4" style="font-family: 'Playfair Display', serif;">
+                        Digital Innovation
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Promote digitalization and innovation in maritime operations to enhance efficiency, safety, and
+                        sustainability.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Organizational Structure -->
+    <section class="py-16 md:py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 md:mb-16">
+                <span class="inline-block px-4 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium mb-4">
+                    Organization
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-6"
+                    style="font-family: 'Playfair Display', serif;">
+                    Organizational Excellence
+                </h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-blue-600 to-cyan-600 mx-auto mb-8"></div>
+                <p class="text-lg md:text-xl text-gray-600 max-w-4xl mx-auto">
+                    A structured hierarchy designed to ensure effective governance, transparent decision-making, and
+                    optimal service delivery
+                </p>
+            </div>
+
+            <!-- Single container for all team members -->
+            <div class="bg-gray-50 p-8 md:p-12 rounded-3xl shadow-xl border border-gray-100">
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-10">
+                    <!-- Team Member 1 -->
+                    <div class="text-center group relative">
+                        <div
+                            class="w-24 h-24 md:w-32 md:h-32 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg overflow-hidden transition-all duration-300 ease-in-out transform group-hover:scale-110 group-hover:shadow-xl group-hover:z-10">
+                            <img src="founders/founder2.jpeg" alt="Founder Profile Picture"
+                                class="w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-125">
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2"
+                            style="font-family: 'Playfair Display', serif;">Founder</h3>
+                        <div class="text-center space-y-1">
+                            <h4 class="text-slate-800 font-semibold tracking-tight"
+                                style="font-family: 'Playfair Display', serif;">
+                                Capt. Sarvesh Ranjan Sinha, Master Mariner
+                            </h4>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider font-medium">
+                                 Chairman
+
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Team Member 2 -->
+                    <div class="text-center group relative">
+                        <div
+                            class="w-24 h-24 md:w-32 md:h-32 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg overflow-hidden transition-all duration-300 ease-in-out transform group-hover:scale-110 group-hover:shadow-xl group-hover:z-10">
+                            <img src="founders/founder1.jpeg" alt="Co-Founder Profile Picture"
+                                class="w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-125">
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2"
+                            style="font-family: 'Playfair Display', serif;">Founder</h3>
+                        <div class="text-center space-y-1">
+                            <h4 class="text-slate-800 font-semibold tracking-tight"
+                                style="font-family: 'Playfair Display', serif;">
+                                Capt. Prakash Kumar   Master Mariner
+                            </h4>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider font-medium">
+                             General Secretary
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Team Member 3 -->
+                    <div class="text-center group relative">
+                        <div
+                            class="w-24 h-24 md:w-32 md:h-32 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg overflow-hidden transition-all duration-300 ease-in-out transform group-hover:scale-110 group-hover:shadow-xl group-hover:z-10">
+                            <img src="founders/co-founder3.jpeg" alt="CEO Profile Picture"
+                                class="w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-125">
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2"
+                            style="font-family: 'Playfair Display', serif;">Co-Founder</h3>
+                        <div class="text-center space-y-1">
+                            <h4 class="text-slate-800 font-semibold tracking-tight"
+                                style="font-family: 'Playfair Display', serif;">
+                                Sanjeev Kumar Sinha<br> Marine Chief Engineer
+                            </h4>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider font-medium">
+                                 President
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Team Member 4 -->
+                    <div class="text-center group relative">
+                        <div
+                            class="w-24 h-24 md:w-32 md:h-32 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg overflow-hidden transition-all duration-300 ease-in-out transform group-hover:scale-110 group-hover:shadow-xl group-hover:z-10">
+                            <img src="founders/co-founder1.jpeg" alt="CTO Profile Picture"
+                                class="w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-125">
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2"
+                            style="font-family: 'Playfair Display', serif;">Co-Founder</h3>
+                        <div class="text-center space-y-1">
+                            <h4 class="text-slate-800 font-semibold tracking-tight"
+                                style="font-family: 'Playfair Display', serif;">
+                                Capt Ranjan Kumar<br> Master Mariner
+
+                            </h4>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider font-medium">
+                                General Manager
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Team Member 5 -->
+                    <div class="text-center group relative">
+                        <div
+                            class="w-24 h-24 md:w-32 md:h-32 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg overflow-hidden transition-all duration-300 ease-in-out transform group-hover:scale-110 group-hover:shadow-xl group-hover:z-10">
+                            <img src="founders/co-founder2.jpeg" alt="CMO Profile Picture"
+                                class="w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-125">
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2"
+                            style="font-family: 'Playfair Display', serif;">Co-Founder</h3>
+                        <div class="text-center space-y-1">
+                            <h4 class="text-slate-800 font-semibold tracking-tight"
+                                style="font-family: 'Playfair Display', serif;">
+                                Shiv Kumar   <br> Marine Chief Engineer
+                            </h4>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider font-medium">
+                             Treasurer
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 md:py-20 bg-gradient-to-br from-blue-600 to-blue-800 relative overflow-hidden ripple">
+        <div class="absolute inset-0 bg-black/10"></div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div
+                class="bg-white/10 backdrop-blur-md rounded-2xl p-8 md:p-12 border border-white/20 shadow-2xl hover-grow">
+                <div class="text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6"
+                        style="font-family: 'Playfair Display', serif;">
+                        Become Part of Our Legacy
+                    </h2>
+                    <p class="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
+                        Join thousands of maritime professionals who have chosen excellence, growth, and community
+                        through UMA membership.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="membership.html"
+                            class="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-700 font-bold rounded-lg hover:bg-gray-100 transition-slow transform hover:scale-[1.02] shadow-xl hover-rotate">
+                            <span>Apply for Membership</span>
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                        <a href="contact.html"
+                            class="inline-flex items-center justify-center px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-bold rounded-lg border-2 border-white/30 hover:bg-white/20 transition-slow hover-rotate">
+                            <span>Contact Our Team</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <!-- About Column -->
+                <div class="reveal">
+                    <div class="flex items-center mb-6">
+                        <div
+                            class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center mr-3 shadow-md">
+                            <a href="http://127.0.0.1:5500/index.html"
+                                class="w-full h-full flex items-center justify-center">
+                                <img src="UMA LOGO.jpeg" alt="UMA Logo"
+                                    class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full" />
+                            </a>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold" style="font-family: 'Playfair Display', serif;">UMA</h3>
+                            <p class="text-xs text-blue-400 font-medium -mt-1">The United Maritime Association</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 mb-6">Empowering maritime professionals through education, advocacy, and
+                        innovation since 2024.</p>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-facebook-f text-sm"></i>
+                        </a>
+                        <a href="#"
+                            class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-twitter text-sm"></i>
+                        </a>
+                        <a href="#"
+                            class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-linkedin-in text-sm"></i>
+                        </a>
+                        <a href="#"
+                            class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-instagram text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links Column -->
+                <div class="reveal" style="transition-delay: 0.1s">
+                    <h3
+                        class="text-lg font-bold mb-6 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:bg-blue-600">
+                        Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Home</a></li>
+                        <li><a href="about.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">About Us</a>
+                        </li>
+                        <li><a href="services.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Services</a>
+                        </li>
+                        <li><a href="partners.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Partners</a>
+                        </li>
+                        <li><a href="subsectors.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Subsectors</a>
+                        </li>
+                        <li><a href="events.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Events</a>
+                        </li>
+                        <li><a href="gallery.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Gallery</a>
+                        </li>
+                        <li><a href="contact.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Services Column -->
+                <div class="reveal" style="transition-delay: 0.2s">
+                    <h3
+                        class="text-lg font-bold mb-6 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:bg-blue-600">
+                        Our Services</h3>
+                    <ul class="space-y-3">
+                        <li><a href="training-education.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Training &
+                                Education</a></li>
+                        <li><a href="medical-support.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Medical
+                                Support</a></li>
+                        <li><a href="job-placement.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Job
+                                Placement</a></li>
+                        <li><a href="family-welfare.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Family
+                                Welfare</a></li>
+                        <li><a href="publications.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Publications</a>
+                        </li>
+                        <li><a href="membership.html"
+                                class="text-slate-400 hover:text-blue-400 transition underline-animation">Membership</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact Column -->
+                <div class="reveal" style="transition-delay: 0.3s">
+                    <h3
+                        class="text-lg font-bold mb-6 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:bg-blue-600">
+                        Contact Us</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-slate-400"> A3, 3RD FLOOR, LAKHAN SONA APARTMENT,NEAR RPS MORE,WEST BAILY
+                                ROAD,PATNA</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-slate-400">+916124482546</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-blue-400 mt-1 mr-3"></i>
+                            <span><a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@unitedmaritimeassociation.com&su=Enquiry%20from%20Website&body=Dear%20United%20Maritime%20Association%20Team,%0A%0A"
+                                    target="_blank" class="text-slate-400">info@unitedmaritimeassociation.com</span></a>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-clock text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-slate-400">Mon-Fri: 9:00 AM - 6:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-slate-500 text-sm mb-4 md:mb-0">© 2023 The United Maritime Association. All rights
+                    reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-slate-500 hover:text-blue-400 text-sm transition">Privacy Policy</a>
+                    <a href="#" class="text-slate-500 hover:text-blue-400 text-sm transition">Terms of Service</a>
+                    <a href="#" class="text-slate-500 hover:text-blue-400 text-sm transition">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top"
+        class="fixed bottom-8 right-8 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white shadow-lg transform transition-all duration-300 opacity-0 invisible hover:bg-blue-700 hover:scale-110">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-full');
+            mobileMenu.classList.add('translate-x-0');
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-0');
+            mobileMenu.classList.add('translate-x-full');
+        });
+
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible');
+                backToTopBtn.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopBtn.classList.remove('opacity-100', 'visible');
+                backToTopBtn.classList.add('opacity-0', 'invisible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Scroll Reveal Animation
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 150;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                } else {
+                    reveals[i].classList.remove('active');
+                }
+            }
+        }
+
+        window.addEventListener('scroll', reveal);
+        window.addEventListener('load', reveal);
+
+        // Dropdown Menu for Mobile
+        const mobileDropdowns = document.querySelectorAll('.mobile-dropdown-trigger');
+
+        mobileDropdowns.forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                const menu = trigger.nextElementSibling;
+                const icon = trigger.querySelector('i');
+
+                menu.classList.toggle('hidden');
+                menu.classList.toggle('block');
+
+                if (icon.classList.contains('fa-chevron-down')) {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                } else {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animation for mission/vision cards on hover
+        const missionVisionCards = document.querySelectorAll('.mission-vision-card');
+
+        missionVisionCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.querySelector('h2').classList.add('text-blue-600');
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.querySelector('h2').classList.remove('text-blue-600');
+            });
+        });
+
+        // Animation for service cards
+        const serviceCards = document.querySelectorAll('.service-card');
+
+        serviceCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.querySelector('h3').classList.add('text-blue-600');
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.querySelector('h3').classList.remove('text-blue-600');
+            });
+        });
+
+        // Animation for objective items
+        const objectiveItems = document.querySelectorAll('.objective-item');
+
+        objectiveItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.querySelector('h3').classList.add('text-blue-600');
+            });
+
+            item.addEventListener('mouseleave', () => {
+                item.querySelector('h3').classList.remove('text-blue-600');
+            });
+        });
+
+        // Counter animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.counter');
+            const speed = 200;
+
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const increment = target / speed;
+
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + increment);
+                    setTimeout(animateCounters, 1);
+                } else {
+                    counter.innerText = target;
+                }
+            });
+        }
+
+        // Initialize counters when they come into view
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.counter').forEach(counter => {
+            counterObserver.observe(counter);
+        });
+
+        // Initialize AOS (Animate On Scroll) if needed
+        // You would need to include AOS library for this to work
+        // AOS.init();
+    </script>
+</body>
+
+</html>
